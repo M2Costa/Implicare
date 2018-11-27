@@ -24,32 +24,44 @@ class InserirUsuarioCandidato {
         String jsp = "";
         try {
 
-            Long CPF = (Long) request.getSession().getAttribute("CPF_CNPJ");
+
+            Long CPF = Long.parseLong(request.getParameter("CPF_CNPJ"));
+
             String Email = request.getParameter("Email");
+            String Senha = request.getParameter("Senha");
             String Foto = request.getParameter("Foto");
             String Endereco = request.getParameter("Endereco");
             Long Cod_CEP = Long.parseLong(request.getParameter("Cod_CEP"));
             String Desc_Usuario = request.getParameter("Desc_Usuario");
             String Nome = request.getParameter("Nome");
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            Date Data_Nascimento = (Date) formato.parse(request.getParameter("Data_Nascimento"));
+            
+            SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-dd");
+            java.util.Date Data_Nascimento = formato.parse(request.getParameter("Data_Nascimento"));
+ 
 
+            
+            java.sql.Date datacerta = convertUtilToSql(Data_Nascimento);
+
+            
+            
+            
             CandidatoManagement CandidatoManagement = new CandidatoManagementImpl();
             Candidato Cand = new Candidato();
             
             Cand.setCPF_CNPJ(CPF);
+            Cand.setSenha(Senha);
             Cand.setEmail(Email);
             Cand.setFoto(Foto);
             Cand.setEndereco(Endereco);
             Cand.setCod_CEP(Cod_CEP);
             Cand.setDesc_Usuario(Desc_Usuario);
             Cand.setNome(Nome);
-            Cand.setData_Nascimento(Data_Nascimento);
+            Cand.setData_Nascimento(datacerta);
             
             boolean Candidato = CandidatoManagement.insert(Cand);
 
             if (Candidato =! false) {
-                jsp = "";
+                jsp = "ImplicareServlet?acao=PerfilCandidato";
                 request.setAttribute("FormacaoAcademica", Cand);
             } else {
                 String Erro = "Erro ao Inserir Formacao Academica";
@@ -58,9 +70,12 @@ class InserirUsuarioCandidato {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            jsp = "";
         }
         return jsp;
     }
-    
+    private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+                java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+                return sDate;
+            }
 }
+

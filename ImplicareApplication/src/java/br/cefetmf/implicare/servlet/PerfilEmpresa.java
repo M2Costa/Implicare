@@ -25,8 +25,15 @@ class PerfilEmpresa {
     static String execute(HttpServletRequest request) {
         String jsp = "";
         try {
-
-            Long CNPJ = (Long) request.getSession().getAttribute("CPF_CNPJ");
+            String Tipo = (String) request.getSession().getAttribute("Tipo");
+            Long CNPJ = null;
+            if(Tipo == "E") {
+                jsp = "/TelePerfilEmpresa.jsp";
+                CNPJ = (Long) request.getSession().getAttribute("CPF_CNPJ");
+            } else {
+                jsp = "/VisualizarEmpresa.jsp";
+                CNPJ = Long.parseLong(request.getParameter("CPF_CNPJ"));
+            }
 
             EmpresaManagement EmpresaManagement = new EmpresaManagementImpl();
             Empresa Empr = new Empresa();
@@ -37,17 +44,12 @@ class PerfilEmpresa {
             ListaTelefone = TelefoneManagement.listar(CNPJ);
 
             if (Empr != null) {
-                jsp = "";
                 request.setAttribute("Empresa", Empr);
                 request.setAttribute("ListaTelefone", ListaTelefone);
-            } else {
-                String Erro = "Erro Empresa Não Existe";
-                jsp = "/WEB-Pages/Erro.jsp";
-                request.setAttribute("Erro", Erro);
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
-            jsp = "TelePerfilEmpresa.jsp";
         }
         return jsp;
     }

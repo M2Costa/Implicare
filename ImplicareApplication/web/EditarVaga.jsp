@@ -18,7 +18,7 @@
         <div class="login-form">
             <div class="main-div">
                 <%Vaga Vaga = (Vaga)request.getAttribute("Vaga");%>
-                <form action="ImplicareServlet?acao=EditarVaga&Seq_Vaga=<%=Vaga.getSeq_Vaga()%>" method="POST">
+                <form action="ImplicareServlet?acao=AlterarVaga&Seq_Vaga=<%=Vaga.getSeq_Vaga()%>" method="POST">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Cargo</label>
                         <select class="form-control" id="Cod_Cargo" name="Cod_Cargo" requeried>
@@ -38,21 +38,21 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="date" class="form-control" id="Dat_Publicacao" value="<%=Vaga.getDat_Publicacao()%>" requeried>
+                        <input type="date" class="form-control" name="Dat_Publicacao" value="<%=Vaga.getDat_Publicacao()%>" requeried>
                     </div>
 
                     <div class="form-group">
-                        <input type="number" class="form-control" id="Num_Vagas" value="<%=Vaga.getNum_Vagas()%>">
+                        <input type="number" class="form-control" name="Num_Vagas" value="<%=Vaga.getNum_Vagas()%>">
                     </div>
                     
                     <div class="form-group">
-                        <input type="number" class="form-control" id="Carga_Horaria" value="<%Vaga.getCarga_Horaria();%>">
+                        <input type="number" class="form-control" name="Carga_Horaria" value="<%Vaga.getCarga_Horaria();%>">
                     </div>
                     <div class="form-group">
-                        <input type="number" class="form-control" id="Remuneracao" value="<%=Vaga.getRemuneracao()%>">
+                        <input type="number" class="form-control" name="Remuneracao" value="<%=Vaga.getRemuneracao()%>">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="Desc_Vaga" value="<%=Vaga.getDesc_Vaga()%>">
+                        <input type="text" class="form-control" name="Desc_Vaga" value="<%=Vaga.getDesc_Vaga()%>">
                     </div>
                     <button type="submit" class="btn btn-primary" id="EditarVaga">Editar Vaga</button>
                 </form>

@@ -1,0 +1,34 @@
+ <div class="login-form">
+     <div class="main-div1">
+         <form action="ImplicareServlet?acao=InserirUsuarioEmpresa" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" name="Nome_Fantasia" placeholder="Nome Fantásia" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Nom_Razao_Social" placeholder="Nome Razão Social" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="CPF_CNPJ" placeholder="CPF_CNPJ" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="file" name="Foto">
+            </div>
+             <div class="form-group">
+                <input type="text" class="form-control" name="Cod_CEP" placeholder="CEP">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="Senha" placeholder="Senha">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Endereco" placeholder="Endereço">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="Desc_Usuario" placeholder="Descrição Usuário">
+            </div>
+            <button type="submit" class="btn btn-primary1 col-md-12" id="CadastrarEmpresa" style="margin-top:30px;">Cadastrar</button>
+        </form>
+   </div>
+</div>
