@@ -5,6 +5,7 @@ import br.cefetmg.implicare.model.daoImpl.UsuarioDaoImpl;
 import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.UsuarioManagement;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,19 +13,13 @@ public class UsuarioManagementImpl implements UsuarioManagement {
 
     private final UsuarioDao UsuarioDao;
 
-    public UsuarioManagementImpl() {
+    public UsuarioManagementImpl() throws RemoteException {
         UsuarioDao = new UsuarioDaoImpl();
     }
 
     @Override
-    public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException {
-        Usuario result = null;
-        try {
-            result = UsuarioDao.login(CPF_CNPJ, Senha);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(UsuarioManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException, RemoteException {
+        return UsuarioDao.login(CPF_CNPJ, Senha);
+            
     }
 }

@@ -5,37 +5,56 @@ import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VagaManagementImpl implements VagaManagement {
 
-    @Override
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException {
-        VagaDaoImpl.getInstance().insert(Vaga);
+    private final VagaDao VagaDao;
+
+    public VagaManagementImpl() throws RemoteException {
+        VagaDao = new VagaDaoImpl();
     }
 
     @Override
-    public void update(Vaga Vaga) throws BusinessException, PersistenceException {
-        VagaDaoImpl.getInstance().update(Vaga);
+    public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
+        if(Vaga == null)
+            throw new BusinessException("VAga não pode ser nulo");
+        return VagaDao.insert(Vaga);
+            
     }
 
     @Override
-    public void delete(Vaga Vaga) throws PersistenceException {
-        VagaDaoImpl.getInstance().delete(Vaga);
+    public boolean update(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
+        if(Vaga == null)
+            throw new BusinessException("VAga não pode ser nulo");
+        return VagaDao.update(Vaga);
+            
     }
 
     @Override
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException {
-        return VagaDaoImpl.getInstance().pesquisar(Seq_Vaga);
+    public boolean delete(Vaga Vaga) throws PersistenceException, RemoteException {
+        if(Vaga == null)
+            throw new BusinessException("VAga não pode ser nulo");
+        return VagaDao.delete(Vaga);
+            
+    }
+
+    @Override
+    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException, RemoteException {
+        return VagaDao.pesquisar(Seq_Vaga);
+            
     }
     
     @Override
-    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException {
-        return VagaDaoImpl.getInstance().listarVagaEmpresa(CNPJ);
+    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException, RemoteException {
+        return VagaDao.listarVagaEmpresa(CNPJ);
+           
     }
 
     @Override
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException {
-        return VagaDaoImpl.getInstance().listarVagaCandidato(CPF);
+    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException, RemoteException{
+        return VagaDao.listarVagaCandidato(CPF);
     }
 }
+

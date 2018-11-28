@@ -3,19 +3,22 @@ package br.cefetmg.implicare.model.service;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface VagaManagement {
+public interface VagaManagement extends Remote{
 
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException;
 
-    public void update(Vaga Vaga) throws BusinessException, PersistenceException;
+    public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public void delete(Vaga Vaga) throws PersistenceException;
+    public boolean update(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException;
+    public boolean delete(Vaga Vaga) throws PersistenceException, RemoteException;
 
-    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException;
+    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException, RemoteException;
 
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException;
+    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException, RemoteException;
+
+    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException, RemoteException;
 }

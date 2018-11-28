@@ -5,59 +5,52 @@ import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ExperienciaProfissionalManagementImpl implements ExperienciaProfissionalManagement {
 
-    @Override
-    public boolean insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().insert(ExperienciaProfissional);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+    private final ExperienciaProfissionalDao ExperienciaProfissionalDao;
+
+    public ExperienciaProfissionalManagementImpl() throws RemoteException {
+        ExperienciaProfissionalDao = new ExperienciaProfissionalDaoImpl();
     }
 
     @Override
-    public boolean update(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().update(ExperienciaProfissional);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+    public boolean insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
+       if(ExperienciaProfissional == null)
+            throw new BusinessException("ExperienciaProficional não pode ser nulo");
+       return ExperienciaProfissionalDao.insert(ExperienciaProfissional);
     }
 
     @Override
-    public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().delete(ExperienciaProfissional);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+    public boolean update(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
+        if(ExperienciaProfissional == null)
+            throw new BusinessException("ExperienciaProficional não pode ser nulo");
+        
+        return ExperienciaProfissionalDao.update(ExperienciaProfissional);
+        
     }
 
     @Override
-    public ExperienciaProfissional pesquisar(int SeqExperiencia) throws PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().pesquisar(SeqExperiencia);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
+    public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException, RemoteException {
+        if(ExperienciaProfissional == null)
+            throw new BusinessException("ExperienciaProficional não pode ser nulo");
+        
+        return ExperienciaProfissionalDao.delete(ExperienciaProfissional);
+            
     }
 
     @Override
-    public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().listar(CPF);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
+    public ExperienciaProfissional pesquisar(int Seq_Experiencia) throws PersistenceException, RemoteException {
+        return ExperienciaProfissionalDao.pesquisar(Seq_Experiencia);
+    }
+
+    @Override
+    public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException, RemoteException {
+        return ExperienciaProfissionalDao.listar(CPF);
+            
     }
 }

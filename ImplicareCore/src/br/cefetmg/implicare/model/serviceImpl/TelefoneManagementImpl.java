@@ -6,6 +6,7 @@ import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,68 +15,43 @@ public class TelefoneManagementImpl implements TelefoneManagement {
 
     private final TelefoneDao TelefoneDao;
 
-    public TelefoneManagementImpl() {
+    public TelefoneManagementImpl() throws RemoteException {
         TelefoneDao = new TelefoneDaoImpl();
     }
 
     @Override
-    public boolean insert(Telefone Telefone) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = TelefoneDao.insert(Telefone);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(TelefoneManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public boolean insert(Telefone Telefone) throws BusinessException, PersistenceException, RemoteException {
+        if(Telefone == null)
+            throw new BusinessException("Telefone não pode ser nulo");
+        return TelefoneDao.insert(Telefone);
+        
     }
 
     @Override
-    public boolean update(Telefone Telefone) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = TelefoneDao.update(Telefone);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(TelefoneManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public boolean update(Telefone Telefone) throws BusinessException, PersistenceException, RemoteException {
+        if(Telefone == null)
+            throw new BusinessException("Telefone não pode ser nulo");
+        return TelefoneDao.update(Telefone);
     }
 
     @Override
-    public boolean delete(Telefone Telefone) throws PersistenceException {
-        boolean result = false;
-        try {
-            result = TelefoneDao.delete(Telefone);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(TelefoneManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public boolean delete(Telefone Telefone) throws PersistenceException, RemoteException {
+        if(Telefone == null)
+            throw new BusinessException("Telefone não pode ser nulo");
+        return TelefoneDao.delete(Telefone);
+            
     }
 
     @Override
-    public Telefone pesquisar(int Seq_Telefone) throws PersistenceException {
-        Telefone result = null;
-        try {
-            result = TelefoneDao.pesquisar(Seq_Telefone);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(TelefoneManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public Telefone pesquisar(int Seq_Telefone) throws PersistenceException, RemoteException {
+        return TelefoneDao.pesquisar(Seq_Telefone);
+            
     }
 
     @Override
-    public ArrayList<Telefone> listar(long CPF_CNPJ) throws PersistenceException {
-        ArrayList<Telefone> result = null;
-        try {
-            result = TelefoneDao.listar(CPF_CNPJ);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(TelefoneManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public ArrayList<Telefone> listar(long CPF_CNPJ) throws PersistenceException, RemoteException {
+        return TelefoneDao.listar(CPF_CNPJ);
+            
     }
 
 }
