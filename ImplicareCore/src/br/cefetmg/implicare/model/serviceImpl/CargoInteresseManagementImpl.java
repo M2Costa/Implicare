@@ -6,6 +6,7 @@ import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoInteresseManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,12 +15,12 @@ public class CargoInteresseManagementImpl implements CargoInteresseManagement {
 
     private final CargoInteresseDao CargoInteresseDao;
 
-    public CargoInteresseManagementImpl() {
+    public CargoInteresseManagementImpl() throws  RemoteException {
         CargoInteresseDao = new CargoInteresseDaoImpl();
     }
 
     @Override
-    public boolean insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException {
+    public boolean insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException, RemoteException {
         if(CargoInteresse == null)
             throw new BusinessException("CargoInteresse não pode ser nulo");
         
@@ -27,7 +28,7 @@ public class CargoInteresseManagementImpl implements CargoInteresseManagement {
     }
 
     @Override
-    public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException {
+    public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException, RemoteException {
         if(CargoInteresse == null)
             throw new BusinessException("CargoInteresse não pode ser nulo");
         
@@ -35,7 +36,7 @@ public class CargoInteresseManagementImpl implements CargoInteresseManagement {
     }
 
     @Override
-    public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException {
+    public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException, RemoteException {
         
         return CargoInteresseDao.listar(CPF);
     }

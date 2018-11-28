@@ -22,12 +22,12 @@ public class AreaEstudoManagementImpl extends UnicastRemoteObject implements Are
     }   
 
     @Override
-    public ArrayList<AreaEstudo> listar() throws PersistenceException{
+    public ArrayList<AreaEstudo> listar() throws PersistenceException, RemoteException{
         return AreaEstudoDao.listar();
     }
 
     @Override
-    public AreaEstudo pesquisar(int Cod_Area_Estudo) throws PersistenceException {
+    public AreaEstudo pesquisar(int Cod_Area_Estudo) throws PersistenceException, RemoteException {
       
         return AreaEstudoDao.pesquisar(Cod_Area_Estudo);
     }
