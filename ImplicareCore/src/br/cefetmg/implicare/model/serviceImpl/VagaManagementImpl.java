@@ -20,74 +20,42 @@ public class VagaManagementImpl implements VagaManagement {
 
     @Override
     public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = VagaDao.insert(Vaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(VagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Vaga == null)
+            throw new BusinessException("VAga não pode ser nulo");
+        return VagaDao.insert(Vaga);
+            
     }
 
     @Override
     public boolean update(Vaga Vaga) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = VagaDao.update(Vaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(VagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Vaga == null)
+            throw new BusinessException("VAga não pode ser nulo");
+        return VagaDao.update(Vaga);
+            
     }
 
     @Override
     public boolean delete(Vaga Vaga) throws PersistenceException {
-        boolean result = false;
-        try {
-            result = VagaDao.delete(Vaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(VagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Vaga == null)
+            throw new BusinessException("VAga não pode ser nulo");
+        return VagaDao.delete(Vaga);
+            
     }
 
     @Override
     public Vaga pesquisar(int Seq_Vaga) throws PersistenceException {
-        Vaga result = null;
-        try {
-            result = VagaDao.pesquisar(Seq_Vaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(VagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return VagaDao.pesquisar(Seq_Vaga);
+            
     }
 
     @Override
     public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException {
-        ArrayList<Vaga> result = null;
-        try {
-            result = VagaDao.listarVagaEmpresa(CNPJ);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(VagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return VagaDao.listarVagaEmpresa(CNPJ);
+           
     }
 
     @Override
     public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException {
-        ArrayList<Vaga> result = null;
-        try {
-            result = VagaDao.listarVagaCandidato(CPF);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(VagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return VagaDao.listarVagaCandidato(CPF);
     }
-
 }

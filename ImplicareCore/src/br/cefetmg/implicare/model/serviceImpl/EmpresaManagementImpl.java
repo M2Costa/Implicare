@@ -19,50 +19,29 @@ public class EmpresaManagementImpl implements EmpresaManagement {
 
     @Override
     public boolean insert(Empresa Empresa) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = EmpresaDao.insert(Empresa);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Empresa == null)
+            throw new BusinessException("Empresa não pode ser nulo");
+        return EmpresaDao.insert(Empresa);  
     }
 
     @Override
     public boolean update(Empresa Empresa) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = EmpresaDao.update(Empresa);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Empresa == null)
+            throw new BusinessException("Empresa não pode ser nulo"); 
+        return EmpresaDao.update(Empresa);
+            
     }
 
     @Override
     public boolean delete(Empresa Empresa) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = EmpresaDao.delete(Empresa);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Empresa == null)
+            throw new BusinessException("Empresa não pode ser nulo");
+        return EmpresaDao.delete(Empresa);
     }
 
     @Override
     public Empresa pesquisar(long CNPJ) throws PersistenceException {
-        Empresa result = null;
-        try {
-            result = EmpresaDao.pesquisar(CNPJ);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return EmpresaDao.pesquisar(CNPJ);
     }
 
 }

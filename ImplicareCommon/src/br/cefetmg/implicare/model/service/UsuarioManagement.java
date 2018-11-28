@@ -2,8 +2,10 @@ package br.cefetmg.implicare.model.service;
 
 import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.exception.PersistenceException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-public interface UsuarioManagement {
+public interface UsuarioManagement extends Remote{
 
-    public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException;
+    public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException, RemoteException;
 }

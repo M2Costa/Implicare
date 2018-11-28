@@ -19,38 +19,17 @@ public class CargoManagementImpl implements CargoManagement {
 
     @Override
     public ArrayList<Cargo> listar() throws PersistenceException {
-        ArrayList<Cargo> result = null;
-        try {
-            result = CargoDao.listar();
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CargoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return CargoDao.listar();
     }
 
     @Override
     public ArrayList<Cargo> listarCargoAreaEstudo(long CPF) throws PersistenceException {
-        ArrayList<Cargo> result = null;
-        try {
-            result = CargoDao.listarCargoAreaEstudo(CPF);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CargoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return CargoDao.listarCargoAreaEstudo(CPF);
     }
 
     @Override
     public Cargo pesquisar(int Cod_Cargo) throws PersistenceException {
-        Cargo result = null;
-        try {
-            result = CargoDao.pesquisar(Cod_Cargo);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CargoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return CargoDao.pesquisar(Cod_Cargo);
     }
 
 }

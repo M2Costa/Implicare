@@ -20,38 +20,24 @@ public class CargoInteresseManagementImpl implements CargoInteresseManagement {
 
     @Override
     public boolean insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CargoInteresseDao.insert(CargoInteresse);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CargoInteresseManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(CargoInteresse == null)
+            throw new BusinessException("CargoInteresse não pode ser nulo");
+        
+        return CargoInteresseDao.insert(CargoInteresse);
     }
 
     @Override
     public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException {
-        boolean result = false;
-        try {
-            result = CargoInteresseDao.delete(CargoInteresse);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CargoInteresseManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(CargoInteresse == null)
+            throw new BusinessException("CargoInteresse não pode ser nulo");
+        
+        return CargoInteresseDao.delete(CargoInteresse);
     }
 
     @Override
     public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException {
-        ArrayList<CargoInteresse> result = null;
-        try {
-            result = CargoInteresseDao.listar(CPF);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CargoInteresseManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        
+        return CargoInteresseDao.listar(CPF);
     }
 
 }

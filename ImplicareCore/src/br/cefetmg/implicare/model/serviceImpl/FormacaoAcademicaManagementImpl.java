@@ -20,62 +20,36 @@ public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagem
 
     @Override
     public boolean insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = FormacaoAcademicaDao.insert(FormacaoAcademica);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(FormacaoAcademica == null)
+            throw new BusinessException("FormacaoAcademica não pode ser nulo");
+        return FormacaoAcademicaDao.insert(FormacaoAcademica);
+            
     }
 
     @Override
     public boolean update(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = FormacaoAcademicaDao.update(FormacaoAcademica);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(FormacaoAcademica == null)
+            throw new BusinessException("FormacaoAcademica não pode ser nulo");
+        return FormacaoAcademicaDao.update(FormacaoAcademica);
+            
     }
 
     @Override
     public boolean delete(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
-        boolean result = false;
-        try {
-            result = FormacaoAcademicaDao.delete(FormacaoAcademica);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(FormacaoAcademica == null)
+            throw new BusinessException("FormacaoAcademica não pode ser nulo");
+        return FormacaoAcademicaDao.delete(FormacaoAcademica);
+           
     }
 
     @Override
     public FormacaoAcademica pesquisar(int Seq_Formacao) throws PersistenceException {
-        FormacaoAcademica result = null;
-        try {
-            result = FormacaoAcademicaDao.pesquisar(Seq_Formacao);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return FormacaoAcademicaDao.pesquisar(Seq_Formacao);
     }
 
     @Override
     public ArrayList<FormacaoAcademica> listar(long CPF) throws PersistenceException {
-        ArrayList<FormacaoAcademica> result = null;
-        try {
-            result = FormacaoAcademicaDao.listar(CPF);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return FormacaoAcademicaDao.listar(CPF);
     }
 
 }

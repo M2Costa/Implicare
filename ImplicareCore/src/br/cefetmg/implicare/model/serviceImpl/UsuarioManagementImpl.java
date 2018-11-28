@@ -18,13 +18,7 @@ public class UsuarioManagementImpl implements UsuarioManagement {
 
     @Override
     public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException {
-        Usuario result = null;
-        try {
-            result = UsuarioDao.login(CPF_CNPJ, Senha);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(UsuarioManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return UsuarioDao.login(CPF_CNPJ, Senha);
+            
     }
 }

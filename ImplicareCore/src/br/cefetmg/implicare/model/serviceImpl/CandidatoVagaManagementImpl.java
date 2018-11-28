@@ -20,38 +20,24 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
 
     @Override
     public boolean insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoVagaDao.insert(CandidatoVaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoVagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(CandidatoVaga == null)
+            throw new BusinessException("CandidatoVaga não pode ser nulo");
+        
+        return CandidatoVagaDao.insert(CandidatoVaga);
     }
 
     @Override
     public boolean update(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoVagaDao.update(CandidatoVaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoVagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(CandidatoVaga == null)
+            throw new BusinessException("CandidatoVaga não pode ser nulo");
+       
+        return CandidatoVagaDao.update(CandidatoVaga);
     }
 
     @Override
     public ArrayList<CandidatoVaga> listar(int Seq_Vaga) throws PersistenceException {
-        ArrayList<CandidatoVaga> result = null;
-        try {
-            result = CandidatoVagaDao.listar(Seq_Vaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoVagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+ 
+        return CandidatoVagaDao.listar(Seq_Vaga);
     }
 
 }

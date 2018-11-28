@@ -20,50 +20,31 @@ public class CandidatoManagementImpl implements CandidatoManagement {
 
     @Override
     public boolean insert(Candidato Candidato) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoDao.insert(Candidato);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Candidato == null)
+            throw new BusinessException("Candidato não pode ser nulo");
+        
+        return CandidatoDao.insert(Candidato);
     }
 
     @Override
     public boolean update(Candidato Candidato) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoDao.update(Candidato);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Candidato == null)
+            throw new BusinessException("Candidato não pode ser nulo");
+   
+        return CandidatoDao.update(Candidato);
     }
 
     @Override
     public boolean delete(Candidato Candidato) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoDao.delete(Candidato);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        if(Candidato == null)
+            throw new BusinessException("Candidato não pode ser nulo");
+        
+        return CandidatoDao.delete(Candidato);
     }
 
     @Override
     public Candidato pesquisar(long CPF) throws PersistenceException {
-        Candidato result = null;
-        try {
-            result = CandidatoDao.pesquisar(CPF);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+        return CandidatoDao.pesquisar(CPF);
     }
 
 }
