@@ -1,22 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmf.implicare.servlet;
 
+import br.cefetmg.implicare.exception.BusinessException;
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;
 import br.cefetmg.implicare.model.serviceImpl.ExperienciaProfissionalManagementImpl;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-
-/**
- *
- * @author Gabriel
- * 
- */
 
 class AlterarExperienciaProfissional {
 
@@ -46,16 +40,15 @@ class AlterarExperienciaProfissional {
             
             boolean Experiencia = ExperienciaManagement.update(Exp);
 
-            if (Experiencia =! false) {
+            if (Experiencia) {
                 jsp = "ImplicareServlet?acao=PerfilCandidato";
                 request.setAttribute("ExperienciaProfissional", Exp);
             } else {
-                String Erro = "Erro ao Editar Experiencia Profissional";
                 jsp = "/WEB-Pages/Erro.jsp";
-                request.setAttribute("Erro", Erro);
+                request.setAttribute("Erro", "Erro ao Editar Experiencia Profissional");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (BusinessException | PersistenceException | NumberFormatException | ParseException e) {
+            Logger.getLogger(PesquisarVaga.class.getName()).log(Level.SEVERE, null, e);
         }
         return jsp;
     }

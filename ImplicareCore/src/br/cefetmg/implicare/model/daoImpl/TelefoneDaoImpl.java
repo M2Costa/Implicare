@@ -9,160 +9,157 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TelefoneDaoImpl implements TelefoneDao {
+    
+    private static TelefoneDao telefoneDao;
 
-    @Override
-    public boolean insert(Telefone Telefone) throws PersistenceException {
-        try {
-
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String sql = "INSERT INTO Telefone (CPF_CNPJ, Num_Telefone, Tipo_Telefone, DDD,"
-                    + "Ramal) VALUES(?,?,?,?,?)";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, Telefone.getCPF_CNPJ());
-            ps.setString(2, Telefone.getNum_Telefone());
-            ps.setString(3, Telefone.getTipo_Telefone());
-            ps.setInt(4, Telefone.getDDD());
-            ps.setInt(5, Telefone.getRamal());
-
-            ResultSet rs = ps.executeQuery();
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return true;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
+    private TelefoneDaoImpl() {}
+    
+    public static TelefoneDao getInstance() {
+        if (telefoneDao == null) {
+            telefoneDao = new TelefoneDaoImpl();
         }
+        return telefoneDao;
     }
 
     @Override
-    public boolean update(Telefone Telefone) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public void insert(Telefone telefone) throws PersistenceException {
+        
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
+            String sql = "INSERT INTO Telefone "
+                    + "(CPF_CNPJ, Num_Telefone, Tipo_Telefone, DDD, Ramal) "
+                    + "VALUES (?,?,?,?,?)";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                
+                ps.setLong(1, telefone.getCPF_CNPJ());
+                ps.setString(2, telefone.getNum_Telefone());
+                ps.setString(3, telefone.getTipo_Telefone());
+                ps.setInt(4, telefone.getDDD());
+                ps.setInt(5, telefone.getRamal());
 
-            String SQL = "UPDATE Telefone SET Num_Telefone = ?, Tipo_Telefone = ?, DDD = ?, Ramal = ? "
-                    + "WHERE Seq_Telefone = ?";
+                ResultSet rs = ps.executeQuery();
 
-            PreparedStatement ps = connection.prepareStatement(SQL);
-
-            ps.setString(1, Telefone.getNum_Telefone());
-            ps.setString(2, Telefone.getTipo_Telefone());
-            ps.setInt(3, Telefone.getDDD());
-            ps.setInt(4, Telefone.getRamal());
-            ps.setInt(5, Telefone.getSeq_Telefone());
-
-            ps.executeQuery(SQL);
-            ps.close();
-            connection.close();
-
-            return true;
-
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-            return false;
-        }
-    }
-
-    @Override
-    public boolean delete(Telefone Telefone) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String SQL = "DELETE FROM Telefone WHERE Seq_Telefone = ?";
-
-            PreparedStatement ps = connection.prepareStatement(SQL);
-
-            ps.setInt(1, Telefone.getSeq_Telefone());
-
-            ps.executeQuery(SQL);
-            ps.close();
-            connection.close();
-            return true;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
-        }
-    }
-
-    @Override
-    public Telefone pesquisar(int Seq_Telefone) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String SQL = "SELECT * FROM Telefone"
-                    + "WHERE Seq_Telefone = ?";
-
-            PreparedStatement ps = connection.prepareStatement(SQL);
-
-            ps.setLong(1, Seq_Telefone);
-
-            ResultSet rs = ps.executeQuery(SQL);
-
-            Telefone Tel = new Telefone();
-            Tel.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
-            Tel.setSeq_Telefone(rs.getInt("Seq_Telefone"));
-            Tel.setNum_Telefone(rs.getString("Num-Telefone"));
-            Tel.setTipo_Telefone(rs.getString("Tipo_Telfone"));
-            Tel.setDDD(rs.getInt("DDD"));
-            Tel.setRamal(rs.getInt("Ramal"));
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return Tel;
-
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-            return null;
-        }
-    }
-
-    @Override
-    public ArrayList<Telefone> listar(long CPF_CNPJ) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String SQL = "SELECT * FROM Telefone"
-                    + "WHERE CPF_CNPJ = ?";
-
-            PreparedStatement ps = connection.prepareStatement(SQL);
-
-            ps.setLong(1, CPF_CNPJ);
-
-            ResultSet rs = ps.executeQuery(SQL);
-
-            ArrayList<Telefone> lista = new ArrayList();
-
-            while (rs.next()) {
-                Telefone Tel = new Telefone();
-                Tel.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
-                Tel.setSeq_Telefone(rs.getInt("Seq_Telefone"));
-                Tel.setNum_Telefone(rs.getString("Num-Telefone"));
-                Tel.setTipo_Telefone(rs.getString("Tipo_Telfone"));
-                Tel.setDDD(rs.getInt("DDD"));
-                Tel.setRamal(rs.getInt("Ramal"));
-                lista.add(Tel);
+                rs.close();
             }
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return lista;
-
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-            return null;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível inserir o telefone: " + telefone);
         }
     }
 
+    @Override
+    public void update(Telefone telefone) throws PersistenceException {
+        
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
+            String SQL = "UPDATE Telefone "
+                    + "SET Num_Telefone = ?, Tipo_Telefone = ?, DDD = ?, Ramal = ? "
+                    + "WHERE Seq_Telefone = ?";
+            try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+                
+                ps.setString(1, telefone.getNum_Telefone());
+                ps.setString(2, telefone.getTipo_Telefone());
+                ps.setInt(3, telefone.getDDD());
+                ps.setInt(4, telefone.getRamal());
+                ps.setInt(5, telefone.getSeq_Telefone());
+
+                ps.executeQuery();
+            }
+        }catch (ClassNotFoundException | SQLException ex) {
+            
+            Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível atualizar o telefone: " + telefone);
+        }
+    }
+
+    @Override
+    public void delete(Telefone telefone) throws PersistenceException {
+        
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
+            String SQL = "DELETE FROM Telefone "
+                    + "WHERE Seq_Telefone = ?";
+            try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+                
+                ps.setInt(1, telefone.getSeq_Telefone());
+                ps.executeQuery();
+            }
+        }catch (SQLException | ClassNotFoundException ex) {
+            
+            Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível deletar o telefone: " + telefone);
+        }
+    }
+
+    @Override
+    public Telefone pesquisar(int seqTelefone) throws PersistenceException {
+        
+        Telefone Tel;
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
+            String SQL = "SELECT * FROM Telefone "
+                    + "WHERE Seq_Telefone = ?";
+            try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+                
+                ps.setLong(1, seqTelefone);
+                try (ResultSet rs = ps.executeQuery(SQL)) {
+                    
+                    Tel = new Telefone(
+                            rs.getLong("CPF_CNPJ"),
+                            rs.getInt("Seq_Telefone"),
+                            rs.getString("Num-Telefone"),
+                            rs.getString("Tipo_Telfone"),
+                            rs.getInt("DDD"),
+                            rs.getInt("Ramal")
+                    );
+                }
+            }
+        }catch (ClassNotFoundException| SQLException ex) {
+            
+            Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível encontrar o telefone com: seqTelefone = " + seqTelefone);
+        }
+        
+        return Tel;
+    }
+
+    @Override
+    public ArrayList<Telefone> listar(long cpfCnpj) throws PersistenceException {
+        
+        ArrayList<Telefone> lista;
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
+            String SQL = "SELECT * FROM Telefone "
+                    + "WHERE CPF_CNPJ = ?";
+            try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+                
+                ps.setLong(1, cpfCnpj);
+                try (ResultSet rs = ps.executeQuery()) {
+                    
+                    lista = new ArrayList();
+                    while (rs.next()) {
+                        
+                        lista.add(
+                            new Telefone(
+                                rs.getLong("CPF_CNPJ"),
+                                rs.getInt("Seq_Telefone"),
+                                rs.getString("Num-Telefone"),
+                                rs.getString("Tipo_Telfone"),
+                                rs.getInt("DDD"),
+                                rs.getInt("Ramal")
+                            )
+                        );
+                    }
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível encontrar telefones com: CpfCnpj = " + cpfCnpj);
+        }
+        return lista;
+    }
 }

@@ -1,6 +1,5 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
-import br.cefetmg.implicare.dao.ExperienciaProfissionalDao;
 import br.cefetmg.implicare.model.daoImpl.ExperienciaProfissionalDaoImpl;
 import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.exception.BusinessException;
@@ -54,5 +53,4 @@ public class ExperienciaProfissionalManagementImpl implements ExperienciaProfiss
         return ExperienciaProfissionalDao.listar(CPF);
             
     }
-
 }

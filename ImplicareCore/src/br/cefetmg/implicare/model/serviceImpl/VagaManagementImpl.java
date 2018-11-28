@@ -1,6 +1,5 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
-import br.cefetmg.implicare.dao.VagaDao;
 import br.cefetmg.implicare.model.daoImpl.VagaDaoImpl;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.exception.BusinessException;
@@ -8,8 +7,6 @@ import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class VagaManagementImpl implements VagaManagement {
 
@@ -48,7 +45,7 @@ public class VagaManagementImpl implements VagaManagement {
         return VagaDao.pesquisar(Seq_Vaga);
             
     }
-
+    
     @Override
     public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException, RemoteException {
         return VagaDao.listarVagaEmpresa(CNPJ);
@@ -60,3 +57,4 @@ public class VagaManagementImpl implements VagaManagement {
         return VagaDao.listarVagaCandidato(CPF);
     }
 }
+

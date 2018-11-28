@@ -11,12 +11,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDao {
+    private static ExperienciaProfissionalDao ExperienciaProfissionalDao;
+    
+    private ExperienciaProfissionalDaoImpl(){}
+
+    public static ExperienciaProfissionalDao getInstance() {
+        if (ExperienciaProfissionalDao == null) {
+            ExperienciaProfissionalDao = new ExperienciaProfissionalDaoImpl();
+        }
+        return ExperienciaProfissionalDao;
+    }
 
     @Override
-    public boolean insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
-
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public void insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "INSERT INTO Experiencia_Profissional (CPF, Seq_Experiencia, Nom_Empresa, Cod_Cargo, "
                     + "Data_Inicio, Data_Termino, Desc_Experiencia_Profissional) "
@@ -47,9 +55,8 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
     }
 
     @Override
-    public boolean update(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public void update(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String SQL = "UPDATE Experiencia_Profissional SET Nom_Empresa = ?, Cod_Cargo = ?, "
                     + "Data_Inicio = ?, Data_Termino = ?, Desc_Experiencia_Profissional = ?"
@@ -69,17 +76,15 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
             connection.close();
             return true;
 
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex.toString());
             return false;
         }
     }
 
     @Override
-    public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
+    public void delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String SQL = "DELETE FROM Experiencia_Profissional"
                     + "WHERE Seq_Experiencia = ?";
 
@@ -99,9 +104,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public ExperienciaProfissional pesquisar(int Seq_Experiencia) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             String sql = "SELECT * FROM Experiencia_Profissional WHERE Seq_Experiencia = ?;";
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -132,8 +135,7 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Experiencia_Profissional WHERE CPF = ? ORDER BY Seq_Experiencia;";
 

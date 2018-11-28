@@ -14,7 +14,7 @@ public interface ExperienciaProfissionalManagement extends Remote{
     public boolean update(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException;
 
     public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException, RemoteException;
-
+  
     public ExperienciaProfissional pesquisar(int Seq_Experiencia) throws PersistenceException, RemoteException;
 
     public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException, RemoteException;

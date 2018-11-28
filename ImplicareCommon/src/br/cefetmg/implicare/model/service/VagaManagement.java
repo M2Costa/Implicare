@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public interface VagaManagement extends Remote{
 
+
     public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
 
     public boolean update(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;

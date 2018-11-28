@@ -1,3 +1,8 @@
-/ImplicareApplication/nbproject/private/
-/ImplicareApplication/build/
 /ImplicareCommon/nbproject/private/
+/ImplicareCommon/build/
+/ImplicareCommon/dist/
+/ImplicareCore/build/
+/ImplicareCore/dist/
+/ImplicareView/dist/
+/ImplicareView/build/
+/ImplicareView/nbproject/private/

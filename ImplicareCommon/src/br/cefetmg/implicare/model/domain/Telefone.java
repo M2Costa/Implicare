@@ -9,9 +9,6 @@ public class Telefone {
     private int DDD;
     private int Ramal;
 
-    public Telefone() {
-    }
-
     public Telefone(long CPF_CNPJ, int Seq_Telefone, String Num_Telefone, String Tipo_Telefone, int DDD, int Ramal) {
         this.CPF_CNPJ = CPF_CNPJ;
         this.Seq_Telefone = Seq_Telefone;

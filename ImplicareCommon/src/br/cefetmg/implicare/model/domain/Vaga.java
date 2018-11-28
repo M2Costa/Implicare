@@ -14,9 +14,6 @@ public class Vaga {
     private String Desc_Vaga;
     private int Status_Vaga;
 
-    public Vaga() {
-    }
-
     public Vaga(long CNPJ, int Seq_Vaga, int Cod_Cargo, Date Dat_Publicacao, int Num_Vagas, int Carga_Horaria, double Remuneracao, String Desc_Vaga, int Status_Vaga) {
         this.CNPJ = CNPJ;
         this.Seq_Vaga = Seq_Vaga;

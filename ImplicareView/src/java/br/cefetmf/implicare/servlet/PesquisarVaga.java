@@ -3,8 +3,6 @@ package br.cefetmf.implicare.servlet;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.domain.Cargo;
 import br.cefetmg.implicare.model.domain.Vaga;
-import br.cefetmg.implicare.model.service.CargoManagement;
-import br.cefetmg.implicare.model.service.VagaManagement;
 import br.cefetmg.implicare.model.serviceImpl.CargoManagementImpl;
 import br.cefetmg.implicare.model.serviceImpl.VagaManagementImpl;
 import java.util.ArrayList;
@@ -22,15 +20,12 @@ class PesquisarVaga {
             
             int Seq_Vaga = Integer.parseInt(request.getParameter("Seq_Vaga"));
             
-            VagaManagement VagaManagement = new VagaManagementImpl();
-            Vaga Vag = VagaManagement.pesquisar(Seq_Vaga);
+            Vaga vaga = new VagaManagementImpl().pesquisar(Seq_Vaga);
+            ArrayList<Cargo> ListaCargo = new CargoManagementImpl().listar();
             
-            CargoManagement CargoManagement = new CargoManagementImpl();
-            ArrayList<Cargo> ListaCargo = CargoManagement.listar();
-            
-            if (Vag != null) {
+            if (vaga != null) {
                 jsp = "EditarVaga.jsp";
-                request.setAttribute("Vaga", Vag);
+                request.setAttribute("Vaga", vaga);
                 request.setAttribute("ListaCargo", ListaCargo);
             }
             
