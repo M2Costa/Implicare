@@ -9,16 +9,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VagaDaoImpl implements VagaDao {
+    
+    private static VagaDao VagaDao;
 
+    private VagaDaoImpl() {}
+    
+    public static VagaDao getInstance() {
+        if (VagaDao == null) {
+            VagaDao = new VagaDaoImpl();
+        }
+        return VagaDao;
+    }
+    
     @Override
-    public boolean insert(Vaga Vaga) throws PersistenceException {
-        try {
+    public void insert(Vaga Vaga) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String sql = "INSERT INTO Vaga (CNPJ, Cod_Cargo, Dat_Publicacao, Num_Vagas,"
+            String sql = "INSERT INTO Vaga (CNPJ, Cod_Cargo, Dat_Publicacao, Num_Vagas, "
                     + "Carga_Horaria, Remuneracao, Desc_Vaga, Status_Vaga) "
                     + "VALUES(?,?,?,?,?,?,?,?)";
 
@@ -39,20 +50,17 @@ public class VagaDaoImpl implements VagaDao {
             ps.close();
             connection.close();
 
-            return true;
-
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível inserir a vaga: " + Vaga);
         }
     }
 
     @Override
-    public boolean update(Vaga Vaga) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public void update(Vaga Vaga) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
-            String SQL = "UPDATE Vaga SET Cod_Cargo = ?, Num_Vagas = ?, Carga_Horaria = ?,"
+            String SQL = "UPDATE Vaga SET Cod_Cargo = ?, Num_Vagas = ?, Carga_Horaria = ?, "
                     + "Remuneracao = ?, Desc_Vaga = ?, Status_Vaga = ?"
                     + " WHERE Seq_Vaga = ?";
 
@@ -69,20 +77,18 @@ public class VagaDaoImpl implements VagaDao {
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
-            return true;
 
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-            return false;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível atualizar a vaga: " + Vaga);
         }
     }
 
     @Override
-    public boolean delete(Vaga Vaga) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public void delete(Vaga Vaga) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
-            String SQL = "DELETE FROM Vaga"
+            String SQL = "DELETE FROM Vaga "
                     + "WHERE Seq_Vaga";
 
             PreparedStatement ps = connection.prepareStatement(SQL);
@@ -92,52 +98,49 @@ public class VagaDaoImpl implements VagaDao {
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
-            return true;
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível deletar a vaga: " + Vaga);
         }
     }
 
     @Override
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public Vaga pesquisar(int seqVaga) throws PersistenceException {
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Vaga WHERE Seq_Vaga = ?;";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, Seq_Vaga);
+            ps.setLong(1, seqVaga);
             ResultSet rs = ps.executeQuery();
 
-            Vaga Vag = new Vaga();
-
-            Vag.setCNPJ(rs.getLong("CNPJ"));
-            Vag.setSeq_Vaga(rs.getInt("Seq_Vaga"));
-            Vag.setCod_Cargo(rs.getInt("Cod_Cargo"));
-            Vag.setDat_Publicacao(rs.getDate("Dat_Publicacao"));
-            Vag.setNum_Vagas(rs.getInt("Num_Vagas"));
-            Vag.setCarga_Horaria(rs.getInt("Caraga_Horaria"));
-            Vag.setRemuneracao(rs.getDouble("Remuneracao"));
-            Vag.setDesc_Vaga(rs.getString("Desc_Vaga"));
-            Vag.setStatus_Vaga(rs.getInt("Status_Vaga"));
-
+            Vaga vaga = new Vaga(
+                rs.getLong("CNPJ"),
+                rs.getInt("Seq_Vaga"),
+                rs.getInt("Cod_Cargo"),
+                rs.getDate("Dat_Publicacao"),
+                rs.getInt("Num_Vagas"),
+                rs.getInt("Caraga_Horaria"),
+                rs.getDouble("Remuneracao"),
+                rs.getString("Desc_Vaga"),
+                rs.getInt("Status_Vaga")
+            );
+            
             rs.close();
             ps.close();
             connection.close();
 
-            return Vag;
+            return vaga;
 
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível encontrar uma vaga com: seqVaga = " + seqVaga);
         }
     }
 
     @Override
     public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             String sql = "SELECT * FROM Vaga WHERE CNPJ = ? AND Status_Vaga = 1 ORDER BY Cod_Cargo, Dat_Publicacao";
 
@@ -146,23 +149,22 @@ public class VagaDaoImpl implements VagaDao {
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Vaga> lista = new ArrayList<>();
+            
+            while(rs.next()) {
 
-            if (rs.next()) {
-                do {
-                    Vaga Vag = new Vaga();
-
-                    Vag.setCNPJ(rs.getLong("CNPJ"));
-                    Vag.setSeq_Vaga(rs.getInt("Seq_Vaga"));
-                    Vag.setCod_Cargo(rs.getInt("Cod_Cargo"));
-                    Vag.setDat_Publicacao(rs.getDate("Dat_Publicacao"));
-                    Vag.setNum_Vagas(rs.getInt("Num_Vagas"));
-                    Vag.setCarga_Horaria(rs.getInt("Caraga_Horaria"));
-                    Vag.setRemuneracao(rs.getDouble("Remuneracao"));
-                    Vag.setDesc_Vaga(rs.getString("Desc_Vaga"));
-                    Vag.setStatus_Vaga(rs.getInt("Status_Vaga"));
-
-                    lista.add(Vag);
-                } while (rs.next());
+                lista.add(
+                    new Vaga(
+                        rs.getLong("CNPJ"),
+                        rs.getInt("Seq_Vaga"),
+                        rs.getInt("Cod_Cargo"),
+                        rs.getDate("Dat_Publicacao"),
+                        rs.getInt("Num_Vagas"),
+                        rs.getInt("Caraga_Horaria"),
+                        rs.getDouble("Remuneracao"),
+                        rs.getString("Desc_Vaga"),
+                        rs.getInt("Status_Vaga")
+                    )
+                );
             }
 
             rs.close();
@@ -172,15 +174,14 @@ public class VagaDaoImpl implements VagaDao {
             return lista;
 
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível listar as vagas com: CNPJ = " + CNPJ);
         }
     }
 
     @Override
     public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             ArrayList<Vaga> lista = new ArrayList<>();
 
@@ -192,42 +193,38 @@ public class VagaDaoImpl implements VagaDao {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, CPF);
             ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                do {
-                    Vaga Vag = new Vaga();
-
-                    Vag.setCNPJ(rs.getLong("CNPJ"));
-                    Vag.setSeq_Vaga(rs.getInt("Seq_Vaga"));
-                    Vag.setCod_Cargo(rs.getInt("Cod_Cargo"));
-                    Vag.setDat_Publicacao(rs.getDate("Dat_Publicacao"));
-                    Vag.setNum_Vagas(rs.getInt("Num_Vagas"));
-                    Vag.setCarga_Horaria(rs.getInt("Caraga_Horaria"));
-                    Vag.setRemuneracao(rs.getDouble("Remuneracao"));
-                    Vag.setDesc_Vaga(rs.getString("Desc_Vaga"));
-                    Vag.setStatus_Vaga(rs.getInt("Status_Vaga"));
-
-                    lista.add(Vag);
-                } while (rs.next());
+            
+            while (rs.next()){
+                lista.add(
+                    new Vaga(
+                        rs.getLong("CNPJ"),
+                        rs.getInt("Seq_Vaga"),
+                        rs.getInt("Cod_Cargo"),
+                        rs.getDate("Dat_Publicacao"),
+                        rs.getInt("Num_Vagas"),
+                        rs.getInt("Caraga_Horaria"),
+                        rs.getDouble("Remuneracao"),
+                        rs.getString("Desc_Vaga"),
+                        rs.getInt("Status_Vaga")
+                    )
+                );
             }
 
             rs.close();
             ps.close();
-
             connection.close();
 
             return lista;
 
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível listar as vagas com: CPF = " + CPF);
         }
     }
 
     @Override
     public ArrayList<Vaga> listarVagaAceito(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
 
             ArrayList<Vaga> lista = new ArrayList<>();
 
@@ -240,35 +237,31 @@ public class VagaDaoImpl implements VagaDao {
             ps.setLong(1, CPF);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                do {
-                    Vaga Vag = new Vaga();
-
-                    Vag.setCNPJ(rs.getLong("CNPJ"));
-                    Vag.setSeq_Vaga(rs.getInt("Seq_Vaga"));
-                    Vag.setCod_Cargo(rs.getInt("Cod_Cargo"));
-                    Vag.setDat_Publicacao(rs.getDate("Dat_Publicacao"));
-                    Vag.setNum_Vagas(rs.getInt("Num_Vagas"));
-                    Vag.setCarga_Horaria(rs.getInt("Caraga_Horaria"));
-                    Vag.setRemuneracao(rs.getDouble("Remuneracao"));
-                    Vag.setDesc_Vaga(rs.getString("Desc_Vaga"));
-                    Vag.setStatus_Vaga(rs.getInt("Status_Vaga"));
-
-                    lista.add(Vag);
-                } while (rs.next());
+            while (rs.next()) {
+                lista.add(
+                    new Vaga(
+                        rs.getLong("CNPJ"),
+                        rs.getInt("Seq_Vaga"),
+                        rs.getInt("Cod_Cargo"),
+                        rs.getDate("Dat_Publicacao"),
+                        rs.getInt("Num_Vagas"),
+                        rs.getInt("Caraga_Horaria"),
+                        rs.getDouble("Remuneracao"),
+                        rs.getString("Desc_Vaga"),
+                        rs.getInt("Status_Vaga")
+                    )
+                );
             }
 
             rs.close();
             ps.close();
-
             connection.close();
 
             return lista;
 
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+            Logger.getLogger(VagaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível listar as vagas aceitas com: CPF = " + CPF);
         }
     }
-
 }

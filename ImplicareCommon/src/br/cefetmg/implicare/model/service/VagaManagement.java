@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public interface VagaManagement {
 
-    public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException;
+    public void insert(Vaga Vaga) throws BusinessException, PersistenceException;
 
-    public boolean update(Vaga Vaga) throws BusinessException, PersistenceException;
+    public void update(Vaga Vaga) throws BusinessException, PersistenceException;
 
-    public boolean delete(Vaga Vaga) throws PersistenceException;
+    public void delete(Vaga Vaga) throws PersistenceException;
 
     public Vaga pesquisar(int Seq_Vaga) throws PersistenceException;
 

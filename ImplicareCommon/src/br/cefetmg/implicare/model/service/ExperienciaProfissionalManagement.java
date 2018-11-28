@@ -13,7 +13,7 @@ public interface ExperienciaProfissionalManagement {
 
     public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException;
 
-    public ExperienciaProfissional pesquisar(int Seq_Experiencia) throws PersistenceException;
+    public ExperienciaProfissional pesquisar(int SeqExperiencia) throws PersistenceException;
 
     public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException;
 }

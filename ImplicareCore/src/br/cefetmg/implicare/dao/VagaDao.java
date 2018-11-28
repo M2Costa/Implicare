@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public interface VagaDao {
 
-    public boolean insert(Vaga Vaga) throws PersistenceException;
+    public void insert(Vaga Vaga) throws PersistenceException;
 
-    public boolean update(Vaga Vaga) throws PersistenceException;
+    public void update(Vaga Vaga) throws PersistenceException;
 
-    public boolean delete(Vaga Vaga) throws PersistenceException;
+    public void delete(Vaga Vaga) throws PersistenceException;
 
     public Vaga pesquisar(int Seq_Vaga) throws PersistenceException;
 

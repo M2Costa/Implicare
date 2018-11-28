@@ -1,9 +1,3 @@
-/**
- * Author:  Morato
- * Created: 12/10/2018
- */
-
-
 INSERT INTO Cargo (Cod_Cargo, Nom_Cargo) VALUES 
 (0, 'Administrador'),
 (1, 'Analista Programador') ,
@@ -89,8 +83,7 @@ INSERT INTO Cargo (Cod_Cargo, Nom_Cargo) VALUES
 (81, 'Web Designer Trainee'),
 (82, 'Web Developer'),
 (83, 'Webmaster'),
-(84, 'Zelador')
-;
+(84, 'Zelador');
 
 INSERT INTO Area_Estudo (Cod_Area_Estudo, Nom_Area_Estudo) VALUES
 (0, 'Ensino Fundamental'),
@@ -143,8 +136,7 @@ INSERT INTO Area_Estudo (Cod_Area_Estudo, Nom_Area_Estudo) VALUES
 (51, 'Relações Publicas'),
 (52, 'Ciências Políticas'),
 (53, 'Nutricionista'),
-(54, 'Farmácia')
-;
+(54, 'Farmácia');
 
 INSERT INTO Cargo_AreaEstudo(Cod_Area_Estudo, Cod_Cargo) VALUES
 (0, 4),
@@ -427,24 +419,21 @@ INSERT INTO Cargo_AreaEstudo(Cod_Area_Estudo, Cod_Cargo) VALUES
 (53, 69),
 (54, 17),
 (54, 20),
-(54, 68)
-;
+(54, 68);
 
 INSERT INTO Usuario (CPF_CNPJ, Email, Senha, Foto, Cod_CEP, Endereco, Desc_Usuario) VALUES
 (12189917699, 'positivo@positivo.com', '21ad84adv3a', NULL, 31310960, 'Av. Amazonas', 'Empresa de Tecnologia & Eletronicos'),
 (18986913678, 'Lg@LG.com', 'hndfuimG', NULL, 31290756, 'Av. São Paulo', 'Empresa de Tecnologia & Eletronicos'),
 (19289916798, 'Hostel@gmail.com', 'hjdfiufdgng', NULL, 39209760, 'Av. Contorno', 'Empresa Hoteleira'),
 (89213819628, 'Betsona@hotmail.com', 'giduhgdgngdsg', NULL, 38210980, 'Av. Rio de Janeiro', 'Empresa Farmacêutica'),
-(25889918652, 'philco@philco.com', '189359521hb', NULL, 36250836, 'Av. Brasil', 'Empresa de Tecnologia & Eletronicos')
-;
+(25889918652, 'philco@philco.com', '189359521hb', NULL, 36250836, 'Av. Brasil', 'Empresa de Tecnologia & Eletronicos');
 
 INSERT INTO Empresa (CNPJ, Nom_Razao_Social, Nome_Fantasia) VALUES
 (12189917699, 'Positivo', 'Positivo'),
 (18986913678, 'LG', 'LG'),
 (19289916798, 'Hostel', 'Hostel'),
 (89213819628, 'Betsona', 'Betsona'),
-(25889918652, 'Philco', 'Philco')
-;
+(25889918652, 'Philco', 'Philco');
 
 INSERT INTO Telefone(CPF_CNPJ, Seq_Telefone, Num_Telefone, Tipo_Telefone, DDD, Ramal) VALUES
 (12189917699, 1, '35424987', 'C', '31', null),
@@ -456,8 +445,7 @@ INSERT INTO Telefone(CPF_CNPJ, Seq_Telefone, Num_Telefone, Tipo_Telefone, DDD, R
 (19289916798, 7,'32596875', 'C', '31', 16),
 (89213819628, 8,'38956759', 'C', '21', null),
 (89213819628, 9,'37598650', 'C', '31', null),
-(89213819628, 10,'39578965', 'C', '31', null)
-;
+(89213819628, 10,'39578965', 'C', '31', null);
 
 
 
