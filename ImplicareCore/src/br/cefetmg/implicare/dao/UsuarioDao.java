@@ -6,7 +6,7 @@
 package br.cefetmg.implicare.dao;
 
 import br.cefetmg.implicare.model.domain.Usuario;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.PersistenceException;
 
 /**
  *
