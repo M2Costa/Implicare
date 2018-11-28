@@ -1,33 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.EmpresaDao;
 import br.cefetmg.implicare.model.daoImpl.EmpresaDaoImpl;
 import br.cefetmg.implicare.model.domain.Empresa;
-import br.cefetmg.implicare.model.exception.BusinessException;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.BusinessException;
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EmpresaManagement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Morato
- * 
- */
+public class EmpresaManagementImpl implements EmpresaManagement {
 
-public class EmpresaManagementImpl implements EmpresaManagement{
     private final EmpresaDao EmpresaDao;
-    
-    public EmpresaManagementImpl(){
+
+    public EmpresaManagementImpl() {
         EmpresaDao = new EmpresaDaoImpl();
     }
-    
-    
+
     @Override
     public boolean insert(Empresa Empresa) throws BusinessException, PersistenceException {
         boolean result = false;
@@ -75,5 +64,5 @@ public class EmpresaManagementImpl implements EmpresaManagement{
         }
         return result;
     }
-    
+
 }

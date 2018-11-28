@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.dao.CargoInteresseDao;
@@ -15,27 +10,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Gabriel
- * 
- */
-
 public class CargoInteresseDaoImpl implements CargoInteresseDao {
 
     @Override
     public boolean insert(CargoInteresse CargoInteresse) throws PersistenceException {
         try {
-            
-           Connection connection = JDBCConnectionManager.getInstance().getConnection();
+
+            Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO Cargo_Interesse (CPF, Cod_Cargo) VALUES(?,?)";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-           
+
             ps.setLong(1, CargoInteresse.getCPF());
             ps.setInt(2, CargoInteresse.getCod_Cargo());
-            
+
             ResultSet rs = ps.executeQuery();
 
             rs.close();
@@ -43,7 +32,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
             connection.close();
 
             return true;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return false;
@@ -54,20 +43,20 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
     public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+
             String SQL = "DELETE FROM Cargo_Interesse"
                     + "WHERE CPF = ?, Cod_Cargo = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setLong(1, CargoInteresse.getCPF());
             ps.setInt(2, CargoInteresse.getCod_Cargo());
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
             return true;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return false;
@@ -86,7 +75,7 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
             ResultSet rs = ps.executeQuery();
 
             ArrayList<CargoInteresse> lista = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     CargoInteresse Car = new CargoInteresse();
@@ -101,11 +90,11 @@ public class CargoInteresseDaoImpl implements CargoInteresseDao {
             connection.close();
 
             return lista;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
+
 }

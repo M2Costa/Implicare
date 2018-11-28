@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.dao.VagaDao;
@@ -15,18 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Gabriel
- * 
- */
+public class VagaDaoImpl implements VagaDao {
 
-public class VagaDaoImpl implements VagaDao{
-    
     @Override
-    public boolean insert(Vaga Vaga) throws PersistenceException{
+    public boolean insert(Vaga Vaga) throws PersistenceException {
         try {
-                    
+
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO Vaga (CNPJ, Cod_Cargo, Dat_Publicacao, Num_Vagas,"
@@ -34,7 +23,7 @@ public class VagaDaoImpl implements VagaDao{
                     + "VALUES(?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, Vaga.getCNPJ());
             ps.setInt(2, Vaga.getCod_Cargo());
             ps.setDate(3, Vaga.getDat_Publicacao());
@@ -43,13 +32,13 @@ public class VagaDaoImpl implements VagaDao{
             ps.setDouble(6, Vaga.getRemuneracao());
             ps.setString(7, Vaga.getDesc_Vaga());
             ps.setInt(8, Vaga.getStatus_Vaga());
-            
+
             ResultSet rs = ps.executeQuery();
 
             rs.close();
             ps.close();
             connection.close();
-            
+
             return true;
 
         } catch (SQLException | ClassNotFoundException ex) {
@@ -57,18 +46,18 @@ public class VagaDaoImpl implements VagaDao{
             return false;
         }
     }
-    
+
     @Override
-    public boolean update(Vaga Vaga) throws PersistenceException{
+    public boolean update(Vaga Vaga) throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+
             String SQL = "UPDATE Vaga SET Cod_Cargo = ?, Num_Vagas = ?, Carga_Horaria = ?,"
                     + "Remuneracao = ?, Desc_Vaga = ?, Status_Vaga = ?"
                     + " WHERE Seq_Vaga = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-       
+
             ps.setInt(1, Vaga.getCod_Cargo());
             ps.setInt(2, Vaga.getNum_Vagas());
             ps.setInt(3, Vaga.getCarga_Horaria());
@@ -76,30 +65,30 @@ public class VagaDaoImpl implements VagaDao{
             ps.setString(5, Vaga.getDesc_Vaga());
             ps.setInt(6, Vaga.getStatus_Vaga());
             ps.setInt(7, Vaga.getSeq_Vaga());
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
             return true;
-            
+
         } catch (Exception ex) {
             System.out.println(ex.toString());
             return false;
         }
     }
-    
+
     @Override
-    public boolean delete(Vaga Vaga) throws PersistenceException{
+    public boolean delete(Vaga Vaga) throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+
             String SQL = "DELETE FROM Vaga"
                     + "WHERE Seq_Vaga";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setInt(1, Vaga.getSeq_Vaga());
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -109,7 +98,7 @@ public class VagaDaoImpl implements VagaDao{
             return false;
         }
     }
-    
+
     @Override
     public Vaga pesquisar(int Seq_Vaga) throws PersistenceException {
         try {
@@ -122,7 +111,7 @@ public class VagaDaoImpl implements VagaDao{
             ResultSet rs = ps.executeQuery();
 
             Vaga Vag = new Vaga();
-                    
+
             Vag.setCNPJ(rs.getLong("CNPJ"));
             Vag.setSeq_Vaga(rs.getInt("Seq_Vaga"));
             Vag.setCod_Cargo(rs.getInt("Cod_Cargo"));
@@ -132,19 +121,19 @@ public class VagaDaoImpl implements VagaDao{
             Vag.setRemuneracao(rs.getDouble("Remuneracao"));
             Vag.setDesc_Vaga(rs.getString("Desc_Vaga"));
             Vag.setStatus_Vaga(rs.getInt("Status_Vaga"));
-             
+
             rs.close();
             ps.close();
             connection.close();
 
             return Vag;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
+
     @Override
     public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException {
         try {
@@ -157,11 +146,11 @@ public class VagaDaoImpl implements VagaDao{
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Vaga> lista = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     Vaga Vag = new Vaga();
-                    
+
                     Vag.setCNPJ(rs.getLong("CNPJ"));
                     Vag.setSeq_Vaga(rs.getInt("Seq_Vaga"));
                     Vag.setCod_Cargo(rs.getInt("Cod_Cargo"));
@@ -171,7 +160,7 @@ public class VagaDaoImpl implements VagaDao{
                     Vag.setRemuneracao(rs.getDouble("Remuneracao"));
                     Vag.setDesc_Vaga(rs.getString("Desc_Vaga"));
                     Vag.setStatus_Vaga(rs.getInt("Status_Vaga"));
-                    
+
                     lista.add(Vag);
                 } while (rs.next());
             }
@@ -181,20 +170,20 @@ public class VagaDaoImpl implements VagaDao{
             connection.close();
 
             return lista;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
+
     @Override
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException{
+    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             ArrayList<Vaga> lista = new ArrayList<>();
-            
+
             String sql = "SELECT * FROM Vaga A "
                     + "JOIN Candidato_Vaga B ON"
                     + "A.Cod_Cargo = B.Cod_Cargo"
@@ -203,9 +192,9 @@ public class VagaDaoImpl implements VagaDao{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, CPF);
             ResultSet rs = ps.executeQuery();
-                
+
             if (rs.next()) {
-                do{
+                do {
                     Vaga Vag = new Vaga();
 
                     Vag.setCNPJ(rs.getLong("CNPJ"));
@@ -221,14 +210,14 @@ public class VagaDaoImpl implements VagaDao{
                     lista.add(Vag);
                 } while (rs.next());
             }
-                
+
             rs.close();
             ps.close();
-            
+
             connection.close();
 
             return lista;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
@@ -241,7 +230,7 @@ public class VagaDaoImpl implements VagaDao{
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             ArrayList<Vaga> lista = new ArrayList<>();
-            
+
             String sql = "SELECT * FROM Vaga A "
                     + "JOIN Candidato_Vaga B ON"
                     + "A.Cod_Cargo = B.Cod_Cargo"
@@ -250,9 +239,9 @@ public class VagaDaoImpl implements VagaDao{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, CPF);
             ResultSet rs = ps.executeQuery();
-                
+
             if (rs.next()) {
-                do{
+                do {
                     Vaga Vag = new Vaga();
 
                     Vag.setCNPJ(rs.getLong("CNPJ"));
@@ -268,14 +257,14 @@ public class VagaDaoImpl implements VagaDao{
                     lista.add(Vag);
                 } while (rs.next());
             }
-                
+
             rs.close();
             ps.close();
-            
+
             connection.close();
 
             return lista;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;

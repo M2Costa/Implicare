@@ -1,33 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.TelefoneDao;
 import br.cefetmg.implicare.model.daoImpl.TelefoneDaoImpl;
 import br.cefetmg.implicare.model.domain.Telefone;
-import br.cefetmg.implicare.model.exception.BusinessException;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.BusinessException;
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Morato
- * 
- */
-
 public class TelefoneManagementImpl implements TelefoneManagement {
+
     private final TelefoneDao TelefoneDao;
-    
-    public TelefoneManagementImpl(){
+
+    public TelefoneManagementImpl() {
         TelefoneDao = new TelefoneDaoImpl();
     }
-    
+
     @Override
     public boolean insert(Telefone Telefone) throws BusinessException, PersistenceException {
         boolean result = false;
@@ -63,7 +53,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
         }
         return result;
     }
-    
+
     @Override
     public Telefone pesquisar(int Seq_Telefone) throws PersistenceException {
         Telefone result = null;
@@ -75,7 +65,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
         }
         return result;
     }
-    
+
     @Override
     public ArrayList<Telefone> listar(long CPF_CNPJ) throws PersistenceException {
         ArrayList<Telefone> result = null;
@@ -87,5 +77,5 @@ public class TelefoneManagementImpl implements TelefoneManagement {
         }
         return result;
     }
-    
+
 }

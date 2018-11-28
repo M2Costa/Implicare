@@ -1,33 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.CandidatoVagaDao;
 import br.cefetmg.implicare.model.daoImpl.CandidatoVagaDaoImpl;
 import br.cefetmg.implicare.model.domain.CandidatoVaga;
-import br.cefetmg.implicare.model.exception.BusinessException;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.BusinessException;
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaManagement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Morato
- * 
- */
-
 public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
+
     private final CandidatoVagaDao CandidatoVagaDao;
-    
-    public CandidatoVagaManagementImpl(){
+
+    public CandidatoVagaManagementImpl() {
         CandidatoVagaDao = new CandidatoVagaDaoImpl();
     }
-    
+
     @Override
     public boolean insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
         boolean result = false;
@@ -63,5 +53,5 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
         }
         return result;
     }
-    
+
 }

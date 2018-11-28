@@ -1,23 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmf.implicare.servlet;
 
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.domain.Empresa;
 import br.cefetmg.implicare.model.service.EmpresaManagement;
 import br.cefetmg.implicare.model.serviceImpl.EmpresaManagementImpl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- * @author Gabriel
- * 
- */
-
 class PesquisarUsuarioEmpresa {
-
+    
+    PesquisarUsuarioEmpresa(){}
     static String execute(HttpServletRequest request) {
         String jsp = "";
         try {
@@ -25,8 +18,7 @@ class PesquisarUsuarioEmpresa {
             Long CNPJ = (Long) request.getSession().getAttribute("CPF_CNPJ");
 
             EmpresaManagement EmpresaManagement = new EmpresaManagementImpl();
-            Empresa Empr = new Empresa();
-            Empr = EmpresaManagement.pesquisar(CNPJ);
+            Empresa Empr = EmpresaManagement.pesquisar(CNPJ);
 
             if (Empr != null) {
                 jsp = "/EditarUsuarioEmpresa.jsp";
@@ -36,8 +28,8 @@ class PesquisarUsuarioEmpresa {
                 jsp = "/WEB-Pages/Erro.jsp";
                 request.setAttribute("Erro", Erro);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (PersistenceException e) {
+            Logger.getLogger(PesquisarVaga.class.getName()).log(Level.SEVERE, null, e);
         }
         return jsp;
     }

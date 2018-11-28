@@ -1,33 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.CargoInteresseDao;
 import br.cefetmg.implicare.model.daoImpl.CargoInteresseDaoImpl;
 import br.cefetmg.implicare.model.domain.CargoInteresse;
-import br.cefetmg.implicare.model.exception.BusinessException;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.BusinessException;
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoInteresseManagement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Morato
- * 
- */
-
 public class CargoInteresseManagementImpl implements CargoInteresseManagement {
+
     private final CargoInteresseDao CargoInteresseDao;
-    
-    public CargoInteresseManagementImpl(){
+
+    public CargoInteresseManagementImpl() {
         CargoInteresseDao = new CargoInteresseDaoImpl();
     }
-    
+
     @Override
     public boolean insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException {
         boolean result = false;
@@ -63,5 +53,5 @@ public class CargoInteresseManagementImpl implements CargoInteresseManagement {
         }
         return result;
     }
-    
+
 }

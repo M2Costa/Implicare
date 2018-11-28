@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.dao.UsuarioDao;
@@ -14,13 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Gabriel
- * 
- */
-
-public class UsuarioDaoImpl implements UsuarioDao{
+public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException {
@@ -30,14 +19,14 @@ public class UsuarioDaoImpl implements UsuarioDao{
             String sql = "SELECT * FROM Usuario WHERE CPF_CNPJ = ? AND Senha = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, CPF_CNPJ);
             ps.setString(2, Senha);
-            
+
             ResultSet rs = ps.executeQuery();
 
             Usuario User = null;
-            
+
             if (rs.next()) {
                 User = new Usuario();
                 User.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
@@ -54,7 +43,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
             connection.close();
 
             return User;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;

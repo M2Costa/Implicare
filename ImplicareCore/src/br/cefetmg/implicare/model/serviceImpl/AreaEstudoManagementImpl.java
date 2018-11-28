@@ -1,33 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.AreaEstudoDao;
 import br.cefetmg.implicare.model.daoImpl.AreaEstudoDaoImpl;
 import br.cefetmg.implicare.model.domain.AreaEstudo;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.PersistenceException;
 
 import br.cefetmg.implicare.model.service.AreaEstudoManagement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Morato
- * 
- */
-
 public class AreaEstudoManagementImpl implements AreaEstudoManagement {
+
     private final AreaEstudoDao AreaEstudoDao;
-    
-    public AreaEstudoManagementImpl(){
+
+    public AreaEstudoManagementImpl() {
         AreaEstudoDao = new AreaEstudoDaoImpl();
     }
-    
+
     @Override
     public ArrayList<AreaEstudo> listar() throws PersistenceException {
         ArrayList<AreaEstudo> result = null;
@@ -51,5 +41,5 @@ public class AreaEstudoManagementImpl implements AreaEstudoManagement {
         }
         return result;
     }
-    
+
 }

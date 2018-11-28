@@ -1,30 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.VagaDao;
 import br.cefetmg.implicare.model.daoImpl.VagaDaoImpl;
 import br.cefetmg.implicare.model.domain.Vaga;
-import br.cefetmg.implicare.model.exception.BusinessException;
-import br.cefetmg.implicare.model.exception.PersistenceException;
+import br.cefetmg.implicare.exception.BusinessException;
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Morato
- * 
- */
-
 public class VagaManagementImpl implements VagaManagement {
+
     private final VagaDao VagaDao;
-    
-    public VagaManagementImpl(){
+
+    public VagaManagementImpl() {
         VagaDao = new VagaDaoImpl();
     }
 
@@ -63,7 +53,7 @@ public class VagaManagementImpl implements VagaManagement {
         }
         return result;
     }
-    
+
     @Override
     public Vaga pesquisar(int Seq_Vaga) throws PersistenceException {
         Vaga result = null;
@@ -75,7 +65,7 @@ public class VagaManagementImpl implements VagaManagement {
         }
         return result;
     }
-    
+
     @Override
     public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException {
         ArrayList<Vaga> result = null;
@@ -99,5 +89,5 @@ public class VagaManagementImpl implements VagaManagement {
         }
         return result;
     }
-    
+
 }

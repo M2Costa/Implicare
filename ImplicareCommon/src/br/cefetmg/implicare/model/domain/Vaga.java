@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.domain;
 
 import java.sql.Date;
 
-/**
- *
- * @author Gabriel
- * 
- */
-
 public class Vaga {
+
     private long CNPJ;
     private int Seq_Vaga;
     private int Cod_Cargo;
@@ -23,10 +13,11 @@ public class Vaga {
     private double Remuneracao;
     private String Desc_Vaga;
     private int Status_Vaga;
-    
-    public Vaga(){}
-    
-    public Vaga(long CNPJ, int Seq_Vaga, int Cod_Cargo, Date Dat_Publicacao, int Num_Vagas, int Carga_Horaria, double Remuneracao, String Desc_Vaga, int Status_Vaga){
+
+    public Vaga() {
+    }
+
+    public Vaga(long CNPJ, int Seq_Vaga, int Cod_Cargo, Date Dat_Publicacao, int Num_Vagas, int Carga_Horaria, double Remuneracao, String Desc_Vaga, int Status_Vaga) {
         this.CNPJ = CNPJ;
         this.Seq_Vaga = Seq_Vaga;
         this.Cod_Cargo = Cod_Cargo;
@@ -45,15 +36,15 @@ public class Vaga {
     public void setCNPJ(long CNPJ) {
         this.CNPJ = CNPJ;
     }
-    
-     public int getSeq_Vaga() {
+
+    public int getSeq_Vaga() {
         return Seq_Vaga;
     }
 
     public void setSeq_Vaga(int Seq_Vaga) {
         this.Seq_Vaga = Seq_Vaga;
     }
-    
+
     public int getCod_Cargo() {
         return Cod_Cargo;
     }
@@ -109,5 +100,5 @@ public class Vaga {
     public void setStatus_Vaga(int Status_Vaga) {
         this.Status_Vaga = Status_Vaga;
     }
-    
+
 }

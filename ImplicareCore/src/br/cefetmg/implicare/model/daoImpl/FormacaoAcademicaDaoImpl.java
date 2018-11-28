@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.dao.FormacaoAcademicaDao;
@@ -15,18 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Gabriel
- * 
- */
-
 public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
 
     @Override
     public boolean insert(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
         try {
-                    
+
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
 
             String sql = "INSERT INTO Formacao_Academica (CPF, Seq_Formacao, Instituicao_Ensino, Cod_Area_Estudo,"
@@ -34,7 +23,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
                     + "VALUES(?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setLong(1, FormacaoAcademica.getCPF());
             ps.setInt(2, FormacaoAcademica.getSeq_Formacao());
             ps.setString(3, FormacaoAcademica.getInstituicao_Ensino());
@@ -49,7 +38,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             rs.close();
             ps.close();
             connection.close();
-            
+
             return true;
 
         } catch (SQLException | ClassNotFoundException ex) {
@@ -62,12 +51,12 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
     public boolean update(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+
             String SQL = "UPDATE Formacao_Academica SET Seq_Formacao = ?, Instituicao_Ensino = ?, "
                     + "Cod_Area_Estudo = ? , Atividades_Desenvolvidas = ?, Data_Inicio = ?, "
                     + "Data_Termino = ?, Desc_Formacao_Academica = ?"
                     + "WHERE Seq_Formacao = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
 
             ps.setInt(1, FormacaoAcademica.getSeq_Formacao());
@@ -78,12 +67,12 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             ps.setDate(6, FormacaoAcademica.getData_Termino());
             ps.setString(7, FormacaoAcademica.getDesc_Formacao_Academica());
             ps.setInt(8, FormacaoAcademica.getSeq_Formacao());
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
             return true;
-            
+
         } catch (Exception ex) {
             System.out.println(ex.toString());
             return false;
@@ -94,13 +83,13 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
     public boolean delete(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
         try {
             Connection connection = JDBCConnectionManager.getInstance().getConnection();
-            
+
             String SQL = "DELETE FROM Formacao_Academica WHERE Seq_Formacao = ?";
-            
+
             PreparedStatement ps = connection.prepareStatement(SQL);
-            
+
             ps.setInt(1, FormacaoAcademica.getSeq_Formacao());
-            
+
             ps.executeQuery(SQL);
             ps.close();
             connection.close();
@@ -110,7 +99,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             return false;
         }
     }
-    
+
     @Override
     public FormacaoAcademica pesquisar(int Seq_Formacao) throws PersistenceException {
         try {
@@ -131,19 +120,19 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             Acad.setData_Inicio(rs.getDate("Data_Inicio"));
             Acad.setData_Termino(rs.getDate("Data_Termino"));
             Acad.setDesc_Formacao_Academica(rs.getString("Desc_Formacao_Academica"));
-            
+
             rs.close();
             ps.close();
             connection.close();
 
             return Acad;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
+
     @Override
     public ArrayList<FormacaoAcademica> listar(long CPF) throws PersistenceException {
         try {
@@ -156,7 +145,7 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             ResultSet rs = ps.executeQuery();
 
             ArrayList<FormacaoAcademica> lista = new ArrayList<>();
-            
+
             if (rs.next()) {
                 do {
                     FormacaoAcademica Acad = new FormacaoAcademica();
@@ -177,11 +166,11 @@ public class FormacaoAcademicaDaoImpl implements FormacaoAcademicaDao {
             connection.close();
 
             return lista;
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
             return null;
         }
     }
-    
+
 }
