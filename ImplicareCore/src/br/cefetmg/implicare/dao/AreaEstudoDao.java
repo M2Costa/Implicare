@@ -8,5 +8,5 @@ public interface AreaEstudoDao {
 
     public ArrayList<AreaEstudo> listar() throws PersistenceException;
 
-    public AreaEstudo pesquisar(int Cod_Area_Estudo) throws PersistenceException;
+    public AreaEstudo pesquisar(int codAreaEstudo) throws PersistenceException;
 }

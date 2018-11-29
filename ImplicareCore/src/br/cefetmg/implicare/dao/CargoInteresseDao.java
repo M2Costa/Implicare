@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public interface CargoInteresseDao {
 
-    public boolean insert(CargoInteresse CargoInteresse) throws PersistenceException;
+    public void insert(CargoInteresse cargoInteresse) throws PersistenceException;
 
-    public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException;
+    public void delete(CargoInteresse cargoInteresse) throws PersistenceException;
 
-    public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException;
+    public ArrayList<CargoInteresse> listar(long cpf) throws PersistenceException;
 }

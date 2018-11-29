@@ -1,63 +1,61 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
-import br.cefetmg.implicare.model.daoImpl.ExperienciaProfissionalDaoImpl;
+import br.cefetmg.implicare.dao.ExperienciaProfissionalDao;
 import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ExperienciaProfissionalManagementImpl implements ExperienciaProfissionalManagement {
+    private final ExperienciaProfissionalDao dao;
 
+    public ExperienciaProfissionalManagementImpl(ExperienciaProfissionalDao dao)
+            throws RemoteException{
+        this.dao = dao;
+    }
+    
     @Override
-    public boolean insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().insert(ExperienciaProfissional);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+    public void insert(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException {
+        if(experienciaProfissional == null)
+            throw new BusinessException("A experiência profissional não pode ser nula!");
+        if(experienciaProfissional.getNomEmpresa() == null)
+            throw new BusinessException("O nome da empresa não pode ser nulo!");
+        if(experienciaProfissional.getNomEmpresa().isEmpty())
+            throw new BusinessException("O nome da empresa não pode estar vazio!");
+        if(experienciaProfissional.getDataInicio() == null)
+            throw new BusinessException("Uma experiência profissional tem que ter uma data de início!");
+        dao.insert(experienciaProfissional);
     }
 
     @Override
-    public boolean update(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().update(ExperienciaProfissional);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+    public void update(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException {
+        if(experienciaProfissional == null)
+            throw new BusinessException("A experiência profissional não pode ser nula!");
+        if(experienciaProfissional.getNomEmpresa() == null)
+            throw new BusinessException("O nome da empresa não pode ser nulo!");
+        if(experienciaProfissional.getNomEmpresa().isEmpty())
+            throw new BusinessException("O nome da empresa não pode estar vazio!");
+        if(experienciaProfissional.getDataInicio() == null)
+            throw new BusinessException("Uma experiência profissional tem que ter uma data de início!");
+        dao.update(experienciaProfissional);
     }
 
     @Override
-    public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().delete(ExperienciaProfissional);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
+    public void delete(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException {
+        if(experienciaProfissional == null)
+            throw new BusinessException("A experiência profissional não pode ser nula!");
+        dao.delete(experienciaProfissional);
     }
 
     @Override
-    public ExperienciaProfissional pesquisar(int SeqExperiencia) throws PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().pesquisar(SeqExperiencia);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
+    public ExperienciaProfissional pesquisar(int seqExperiencia) throws PersistenceException {
+        return dao.pesquisar(seqExperiencia);
     }
 
     @Override
-    public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException {
-        try {
-            return ExperienciaProfissionalDaoImpl.getInstance().listar(CPF);
-        } catch (br.cefetmg.implicare.exception.PersistenceException e) {
-            Logger.getLogger(ExperienciaProfissionalManagementImpl.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
+    public ArrayList<ExperienciaProfissional> listar(long cpf) throws PersistenceException {
+        return dao.listar(cpf);
     }
 }

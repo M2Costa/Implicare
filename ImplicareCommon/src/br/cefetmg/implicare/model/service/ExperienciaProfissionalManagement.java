@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public interface ExperienciaProfissionalManagement {
 
-    public boolean insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException;
+    public void insert(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException;
 
-    public boolean update(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException;
+    public void update(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException;
 
-    public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException;
+    public void delete(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException;
 
-    public ExperienciaProfissional pesquisar(int SeqExperiencia) throws PersistenceException;
+    public ExperienciaProfissional pesquisar(int seqExperiencia) throws PersistenceException;
 
-    public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException;
+    public ArrayList<ExperienciaProfissional> listar(long cpf) throws PersistenceException;
 }

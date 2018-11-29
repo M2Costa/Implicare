@@ -1,68 +1,83 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.EmpresaDao;
-import br.cefetmg.implicare.model.daoImpl.EmpresaDaoImpl;
 import br.cefetmg.implicare.model.domain.Empresa;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.EmpresaManagement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.rmi.RemoteException;
 
 public class EmpresaManagementImpl implements EmpresaManagement {
 
-    private final EmpresaDao EmpresaDao;
+    private final EmpresaDao dao;
 
-    public EmpresaManagementImpl() {
-        EmpresaDao = new EmpresaDaoImpl();
+    public EmpresaManagementImpl(EmpresaDao dao) throws RemoteException{
+        this.dao = dao;
     }
 
     @Override
-    public boolean insert(Empresa Empresa) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = EmpresaDao.insert(Empresa);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void insert(Empresa empresa) throws BusinessException, PersistenceException {
+        if(empresa == null)
+            throw new BusinessException("A empresa não pode ser nula!");
+        if(empresa.getEmail() == null)
+            throw new BusinessException("Uma empresa tem que ter um e-mail!");
+        if(empresa.getEmail().isEmpty())
+            throw new BusinessException("O e-mail da empresa não pode estar vazio!");
+        if(empresa.getSenha() == null)
+            throw new BusinessException("Uma empresa tem que ter uma senha!");
+        if(empresa.getSenha().isEmpty())
+            throw new BusinessException("A senha da empresa não pode estar vazia!");
+        if(empresa.getEndereco() == null)
+            throw new BusinessException("A empresa tem que ter um endereço!");
+        if(empresa.getEndereco().isEmpty())
+            throw new BusinessException("O endereço da empresa não pode estar vazio!");
+        if(empresa.getNomRazaoSocial() == null)
+            throw new BusinessException("A empresa tem que ter uma razão social!");
+        if(empresa.getNomRazaoSocial().isEmpty())
+            throw new BusinessException("A razão social não pode estar vazia!");
+        if(empresa.getNomeFantasia() == null)
+            throw new BusinessException("A empresa tem que ter um nome fantasia");
+        if(empresa.getNomeFantasia().isEmpty())
+            throw new BusinessException("O nome fazntasia não pode estar vazio!");
+        dao.insert(empresa);
     }
 
     @Override
-    public boolean update(Empresa Empresa) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = EmpresaDao.update(Empresa);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void update(Empresa empresa) throws BusinessException, PersistenceException {
+        if(empresa == null)
+            throw new BusinessException("A empresa não pode ser nula!");
+        if(empresa.getEmail() == null)
+            throw new BusinessException("Uma empresa tem que ter um e-mail!");
+        if(empresa.getEmail().isEmpty())
+            throw new BusinessException("O e-mail da empresa não pode estar vazio!");
+        if(empresa.getSenha() == null)
+            throw new BusinessException("Uma empresa tem que ter uma senha!");
+        if(empresa.getSenha().isEmpty())
+            throw new BusinessException("A senha da empresa não pode estar vazia!");
+        if(empresa.getEndereco() == null)
+            throw new BusinessException("A empresa tem que ter um endereço!");
+        if(empresa.getEndereco().isEmpty())
+            throw new BusinessException("O endereço da empresa não pode estar vazio!");
+        if(empresa.getNomRazaoSocial() == null)
+            throw new BusinessException("A empresa tem que ter uma razão social!");
+        if(empresa.getNomRazaoSocial().isEmpty())
+            throw new BusinessException("A razão social não pode estar vazia!");
+        if(empresa.getNomeFantasia() == null)
+            throw new BusinessException("A empresa tem que ter um nome fantasia");
+        if(empresa.getNomeFantasia().isEmpty())
+            throw new BusinessException("O nome fazntasia não pode estar vazio!");
+        dao.update(empresa);
     }
 
     @Override
-    public boolean delete(Empresa Empresa) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = EmpresaDao.delete(Empresa);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void delete(Empresa empresa) throws BusinessException, PersistenceException {
+        if(empresa == null)
+            throw new BusinessException("A empresa não pode ser nula!");
+        dao.delete(empresa);
     }
 
     @Override
-    public Empresa pesquisar(long CNPJ) throws PersistenceException {
-        Empresa result = null;
-        try {
-            result = EmpresaDao.pesquisar(CNPJ);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(EmpresaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public Empresa pesquisar(long cnpj) throws PersistenceException {
+        return dao.pesquisar(cnpj);
     }
-
 }

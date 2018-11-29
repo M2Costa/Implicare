@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public interface FormacaoAcademicaManagement {
 
-    public boolean insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException;
+    public void insert(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException;
 
-    public boolean update(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException;
+    public void update(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException;
 
-    public boolean delete(FormacaoAcademica FormacaoAcademica) throws PersistenceException;
+    public void delete(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException;
 
-    public FormacaoAcademica pesquisar(int Seq_Formacao) throws PersistenceException;
+    public FormacaoAcademica pesquisar(int seqFormacao) throws PersistenceException;
 
-    public ArrayList<FormacaoAcademica> listar(long CPF) throws PersistenceException;
+    public ArrayList<FormacaoAcademica> listar(long cpf) throws PersistenceException;
 }

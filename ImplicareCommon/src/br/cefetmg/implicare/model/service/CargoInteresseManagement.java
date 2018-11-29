@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public interface CargoInteresseManagement {
 
-    public boolean insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException;
+    public void insert(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException;
 
-    public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException;
+    public void delete(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException;
 
-    public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException;
+    public ArrayList<CargoInteresse> listar(long cpf) throws PersistenceException;
 }

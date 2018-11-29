@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public interface ExperienciaProfissionalDao {
 
-    public void insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException;
+    public void insert(ExperienciaProfissional experienciaProfissional) throws PersistenceException;
 
-    public void update(ExperienciaProfissional ExperienciaProfssional) throws PersistenceException;
+    public void update(ExperienciaProfissional experienciaProfssional) throws PersistenceException;
 
-    public void delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException;
+    public void delete(ExperienciaProfissional experienciaProfissional) throws PersistenceException;
 
-    public ExperienciaProfissional pesquisar(int Seq_Experiencia) throws PersistenceException;
+    public ExperienciaProfissional pesquisar(int seqExperiencia) throws PersistenceException;
 
-    public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException;
+    public ArrayList<ExperienciaProfissional> listar(long cpf) throws PersistenceException;
 }

@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmf.implicare.servlet;
 
 import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
 import br.cefetmg.implicare.model.serviceImpl.TelefoneManagementImpl;
 import javax.servlet.http.HttpServletRequest;
-
-/**
- *
- * @author Gabriel
- * 
- */
 
 class AlterarTelefone {
 

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmf.implicare.servlet;
 
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.model.domain.Candidato;
 import br.cefetmg.implicare.model.domain.Cargo;
@@ -28,12 +24,6 @@ import br.cefetmg.implicare.model.serviceImpl.FormacaoAcademicaManagementImpl;
 import br.cefetmg.implicare.model.serviceImpl.TelefoneManagementImpl;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-
-/**
- *
- * @author Gabriel
- * 
- */
 
 class PerfilCandidato {
 
@@ -67,19 +57,13 @@ class PerfilCandidato {
             ListaExpProfissional = ExperienciaManagement.listar(CPF);
             
             CargoManagement CargoManagement = new CargoManagementImpl();
-            ArrayList<Cargo> ListaCargo = new ArrayList();
-            ListaCargo = CargoManagement.listar();
+            ArrayList<Cargo> ListaCargo = CargoManagement.listar();
             
-            TelefoneManagement TelefoneManagement = new TelefoneManagementImpl();
-            ArrayList<Telefone> ListaTelefone = new ArrayList();
-            ListaTelefone = TelefoneManagement.listar(CPF);
+            ArrayList<Telefone> ListaTelefone = new TelefoneManagementImpl().listar(CPF);
             
-            CargoInteresseManagement CargoInteresseManagement = new CargoInteresseManagementImpl();
-            ArrayList<CargoInteresse> ListaCargoInt = new ArrayList();
-            ListaCargoInt = CargoInteresseManagement.listar(CPF);
+            ArrayList<CargoInteresse> ListaCargoInt = new CargoInteresseManagementImpl().listar(CPF);
             
-            ArrayList<Cargo> ListaCargoArea = new ArrayList();
-            ListaCargoArea = CargoManagement.listarCargoAreaEstudo(CPF);
+            ArrayList<Cargo> ListaCargoArea = CargoManagement.listarCargoAreaEstudo(CPF);
 
             if (Cand != null) {
                 request.setAttribute("Candidato", Cand);
@@ -95,7 +79,7 @@ class PerfilCandidato {
                 jsp = "/WEB-Pages/Erro.jsp";
                 request.setAttribute("Erro", Erro);
             }
-        } catch (Exception e) {
+        } catch (PersistenceException | NumberFormatException e) {
             e.printStackTrace();
         }
         return jsp;

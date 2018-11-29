@@ -9,5 +9,4 @@ public class PersistenceException extends RuntimeException {
     public PersistenceException(PersistenceException ex) {
         super(ex);
     }
-
 }

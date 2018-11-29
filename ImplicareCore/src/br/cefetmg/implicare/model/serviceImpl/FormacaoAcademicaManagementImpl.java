@@ -1,81 +1,67 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.FormacaoAcademicaDao;
-import br.cefetmg.implicare.model.daoImpl.FormacaoAcademicaDaoImpl;
 import br.cefetmg.implicare.model.domain.FormacaoAcademica;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagement {
 
-    private final FormacaoAcademicaDao FormacaoAcademicaDao;
+    private final FormacaoAcademicaDao dao;
 
-    public FormacaoAcademicaManagementImpl() {
-        FormacaoAcademicaDao = new FormacaoAcademicaDaoImpl();
+    public FormacaoAcademicaManagementImpl(FormacaoAcademicaDao dao)
+            throws RemoteException{
+        this.dao = dao;
     }
 
     @Override
-    public boolean insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = FormacaoAcademicaDao.insert(FormacaoAcademica);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void insert(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException {
+        if(formacaoAcademica == null)
+            throw new BusinessException("A formação acadêmica dada não pode ser nula!");
+        if(formacaoAcademica.getDataInicio() == null)
+            throw new BusinessException("Uma formação acadêmica tem que ter uma data de início!");
+        if(formacaoAcademica.getDataTermino() == null)
+            throw new BusinessException("Uma formação acadêmica tem que ter uma data de término!");
+        if(formacaoAcademica.getInstituicaoEnsino() == null)
+            throw new BusinessException("Uma formação acadêmica tem que ter uma instituição de ensino!");
+        if(formacaoAcademica.getInstituicaoEnsino().isEmpty())
+            throw new BusinessException("O campo instituição de ensino não pode estar vazio!");
+        dao.insert(formacaoAcademica);
     }
 
     @Override
-    public boolean update(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = FormacaoAcademicaDao.update(FormacaoAcademica);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void update(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException {
+        if(formacaoAcademica == null)
+            throw new BusinessException("A formação acadêmica dada não pode ser nula!");
+        if(formacaoAcademica.getDataInicio() == null)
+            throw new BusinessException("Uma formação acadêmica tem que ter uma data de início!");
+        if(formacaoAcademica.getDataTermino() == null)
+            throw new BusinessException("Uma formação acadêmica tem que ter uma data de término!");
+        if(formacaoAcademica.getInstituicaoEnsino() == null)
+            throw new BusinessException("Uma formação acadêmica tem que ter uma instituição de ensino!");
+        if(formacaoAcademica.getInstituicaoEnsino().isEmpty())
+            throw new BusinessException("O campo instituição de ensino não pode estar vazio!");
+        dao.update(formacaoAcademica);
     }
 
     @Override
-    public boolean delete(FormacaoAcademica FormacaoAcademica) throws PersistenceException {
-        boolean result = false;
-        try {
-            result = FormacaoAcademicaDao.delete(FormacaoAcademica);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void delete(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException {
+        if(formacaoAcademica == null)
+            throw new BusinessException("A formação acadêmica dada não pode ser nula!");
+        dao.delete(formacaoAcademica);
     }
 
     @Override
-    public FormacaoAcademica pesquisar(int Seq_Formacao) throws PersistenceException {
-        FormacaoAcademica result = null;
-        try {
-            result = FormacaoAcademicaDao.pesquisar(Seq_Formacao);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public FormacaoAcademica pesquisar(int seqFormacao) throws PersistenceException {
+        return dao.pesquisar(seqFormacao);
     }
 
     @Override
-    public ArrayList<FormacaoAcademica> listar(long CPF) throws PersistenceException {
-        ArrayList<FormacaoAcademica> result = null;
-        try {
-            result = FormacaoAcademicaDao.listar(CPF);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(FormacaoAcademicaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public ArrayList<FormacaoAcademica> listar(long cpf) throws PersistenceException {
+        return dao.listar(cpf);
     }
 
 }

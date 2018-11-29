@@ -4,81 +4,78 @@ import java.sql.Date;
 
 public class ExperienciaProfissional {
 
-    private long CPF;
-    private int Seq_Experiencia;
-    private String Nom_Empresa;
-    private int Cod_Cargo;
-    private Date Data_Inicio;
-    private Date Data_Termino;
-    private String Desc_Experiencia_Profissional;
+    private long cpf;
+    private int seqExperiencia;
+    private String nomEmpresa;
+    private int codCargo;
+    private Date dataInicio;
+    private Date dataTermino;
+    private String descExperienciaProfissional;
 
-    public ExperienciaProfissional() {
+    public ExperienciaProfissional(long cpf, int seqExperiencia, String nomEmpresa, int codCargo, Date dataInicio, Date dataTermino, String descExperienciaProfissional) {
+        this.cpf = cpf;
+        this.seqExperiencia = seqExperiencia;
+        this.nomEmpresa = nomEmpresa;
+        this.codCargo = codCargo;
+        this.dataInicio = dataInicio;
+        this.dataTermino = dataTermino;
+        this.descExperienciaProfissional = descExperienciaProfissional;
+    }
+    
+    public long getCpf() {
+        return cpf;
     }
 
-    public ExperienciaProfissional(long CPF, int Seq_Experiencia, String Nom_Empresa, int Cod_Cargo, Date Data_Inicio, Date Data_Termino, String Desc_Experiencia_Profissional) {
-        this.CPF = CPF;
-        this.Seq_Experiencia = Seq_Experiencia;
-        this.Nom_Empresa = Nom_Empresa;
-        this.Cod_Cargo = Cod_Cargo;
-        this.Data_Inicio = Data_Inicio;
-        this.Data_Termino = Data_Termino;
-        this.Desc_Experiencia_Profissional = Desc_Experiencia_Profissional;
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
-    public long getCPF() {
-        return CPF;
+    public int getSeqExperiencia() {
+        return seqExperiencia;
     }
 
-    public void setCPF(long CPF) {
-        this.CPF = CPF;
+    public void setSeqExperiencia(int seqExperiencia) {
+        this.seqExperiencia = seqExperiencia;
     }
 
-    public int getSeq_Experiencia() {
-        return Seq_Experiencia;
+    public String getNomEmpresa() {
+        return nomEmpresa;
     }
 
-    public void setSeq_Experiencia(int Seq_Experiencia) {
-        this.Seq_Experiencia = Seq_Experiencia;
+    public void setNomEmpresa(String nomEmpresa) {
+        this.nomEmpresa = nomEmpresa;
     }
 
-    public String getNom_Empresa() {
-        return Nom_Empresa;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public void setNom_Empresa(String Nom_Empresa) {
-        this.Nom_Empresa = Nom_Empresa;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
 
-    public int getCod_Cargo() {
-        return Cod_Cargo;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setCod_Cargo(int Cod_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public Date getData_Inicio() {
-        return Data_Inicio;
+    public Date getDataTermino() {
+        return dataTermino;
     }
 
-    public void setData_Inicio(Date Data_Inicio) {
-        this.Data_Inicio = Data_Inicio;
+    public void setDataTermino(Date dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
-    public Date getData_Termino() {
-        return Data_Termino;
+    public String getDescExperienciaProfissional() {
+        return descExperienciaProfissional;
     }
 
-    public void setData_Termino(Date Data_Termino) {
-        this.Data_Termino = Data_Termino;
-    }
-
-    public String getDesc_Experiencia_Profissional() {
-        return Desc_Experiencia_Profissional;
-    }
-
-    public void setDesc_Experiencia_Profissional(String Desc_Experiencia_Profissional) {
-        this.Desc_Experiencia_Profissional = Desc_Experiencia_Profissional;
+    public void setDescExperienciaProfissional(String descExperienciaProfissional) {
+        this.descExperienciaProfissional = descExperienciaProfissional;
     }
 
 }

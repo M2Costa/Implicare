@@ -2,30 +2,27 @@ package br.cefetmg.implicare.model.domain;
 
 public class AreaEstudo {
 
-    private int Cod_Area_Estudo;
-    private String Nom_Area_Estudo;
+    private int codAreaEstudo;
+    private String nomAreaEstudo;
 
-    public AreaEstudo() {
+    public AreaEstudo(int codAreaEstudo, String nomAreaEstudo) {
+        this.codAreaEstudo = codAreaEstudo;
+        this.nomAreaEstudo = nomAreaEstudo;
     }
 
-    public AreaEstudo(int Cod_Area_Estudo, String Nom_Area_Estudo) {
-        this.Cod_Area_Estudo = Cod_Area_Estudo;
-        this.Nom_Area_Estudo = Nom_Area_Estudo;
+    public int getCodAreaEstudo() {
+        return codAreaEstudo;
     }
 
-    public int getCod_Area_Estudo() {
-        return Cod_Area_Estudo;
+    public void setCodAreaEstudo(int codAreaEstudo) {
+        this.codAreaEstudo = codAreaEstudo;
     }
 
-    public void setCod_Area_Estudo(int Cod_Area_Estudo) {
-        this.Cod_Area_Estudo = Cod_Area_Estudo;
+    public String getNomAreaEstudo() {
+        return nomAreaEstudo;
     }
 
-    public String getNom_Area_Estudo() {
-        return Nom_Area_Estudo;
-    }
-
-    public void setNom_Area_Estudo(String Nom_Area_Estudo) {
-        this.Nom_Area_Estudo = Nom_Area_Estudo;
+    public void setNomAreaEstudo(String nomAreaEstudo) {
+        this.nomAreaEstudo = nomAreaEstudo;
     }
 }

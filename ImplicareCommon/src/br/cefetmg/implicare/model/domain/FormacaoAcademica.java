@@ -4,91 +4,88 @@ import java.sql.Date;
 
 public class FormacaoAcademica {
 
-    private long CPF;
-    private int Seq_Formacao;
-    private String Instituicao_Ensino;
-    private int Cod_Area_Estudo;
-    private String Atividades_Desenvolvidas;
-    private Date Data_Inicio;
-    private Date Data_Termino;
-    private String Desc_Formacao_Academica;
+    private long cpf;
+    private int seqFormacao;
+    private String instituicaoEnsino;
+    private int codAreaEstudo;
+    private String atividadesDesenvolvidas;
+    private Date dataInicio;
+    private Date dataTermino;
+    private String descFormacaoAcademica;
 
-    public FormacaoAcademica() {
+    public FormacaoAcademica(long cpf, int seqFormacao, String instituicaoEnsino, int codAreaEstudo, String atividadesDesenvolvidas, Date dataInicio, Date dataTermino, String descFormacaoAcademica) {
+        this.cpf = cpf;
+        this.seqFormacao = seqFormacao;
+        this.instituicaoEnsino = instituicaoEnsino;
+        this.codAreaEstudo = codAreaEstudo;
+        this.atividadesDesenvolvidas = atividadesDesenvolvidas;
+        this.dataInicio = dataInicio;
+        this.dataTermino = dataTermino;
+        this.descFormacaoAcademica = descFormacaoAcademica;
     }
 
-    public FormacaoAcademica(long CPF, int Seq_Formacao, String Instituicao_Ensino, int Cod_Area_Estudo, String Atividades_Desenvolvidas, Date Data_Inicio, Date Data_Termino, String Desc_Formacao_Academica) {
-        this.CPF = CPF;
-        this.Seq_Formacao = Seq_Formacao;
-        this.Instituicao_Ensino = Instituicao_Ensino;
-        this.Cod_Area_Estudo = Cod_Area_Estudo;
-        this.Atividades_Desenvolvidas = Atividades_Desenvolvidas;
-        this.Data_Inicio = Data_Inicio;
-        this.Data_Termino = Data_Termino;
-        this.Desc_Formacao_Academica = Desc_Formacao_Academica;
+    public long getCpf() {
+        return cpf;
     }
 
-    public long getCPF() {
-        return CPF;
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
-    public void setCPF(long CPF) {
-        this.CPF = CPF;
+    public int getSeqFormacao() {
+        return seqFormacao;
     }
 
-    public int getSeq_Formacao() {
-        return Seq_Formacao;
+    public void setSeqFormacao(int seqFormacao) {
+        this.seqFormacao = seqFormacao;
     }
 
-    public void setSeq_Formacao(int Seq_Formacao) {
-        this.Seq_Formacao = Seq_Formacao;
+    public String getInstituicaoEnsino() {
+        return instituicaoEnsino;
     }
 
-    public String getInstituicao_Ensino() {
-        return Instituicao_Ensino;
+    public void setInstituicaoEnsino(String instituicaoEnsino) {
+        this.instituicaoEnsino = instituicaoEnsino;
     }
 
-    public void setInstituicao_Ensino(String Instituicao_Ensino) {
-        this.Instituicao_Ensino = Instituicao_Ensino;
+    public int getCodAreaEstudo() {
+        return codAreaEstudo;
     }
 
-    public int getCod_Area_Estudo() {
-        return Cod_Area_Estudo;
+    public void setCodAreaEstudo(int codAreaEstudo) {
+        this.codAreaEstudo = codAreaEstudo;
     }
 
-    public void setCod_Area_Estudo(int Cod_Area_Estudo) {
-        this.Cod_Area_Estudo = Cod_Area_Estudo;
+    public String getAtividadesDesenvolvidas() {
+        return atividadesDesenvolvidas;
     }
 
-    public String getAtividades_Desenvolvidas() {
-        return Atividades_Desenvolvidas;
+    public void setAtividadesDesenvolvidas(String atividadesDesenvolvidas) {
+        this.atividadesDesenvolvidas = atividadesDesenvolvidas;
     }
 
-    public void setAtividades_Desenvolvidas(String Atividades_Desenvolvidas) {
-        this.Atividades_Desenvolvidas = Atividades_Desenvolvidas;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public Date getData_Inicio() {
-        return Data_Inicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public void setData_Inicio(Date Data_Inicio) {
-        this.Data_Inicio = Data_Inicio;
+    public Date getDataTermino() {
+        return dataTermino;
     }
 
-    public Date getData_Termino() {
-        return Data_Termino;
+    public void setDataTermino(Date dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
-    public void setData_Termino(Date Data_Termino) {
-        this.Data_Termino = Data_Termino;
+    public String getDescFormacaoAcademica() {
+        return descFormacaoAcademica;
     }
 
-    public String getDesc_Formacao_Academica() {
-        return Desc_Formacao_Academica;
-    }
-
-    public void setDesc_Formacao_Academica(String Desc_Formacao_Academica) {
-        this.Desc_Formacao_Academica = Desc_Formacao_Academica;
+    public void setDescFormacaoAcademica(String descFormacaoAcademica) {
+        this.descFormacaoAcademica = descFormacaoAcademica;
     }
 
 }

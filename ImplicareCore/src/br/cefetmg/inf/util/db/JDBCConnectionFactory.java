@@ -5,5 +5,5 @@ import java.sql.SQLException;
 
 public interface JDBCConnectionFactory {
 
-    public Connection getConnection() throws ClassNotFoundException, SQLException;
+    public Connection getConnection() throws SQLException;
 }

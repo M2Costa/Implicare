@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public interface TelefoneManagement {
 
-    public boolean insert(Telefone Telefone) throws BusinessException, PersistenceException;
+    public void insert(Telefone telefone) throws BusinessException, PersistenceException;
 
-    public boolean update(Telefone Telefone) throws BusinessException, PersistenceException;
+    public void update(Telefone telefone) throws BusinessException, PersistenceException;
 
-    public boolean delete(Telefone Telefone) throws PersistenceException;
+    public void delete(Telefone telefone) throws BusinessException, PersistenceException;
 
-    public Telefone pesquisar(int Seq_Telefone) throws PersistenceException;
+    public Telefone pesquisar(int seqTelefone) throws PersistenceException;
 
-    public ArrayList<Telefone> listar(long CPF_CNPJ) throws PersistenceException;
+    public ArrayList<Telefone> listar(long cpjCnpj) throws PersistenceException;
 }

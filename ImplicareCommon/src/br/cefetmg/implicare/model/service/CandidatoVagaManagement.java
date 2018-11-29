@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public interface CandidatoVagaManagement {
 
-    public boolean insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException;
+    public void insert(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException;
 
-    public boolean update(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException;
+    public void update(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException;
 
-    public ArrayList<CandidatoVaga> listar(int Seq_Vaga) throws PersistenceException;
+    public ArrayList<CandidatoVaga> listar(int seqVaga) throws PersistenceException;
 }

@@ -1,41 +1,59 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.dao.VagaDao;
 import br.cefetmg.implicare.model.daoImpl.VagaDaoImpl;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VagaManagementImpl implements VagaManagement {
+    
+    private final VagaDao dao;
 
-    @Override
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException {
-        VagaDaoImpl.getInstance().insert(Vaga);
+    public VagaManagementImpl(VagaDao dao) throws RemoteException {
+        this.dao = dao;
     }
 
     @Override
-    public void update(Vaga Vaga) throws BusinessException, PersistenceException {
-        VagaDaoImpl.getInstance().update(Vaga);
+    public void insert(Vaga vaga) throws BusinessException, PersistenceException {
+        if(vaga == null)
+            throw new BusinessException("A vaga não pode ser nula!");
+        if(vaga.getDataPublicacao() == null)
+            throw new BusinessException("A data de publicação não pode ser nula!");
+        VagaDaoImpl.getInstance().insert(vaga);
     }
 
     @Override
-    public void delete(Vaga Vaga) throws PersistenceException {
-        VagaDaoImpl.getInstance().delete(Vaga);
+    public void update(Vaga vaga) throws BusinessException, PersistenceException {
+        if(vaga == null)
+            throw new BusinessException("A vaga não pode ser nula!");
+        if(vaga.getDataPublicacao() == null)
+            throw new BusinessException("A data de publicação não pode ser nula!");
+        VagaDaoImpl.getInstance().update(vaga);
     }
 
     @Override
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException {
-        return VagaDaoImpl.getInstance().pesquisar(Seq_Vaga);
+    public void delete(Vaga vaga) throws PersistenceException {
+        if(vaga == null)
+            throw new BusinessException("A vaga não pode ser nula!");
+        VagaDaoImpl.getInstance().delete(vaga);
+    }
+
+    @Override
+    public Vaga pesquisar(int seqVaga) throws PersistenceException {
+        return VagaDaoImpl.getInstance().pesquisar(seqVaga);
     }
     
     @Override
-    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException {
-        return VagaDaoImpl.getInstance().listarVagaEmpresa(CNPJ);
+    public ArrayList<Vaga> listarVagaEmpresa(long cnpj) throws PersistenceException {
+        return VagaDaoImpl.getInstance().listarVagaEmpresa(cnpj);
     }
 
     @Override
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException {
-        return VagaDaoImpl.getInstance().listarVagaCandidato(CPF);
+    public ArrayList<Vaga> listarVagaCandidato(long cpf) throws PersistenceException {
+        return VagaDaoImpl.getInstance().listarVagaCandidato(cpf);
     }
 }

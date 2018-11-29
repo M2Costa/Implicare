@@ -1,57 +1,41 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.CandidatoVagaDao;
-import br.cefetmg.implicare.model.daoImpl.CandidatoVagaDaoImpl;
 import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaManagement;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
 
-    private final CandidatoVagaDao CandidatoVagaDao;
+    private final CandidatoVagaDao dao;
 
-    public CandidatoVagaManagementImpl() {
-        CandidatoVagaDao = new CandidatoVagaDaoImpl();
+    public CandidatoVagaManagementImpl(CandidatoVagaDao dao) throws RemoteException{
+        this.dao = dao;
     }
 
     @Override
-    public boolean insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoVagaDao.insert(CandidatoVaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoVagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void insert(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException {
+        if(candidatoVaga == null)
+            throw new BusinessException("A vaga do candidato não podem ser nula!");
+        if(candidatoVaga.getDatPublicacao() == null)
+            throw new BusinessException("A vaga do candidato tem que ter uma data definida!");
+        dao.insert(candidatoVaga);
     }
 
     @Override
-    public boolean update(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException {
-        boolean result = false;
-        try {
-            result = CandidatoVagaDao.update(CandidatoVaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoVagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public void update(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException {
+        if(candidatoVaga == null)
+            throw new BusinessException("A vaga do candidato não podem ser nula!");
+        if(candidatoVaga.getDatPublicacao() == null)
+            throw new BusinessException("A vaga do candidato tem que ter uma data definida!");
+        dao.update(candidatoVaga);
     }
 
     @Override
-    public ArrayList<CandidatoVaga> listar(int Seq_Vaga) throws PersistenceException {
-        ArrayList<CandidatoVaga> result = null;
-        try {
-            result = CandidatoVagaDao.listar(Seq_Vaga);
-            return result;
-        } catch (br.cefetmg.implicare.exception.PersistenceException ex) {
-            Logger.getLogger(CandidatoVagaManagementImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
+    public ArrayList<CandidatoVaga> listar(int seqVaga) throws PersistenceException {
+        return dao.listar(seqVaga);
     }
-
 }

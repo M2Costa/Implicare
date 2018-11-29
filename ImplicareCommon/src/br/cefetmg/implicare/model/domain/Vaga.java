@@ -4,98 +4,98 @@ import java.sql.Date;
 
 public class Vaga {
 
-    private long CNPJ;
-    private int Seq_Vaga;
-    private int Cod_Cargo;
-    private Date Dat_Publicacao;
-    private int Num_Vagas;
-    private int Carga_Horaria;
-    private double Remuneracao;
-    private String Desc_Vaga;
-    private int Status_Vaga;
+    private long cnpj;
+    private int seqVaga;
+    private int codCargo;
+    private Date dataPublicacao;
+    private int numVagas;
+    private int cargaHoraria;
+    private double remuneracao;
+    private String descVaga;
+    private int statusVaga;
 
-    public Vaga(long CNPJ, int Seq_Vaga, int Cod_Cargo, Date Dat_Publicacao, int Num_Vagas, int Carga_Horaria, double Remuneracao, String Desc_Vaga, int Status_Vaga) {
-        this.CNPJ = CNPJ;
-        this.Seq_Vaga = Seq_Vaga;
-        this.Cod_Cargo = Cod_Cargo;
-        this.Dat_Publicacao = Dat_Publicacao;
-        this.Num_Vagas = Num_Vagas;
-        this.Carga_Horaria = Carga_Horaria;
-        this.Remuneracao = Remuneracao;
-        this.Desc_Vaga = Desc_Vaga;
-        this.Status_Vaga = Status_Vaga;
+    public Vaga(long cnpj, int seqVaga, int codCargo, Date dataPublicacao, int numVagas, int cargaHoraria, double remuneracao, String descVaga, int statusVaga) {
+        this.cnpj = cnpj;
+        this.seqVaga = seqVaga;
+        this.codCargo = codCargo;
+        this.dataPublicacao = dataPublicacao;
+        this.numVagas = numVagas;
+        this.cargaHoraria = cargaHoraria;
+        this.remuneracao = remuneracao;
+        this.descVaga = descVaga;
+        this.statusVaga = statusVaga;
     }
 
-    public long getCNPJ() {
-        return CNPJ;
+    public long getCnpj() {
+        return cnpj;
     }
 
-    public void setCNPJ(long CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCnpj(long cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public int getSeq_Vaga() {
-        return Seq_Vaga;
+    public int getSeqVaga() {
+        return seqVaga;
     }
 
-    public void setSeq_Vaga(int Seq_Vaga) {
-        this.Seq_Vaga = Seq_Vaga;
+    public void setSeqVaga(int seqVaga) {
+        this.seqVaga = seqVaga;
     }
 
-    public int getCod_Cargo() {
-        return Cod_Cargo;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public void setCod_Cargo(int Cod_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
 
-    public Date getDat_Publicacao() {
-        return Dat_Publicacao;
+    public Date getDataPublicacao() {
+        return dataPublicacao;
     }
 
-    public void setDat_Publicacao(Date Dat_Publicacao) {
-        this.Dat_Publicacao = Dat_Publicacao;
+    public void setDataPublicacao(Date dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
     }
 
-    public int getNum_Vagas() {
-        return Num_Vagas;
+    public int getNumVagas() {
+        return numVagas;
     }
 
-    public void setNum_Vagas(int Num_Vagas) {
-        this.Num_Vagas = Num_Vagas;
+    public void setNumVagas(int numVagas) {
+        this.numVagas = numVagas;
     }
 
-    public int getCarga_Horaria() {
-        return Carga_Horaria;
+    public int getCargaHoraria() {
+        return cargaHoraria;
     }
 
-    public void setCarga_Horaria(int Carga_Horaria) {
-        this.Carga_Horaria = Carga_Horaria;
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 
     public double getRemuneracao() {
-        return Remuneracao;
+        return remuneracao;
     }
 
-    public void setRemuneracao(double Remuneracao) {
-        this.Remuneracao = Remuneracao;
+    public void setRemuneracao(double remuneracao) {
+        this.remuneracao = remuneracao;
     }
 
-    public String getDesc_Vaga() {
-        return Desc_Vaga;
+    public String getDescVaga() {
+        return descVaga;
     }
 
-    public void setDesc_Vaga(String Desc_Vaga) {
-        this.Desc_Vaga = Desc_Vaga;
+    public void setDescVaga(String descVaga) {
+        this.descVaga = descVaga;
     }
 
-    public int getStatus_Vaga() {
-        return Status_Vaga;
+    public int getStatusVaga() {
+        return statusVaga;
     }
 
-    public void setStatus_Vaga(int Status_Vaga) {
-        this.Status_Vaga = Status_Vaga;
+    public void setStatusVaga(int statusVaga) {
+        this.statusVaga = statusVaga;
     }
 
 }

@@ -24,33 +24,29 @@ public class ExperienciaProfissionalDaoImpl implements ExperienciaProfissionalDa
 
     @Override
     public void insert(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException {
-        try(Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
-
+        
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
             String sql = "INSERT INTO Experiencia_Profissional (CPF, Seq_Experiencia, Nom_Empresa, Cod_Cargo, "
                     + "Data_Inicio, Data_Termino, Desc_Experiencia_Profissional) "
                     + "VALUES(?,?,?,?,?,?,?)";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                
+                ps.setLong(1, ExperienciaProfissional.getCPF());
+                ps.setInt(2, ExperienciaProfissional.getSeq_Experiencia());
+                ps.setString(3, ExperienciaProfissional.getNom_Empresa());
+                ps.setInt(4, ExperienciaProfissional.getCod_Cargo());
+                ps.setDate(5, ExperienciaProfissional.getData_Inicio());
+                ps.setDate(6, ExperienciaProfissional.getData_Termino());
+                ps.setString(7, ExperienciaProfissional.getDesc_Experiencia_Profissional());
 
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ps.setLong(1, ExperienciaProfissional.getCPF());
-            ps.setInt(2, ExperienciaProfissional.getSeq_Experiencia());
-            ps.setString(3, ExperienciaProfissional.getNom_Empresa());
-            ps.setInt(4, ExperienciaProfissional.getCod_Cargo());
-            ps.setDate(5, ExperienciaProfissional.getData_Inicio());
-            ps.setDate(6, ExperienciaProfissional.getData_Termino());
-            ps.setString(7, ExperienciaProfissional.getDesc_Experiencia_Profissional());
-
-            ResultSet rs = ps.executeQuery();
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return true;
-
+                if(ps.executeUpdate() == 0)
+                {
+                    //TO DO
+                }
+            }
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
+            //TO DO
         }
     }
 

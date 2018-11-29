@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 public interface VagaManagement {
 
-    public void insert(Vaga Vaga) throws BusinessException, PersistenceException;
+    public void insert(Vaga vaga) throws BusinessException, PersistenceException;
 
-    public void update(Vaga Vaga) throws BusinessException, PersistenceException;
+    public void update(Vaga vaga) throws BusinessException, PersistenceException;
 
-    public void delete(Vaga Vaga) throws PersistenceException;
+    public void delete(Vaga vaga) throws BusinessException, PersistenceException;
 
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException;
+    public Vaga pesquisar(int seqVaga) throws PersistenceException;
 
-    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException;
+    public ArrayList<Vaga> listarVagaEmpresa(long cnpj) throws PersistenceException;
 
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException;
+    public ArrayList<Vaga> listarVagaCandidato(long cpf) throws PersistenceException;
 }

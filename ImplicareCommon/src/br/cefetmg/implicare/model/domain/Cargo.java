@@ -2,30 +2,27 @@ package br.cefetmg.implicare.model.domain;
 
 public class Cargo {
 
-    private int Cod_Cargo;
-    private String Nom_Cargo;
+    private int codCargo;
+    private String nomCargo;
 
-    public Cargo() {
+    public Cargo(int codCargo, String nomCargo) {
+        this.codCargo = codCargo;
+        this.nomCargo = nomCargo;
     }
 
-    public Cargo(int Cod_Cargo, String Nom_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
-        this.Nom_Cargo = Nom_Cargo;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public int getCod_Cargo() {
-        return Cod_Cargo;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
 
-    public void setCod_Cargo(int Cod_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
+    public String getNomCargo() {
+        return nomCargo;
     }
 
-    public String getNom_Cargo() {
-        return Nom_Cargo;
-    }
-
-    public void setNom_Cargo(String Nom_Cargo) {
-        this.Nom_Cargo = Nom_Cargo;
+    public void setNomCargo(String nomCargo) {
+        this.nomCargo = nomCargo;
     }
 }

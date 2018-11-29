@@ -2,81 +2,77 @@ package br.cefetmg.implicare.model.domain;
 
 public class Usuario {
 
-    private long CPF_CNPJ;
-    private String Email;
-    private String Senha;
-    private String Foto;
-    private long Cod_CEP;
-    private String Endereco;
-    private String Desc_Usuario;
+    private long cpfCnpj;
+    private long codCep;
+    private String descUsuario;
+    private String email;
+    private String endereco;
+    private String foto;
+    private String senha;
 
-    public Usuario() {
+    public Usuario(long cpfCnpj, long codCep, String descUsuario, String email, String endereco, String foto, String senha) {
+        this.cpfCnpj = cpfCnpj;
+        this.codCep = codCep;
+        this.descUsuario = descUsuario;
+        this.email = email;
+        this.endereco = endereco;
+        this.foto = foto;
+        this.senha = senha;
     }
 
-    public Usuario(long CPF_CNPJ, String Email, String Senha, String Foto, long Cod_Cep, String Endereco, String Desc_Usuario) {
-        this.CPF_CNPJ = CPF_CNPJ;
-        this.Email = Email;
-        this.Senha = Senha;
-        this.Foto = Foto;
-        this.Cod_CEP = Cod_Cep;
-        this.Endereco = Endereco;
-        this.Desc_Usuario = Desc_Usuario;
+    public long getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setCPF_CNPJ(Long CPF_CNPJ) {
-        this.CPF_CNPJ = CPF_CNPJ;
+    public void setCpfCnpj(long cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
-    public Long getCPF_CNPJ() {
-        return CPF_CNPJ;
+    public long getCodCep() {
+        return codCep;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setCodCep(long codCep) {
+        this.codCep = codCep;
+    }
+
+    public String getDescUsuario() {
+        return descUsuario;
+    }
+
+    public void setDescUsuario(String descUsuario) {
+        this.descUsuario = descUsuario;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setSenha(String Senha) {
-        this.Senha = Senha;
-    }
-
-    public String getSenha() {
-        return Senha;
-    }
-
-    public void setFoto(String Foto) {
-        this.Foto = Foto;
-    }
-
-    public String getFoto() {
-        return Foto;
-    }
-
-    public void setCod_CEP(Long Cod_CEP) {
-        this.Cod_CEP = Cod_CEP;
-    }
-
-    public Long getCod_CEP() {
-        return Cod_CEP;
-    }
-
-    public void setEndereco(String Endereco) {
-        this.Endereco = Endereco;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEndereco() {
-        return Endereco;
+        return endereco;
     }
 
-    public void setDesc_Usuario(String Desc_Usuario) {
-        this.Desc_Usuario = Desc_Usuario;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public String getDesc_Usuario() {
-        return Desc_Usuario;
+    public String getFoto() {
+        return foto;
     }
 
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }

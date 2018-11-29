@@ -40,10 +40,12 @@ public class TelefoneDaoImpl implements TelefoneDao {
                 ps.setString(3, telefone.getTipo_Telefone());
                 ps.setInt(4, telefone.getDDD());
                 ps.setInt(5, telefone.getRamal());
-
-                ResultSet rs = ps.executeQuery();
-
-                rs.close();
+                
+                if(ps.executeUpdate() == 0)
+                {
+                    Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, "Execução inválida!");
+                    throw new PersistenceException("Não foi possível inserir o telefone: " + telefone);
+                }
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +69,11 @@ public class TelefoneDaoImpl implements TelefoneDao {
                 ps.setInt(4, telefone.getRamal());
                 ps.setInt(5, telefone.getSeq_Telefone());
 
-                ps.executeQuery();
+                if(ps.executeUpdate() == 0)
+                {
+                    Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, "Execução inválida!");
+                    throw new PersistenceException("Não foi possível inserir o telefone: " + telefone);
+                }
             }
         }catch (ClassNotFoundException | SQLException ex) {
             
@@ -86,7 +92,11 @@ public class TelefoneDaoImpl implements TelefoneDao {
             try (PreparedStatement ps = connection.prepareStatement(SQL)) {
                 
                 ps.setInt(1, telefone.getSeq_Telefone());
-                ps.executeQuery();
+                if(ps.executeUpdate() == 0)
+                {
+                    Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, "Execução inválida!");
+                    throw new PersistenceException("Não foi possível inserir o telefone: " + telefone);
+                }
             }
         }catch (SQLException | ClassNotFoundException ex) {
             
@@ -98,7 +108,6 @@ public class TelefoneDaoImpl implements TelefoneDao {
     @Override
     public Telefone pesquisar(int seqTelefone) throws PersistenceException {
         
-        Telefone Tel;
         try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
             
             String SQL = "SELECT * FROM Telefone "
@@ -106,9 +115,9 @@ public class TelefoneDaoImpl implements TelefoneDao {
             try (PreparedStatement ps = connection.prepareStatement(SQL)) {
                 
                 ps.setLong(1, seqTelefone);
-                try (ResultSet rs = ps.executeQuery(SQL)) {
-                    
-                    Tel = new Telefone(
+                try (ResultSet rs = ps.executeQuery()) {
+                    rs.first();
+                    return new Telefone(
                             rs.getLong("CPF_CNPJ"),
                             rs.getInt("Seq_Telefone"),
                             rs.getString("Num-Telefone"),
@@ -123,8 +132,6 @@ public class TelefoneDaoImpl implements TelefoneDao {
             Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw new PersistenceException("Não foi possível encontrar o telefone com: seqTelefone = " + seqTelefone);
         }
-        
-        return Tel;
     }
 
     @Override
@@ -154,12 +161,12 @@ public class TelefoneDaoImpl implements TelefoneDao {
                             )
                         );
                     }
+                    return lista;
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw new PersistenceException("Não foi possível encontrar telefones com: CpfCnpj = " + cpfCnpj);
         }
-        return lista;
     }
 }

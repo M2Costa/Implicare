@@ -4,70 +4,67 @@ import java.sql.Date;
 
 public class CandidatoVaga {
 
-    private long CPF;
-    private int Seq_Vaga;
-    private int Cod_Cargo;
-    private long CNPJ;
-    private Date Dat_Publicacao;
-    private String Status_Candidato;
+    private long cpf;
+    private int seqVaga;
+    private int codCargo;
+    private long cnpj;
+    private Date datPublicacao;
+    private char statusCandidato;
 
-    public CandidatoVaga() {
+    public CandidatoVaga(long cpf, int seqVaga, int codCargo, long cnpj, Date datPublicacao, char statusCandidato) {
+        this.cpf = cpf;
+        this.seqVaga = seqVaga;
+        this.codCargo = codCargo;
+        this.cnpj = cnpj;
+        this.datPublicacao = datPublicacao;
+        this.statusCandidato = statusCandidato;
+    }
+    
+    public long getCpf() {
+        return cpf;
     }
 
-    public CandidatoVaga(long CPF, int Seq_Vaga, int Cod_Cargo, long CNPJ, Date Dat_Publicacao, String Status_Candidato) {
-        this.CPF = CPF;
-        this.Seq_Vaga = Seq_Vaga;
-        this.Cod_Cargo = Cod_Cargo;
-        this.CNPJ = CNPJ;
-        this.Dat_Publicacao = Dat_Publicacao;
-        this.Status_Candidato = Status_Candidato;
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
-    public long getCPF() {
-        return CPF;
+    public int getSeqVaga() {
+        return seqVaga;
     }
 
-    public void setCPF(long CPF) {
-        this.CPF = CPF;
+    public void setSeqVaga(int seqVaga) {
+        this.seqVaga = seqVaga;
     }
 
-    public int getSeq_Vaga() {
-        return Seq_Vaga;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public void setSeq_Vaga(int Seq_Vaga) {
-        this.Seq_Vaga = Seq_Vaga;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
 
-    public int getCod_Cargo() {
-        return Cod_Cargo;
+    public long getCnpj() {
+        return cnpj;
     }
 
-    public void setCod_Cargo(int Cod_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
+    public void setCnpj(long cnpj) {
+        this.cnpj = cnpj;
     }
 
-    public long getCNPJ() {
-        return CNPJ;
+    public Date getDatPublicacao() {
+        return datPublicacao;
     }
 
-    public void setCNPJ(long CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setDatPublicacao(Date datPublicacao) {
+        this.datPublicacao = datPublicacao;
     }
 
-    public Date getDat_Publicacao() {
-        return Dat_Publicacao;
+    public char getStatusCandidato() {
+        return statusCandidato;
     }
 
-    public void setDat_Publicacao(Date Dat_Publicacao) {
-        this.Dat_Publicacao = Dat_Publicacao;
-    }
-
-    public String getStatus_Candidato() {
-        return Status_Candidato;
-    }
-
-    public void setStatus_Candidato(String Status_Candidato) {
-        this.Status_Candidato = Status_Candidato;
+    public void setStatusCandidato(char statusCandidato) {
+        this.statusCandidato = statusCandidato;
     }
 }

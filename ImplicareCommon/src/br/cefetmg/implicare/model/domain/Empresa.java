@@ -2,31 +2,30 @@ package br.cefetmg.implicare.model.domain;
 
 public class Empresa extends Usuario {
 
-    private String Nom_Razao_Social;
-    private String Nome_Fantasia;
+    private String nomRazaoSocial;
+    private String nomeFantasia;
 
-    public Empresa() {
+    public Empresa(
+            long cpfCnpj, long codCep, String descUsuario, String email, String endereco, String foto, String senha,
+            String nomRazaoSocial, String nomeFantasia) {
+        super(cpfCnpj, codCep, descUsuario, email, endereco, foto, senha);
+        this.nomRazaoSocial = nomRazaoSocial;
+        this.nomeFantasia = nomeFantasia;
+    }
+    
+    public String getNomRazaoSocial() {
+        return nomRazaoSocial;
     }
 
-    public Empresa(String Nom_Razao_Social, String Nome_Fantasia) {
-        this.Nom_Razao_Social = Nom_Razao_Social;
-        this.Nome_Fantasia = Nome_Fantasia;
+    public void setNomRazaoSocial(String nomRazaoSocial) {
+        this.nomRazaoSocial = nomRazaoSocial;
     }
 
-    public String getNom_Razao_Social() {
-        return Nom_Razao_Social;
+    public String getNomeFantasia() {
+        return nomeFantasia;
     }
 
-    public void setNom_Razao_Social(String Nom_Razao_Social) {
-        this.Nom_Razao_Social = Nom_Razao_Social;
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
-
-    public String getNome_Fantasia() {
-        return Nome_Fantasia;
-    }
-
-    public void setNome_Fantasia(String Nome_Fantasia) {
-        this.Nome_Fantasia = Nome_Fantasia;
-    }
-
 }

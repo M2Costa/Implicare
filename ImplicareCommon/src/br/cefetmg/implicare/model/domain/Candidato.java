@@ -4,30 +4,30 @@ import java.sql.Date;
 
 public class Candidato extends Usuario {
 
-    private String Nome;
-    private Date Data_Nascimento;
+    private String nome;
+    private Date dataNascimento;
 
-    public Candidato() {
-    }
-
-    public Candidato(String Nome, Date Data_Nascimento) {
-        this.Nome = Nome;
-        this.Data_Nascimento = Data_Nascimento;
+    public Candidato(
+            long cpfCnpj, long codCep, String descUsuario, String email, String endereco, String foto, String senha,
+            String nome, Date dataNascimento) {
+        super(cpfCnpj, codCep, descUsuario, email, endereco, foto, senha);
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Date getData_Nascimento() {
-        return Data_Nascimento;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setData_Nascimento(Date Data_Nascimento) {
-        this.Data_Nascimento = Data_Nascimento;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }
