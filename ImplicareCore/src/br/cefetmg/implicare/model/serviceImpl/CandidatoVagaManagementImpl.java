@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
 
     private final CandidatoVagaDao dao;
-
+    
     public CandidatoVagaManagementImpl(CandidatoVagaDao dao) throws RemoteException{
         this.dao = dao;
     }
 
     @Override
-    public void insert(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException {
+    public void insert(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         if(candidatoVaga == null)
             throw new BusinessException("A vaga do candidato não podem ser nula!");
         if(candidatoVaga.getDatPublicacao() == null)
@@ -26,7 +26,7 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
     }
 
     @Override
-    public void update(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException {
+    public void update(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         if(candidatoVaga == null)
             throw new BusinessException("A vaga do candidato não podem ser nula!");
         if(candidatoVaga.getDatPublicacao() == null)
@@ -35,7 +35,7 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
     }
 
     @Override
-    public ArrayList<CandidatoVaga> listar(int seqVaga) throws PersistenceException {
+    public ArrayList<CandidatoVaga> listar(int seqVaga) throws PersistenceException, RemoteException {
         return dao.listar(seqVaga);
     }
 }

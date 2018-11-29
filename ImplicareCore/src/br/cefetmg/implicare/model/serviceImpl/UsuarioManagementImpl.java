@@ -16,7 +16,7 @@ public class UsuarioManagementImpl implements UsuarioManagement {
     }
     
     @Override
-    public Usuario login(long cpfCnpj, String senha) throws BusinessException, PersistenceException {
+    public Usuario login(long cpfCnpj, String senha) throws BusinessException, PersistenceException, RemoteException {
         if(senha == null)
             throw new BusinessException("A senha não pode ser nula!");
         if(senha.isEmpty())

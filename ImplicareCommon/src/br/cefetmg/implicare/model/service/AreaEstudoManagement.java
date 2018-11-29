@@ -2,11 +2,13 @@ package br.cefetmg.implicare.model.service;
 
 import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.exception.PersistenceException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface AreaEstudoManagement {
+public interface AreaEstudoManagement extends Remote{
 
-    public ArrayList<AreaEstudo> listar() throws PersistenceException;
+    public ArrayList<AreaEstudo> listar() throws PersistenceException, RemoteException, RemoteException;
 
-    public AreaEstudo pesquisar(int codAreaEstudo) throws PersistenceException;
+    public AreaEstudo pesquisar(int codAreaEstudo) throws PersistenceException, RemoteException;
 }

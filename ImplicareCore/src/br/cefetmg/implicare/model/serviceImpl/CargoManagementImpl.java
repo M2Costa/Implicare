@@ -16,17 +16,17 @@ public class CargoManagementImpl implements CargoManagement {
     }
     
     @Override
-    public ArrayList<Cargo> listar() throws PersistenceException {
+    public ArrayList<Cargo> listar() throws PersistenceException, RemoteException {
         return dao.listar();
     }
 
     @Override
-    public ArrayList<Cargo> listarCargoAreaEstudo(long cpf) throws PersistenceException {
+    public ArrayList<Cargo> listarCargoAreaEstudo(long cpf) throws PersistenceException, RemoteException {
         return dao.listarCargoAreaEstudo(cpf);
     }
 
     @Override
-    public Cargo pesquisar(int codCargo) throws PersistenceException {
+    public Cargo pesquisar(int codCargo) throws PersistenceException, RemoteException {
         return dao.pesquisar(codCargo);
     }
 }

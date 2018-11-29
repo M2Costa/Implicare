@@ -17,7 +17,7 @@ public class CandidatoManagementImpl implements CandidatoManagement {
     
 
     @Override
-    public void insert(Candidato candidato) throws BusinessException, PersistenceException {
+    public void insert(Candidato candidato) throws BusinessException, PersistenceException, RemoteException {
         if(candidato == null)
             throw new BusinessException("O candidato não pode ser nulo!");
         if(candidato.getEmail() == null)
@@ -42,7 +42,7 @@ public class CandidatoManagementImpl implements CandidatoManagement {
     }
 
     @Override
-    public void update(Candidato candidato) throws BusinessException, PersistenceException {
+    public void update(Candidato candidato) throws BusinessException, PersistenceException, RemoteException {
         if(candidato == null)
             throw new BusinessException("O candidato não pode ser nulo!");
         if(candidato.getEmail() == null)
@@ -67,12 +67,12 @@ public class CandidatoManagementImpl implements CandidatoManagement {
     }
 
     @Override
-    public void delete(Candidato candidato) throws BusinessException, PersistenceException {
+    public void delete(Candidato candidato) throws BusinessException, PersistenceException, RemoteException {
         dao.delete(candidato);
     }
 
     @Override
-    public Candidato pesquisar(long cpf) throws PersistenceException {
+    public Candidato pesquisar(long cpf) throws PersistenceException, RemoteException {
         return dao.pesquisar(cpf);
     }
 

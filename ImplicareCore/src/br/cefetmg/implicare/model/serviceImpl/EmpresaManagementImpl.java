@@ -16,7 +16,7 @@ public class EmpresaManagementImpl implements EmpresaManagement {
     }
 
     @Override
-    public void insert(Empresa empresa) throws BusinessException, PersistenceException {
+    public void insert(Empresa empresa) throws BusinessException, PersistenceException, RemoteException {
         if(empresa == null)
             throw new BusinessException("A empresa não pode ser nula!");
         if(empresa.getEmail() == null)
@@ -43,7 +43,7 @@ public class EmpresaManagementImpl implements EmpresaManagement {
     }
 
     @Override
-    public void update(Empresa empresa) throws BusinessException, PersistenceException {
+    public void update(Empresa empresa) throws BusinessException, PersistenceException, RemoteException {
         if(empresa == null)
             throw new BusinessException("A empresa não pode ser nula!");
         if(empresa.getEmail() == null)
@@ -70,14 +70,14 @@ public class EmpresaManagementImpl implements EmpresaManagement {
     }
 
     @Override
-    public void delete(Empresa empresa) throws BusinessException, PersistenceException {
+    public void delete(Empresa empresa) throws BusinessException, PersistenceException, RemoteException {
         if(empresa == null)
             throw new BusinessException("A empresa não pode ser nula!");
         dao.delete(empresa);
     }
 
     @Override
-    public Empresa pesquisar(long cnpj) throws PersistenceException {
+    public Empresa pesquisar(long cnpj) throws PersistenceException, RemoteException {
         return dao.pesquisar(cnpj);
     }
 }

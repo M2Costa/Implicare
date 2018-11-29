@@ -17,7 +17,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     }
     
     @Override
-    public void insert(Telefone telefone) throws BusinessException, PersistenceException {
+    public void insert(Telefone telefone) throws BusinessException, PersistenceException, RemoteException {
         if(telefone == null)
             throw new BusinessException("O telefone dado não pode ser nulo!");
         if(telefone.getNumTelefone() == null)
@@ -28,7 +28,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     }
 
     @Override
-    public void update(Telefone telefone) throws BusinessException, PersistenceException {
+    public void update(Telefone telefone) throws BusinessException, PersistenceException, RemoteException {
         if(telefone == null)
             throw new BusinessException("O telefone dado não pode ser nulo!");
         if(telefone.getNumTelefone() == null)
@@ -39,7 +39,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     }
 
     @Override
-    public void delete(Telefone telefone) throws BusinessException, PersistenceException {
+    public void delete(Telefone telefone) throws BusinessException, PersistenceException, RemoteException {
         if(telefone == null)
             throw new BusinessException("O telefone dado não pode ser nulo!");
         if(telefone.getNumTelefone() == null)
@@ -50,12 +50,12 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     }
 
     @Override
-    public Telefone pesquisar(int seqTelefone) throws PersistenceException {
+    public Telefone pesquisar(int seqTelefone) throws PersistenceException, RemoteException {
         return dao.pesquisar(seqTelefone);
     }
 
     @Override
-    public ArrayList<Telefone> listar(long cpfCnpj) throws PersistenceException {
+    public ArrayList<Telefone> listar(long cpfCnpj) throws PersistenceException, RemoteException {
         return dao.listar(cpfCnpj);
     }
 }

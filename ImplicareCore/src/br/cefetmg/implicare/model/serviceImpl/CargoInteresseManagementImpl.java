@@ -17,21 +17,21 @@ public class CargoInteresseManagementImpl implements CargoInteresseManagement {
     }
 
     @Override
-    public void insert(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException {
+    public void insert(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException, RemoteException {
         if(cargoInteresse == null)
             throw new BusinessException("O cargo de interesse não pode ser nulo!");
         dao.insert(cargoInteresse);
     }
 
     @Override
-    public void delete(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException {
+    public void delete(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException, RemoteException {
         if(cargoInteresse == null)
             throw new BusinessException("O cargo de interesse não pode ser nulo!");
         dao.delete(cargoInteresse);
     }
 
     @Override
-    public ArrayList<CargoInteresse> listar(long cpf) throws PersistenceException {
+    public ArrayList<CargoInteresse> listar(long cpf) throws PersistenceException, RemoteException {
         return dao.listar(cpf);
     }
 

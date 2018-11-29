@@ -17,7 +17,7 @@ public class ExperienciaProfissionalManagementImpl implements ExperienciaProfiss
     }
     
     @Override
-    public void insert(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException {
+    public void insert(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
         if(experienciaProfissional == null)
             throw new BusinessException("A experiência profissional não pode ser nula!");
         if(experienciaProfissional.getNomEmpresa() == null)
@@ -30,7 +30,7 @@ public class ExperienciaProfissionalManagementImpl implements ExperienciaProfiss
     }
 
     @Override
-    public void update(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException {
+    public void update(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
         if(experienciaProfissional == null)
             throw new BusinessException("A experiência profissional não pode ser nula!");
         if(experienciaProfissional.getNomEmpresa() == null)
@@ -43,19 +43,19 @@ public class ExperienciaProfissionalManagementImpl implements ExperienciaProfiss
     }
 
     @Override
-    public void delete(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException {
+    public void delete(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException, RemoteException {
         if(experienciaProfissional == null)
             throw new BusinessException("A experiência profissional não pode ser nula!");
         dao.delete(experienciaProfissional);
     }
 
     @Override
-    public ExperienciaProfissional pesquisar(int seqExperiencia) throws PersistenceException {
+    public ExperienciaProfissional pesquisar(int seqExperiencia) throws PersistenceException, RemoteException {
         return dao.pesquisar(seqExperiencia);
     }
 
     @Override
-    public ArrayList<ExperienciaProfissional> listar(long cpf) throws PersistenceException {
+    public ArrayList<ExperienciaProfissional> listar(long cpf) throws PersistenceException, RemoteException {
         return dao.listar(cpf);
     }
 }

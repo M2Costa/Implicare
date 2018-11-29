@@ -18,7 +18,7 @@ public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagem
     }
 
     @Override
-    public void insert(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException {
+    public void insert(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException, RemoteException {
         if(formacaoAcademica == null)
             throw new BusinessException("A formação acadêmica dada não pode ser nula!");
         if(formacaoAcademica.getDataInicio() == null)
@@ -33,7 +33,7 @@ public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagem
     }
 
     @Override
-    public void update(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException {
+    public void update(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException, RemoteException {
         if(formacaoAcademica == null)
             throw new BusinessException("A formação acadêmica dada não pode ser nula!");
         if(formacaoAcademica.getDataInicio() == null)
@@ -48,19 +48,19 @@ public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagem
     }
 
     @Override
-    public void delete(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException {
+    public void delete(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException, RemoteException {
         if(formacaoAcademica == null)
             throw new BusinessException("A formação acadêmica dada não pode ser nula!");
         dao.delete(formacaoAcademica);
     }
 
     @Override
-    public FormacaoAcademica pesquisar(int seqFormacao) throws PersistenceException {
+    public FormacaoAcademica pesquisar(int seqFormacao) throws PersistenceException, RemoteException {
         return dao.pesquisar(seqFormacao);
     }
 
     @Override
-    public ArrayList<FormacaoAcademica> listar(long cpf) throws PersistenceException {
+    public ArrayList<FormacaoAcademica> listar(long cpf) throws PersistenceException, RemoteException {
         return dao.listar(cpf);
     }
 
