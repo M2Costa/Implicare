@@ -1,5 +1,6 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.dao.VagaDao;
 import br.cefetmg.implicare.model.daoImpl.VagaDaoImpl;
 import br.cefetmg.implicare.model.domain.Vaga;
 import br.cefetmg.implicare.exception.BusinessException;
@@ -9,52 +10,50 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VagaManagementImpl implements VagaManagement {
+    
+    private final VagaDao dao;
 
-    private final VagaDao VagaDao;
-
-    public VagaManagementImpl() throws RemoteException {
-        VagaDao = new VagaDaoImpl();
+    public VagaManagementImpl(VagaDao dao) throws RemoteException {
+        this.dao = dao;
     }
 
     @Override
-    public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
-        if(Vaga == null)
-            throw new BusinessException("VAga não pode ser nulo");
-        return VagaDao.insert(Vaga);
-            
+    public void insert(Vaga vaga) throws BusinessException, PersistenceException, RemoteException {
+        if(vaga == null)
+            throw new BusinessException("A vaga não pode ser nula!");
+        if(vaga.getDataPublicacao() == null)
+            throw new BusinessException("A data de publicação não pode ser nula!");
+        VagaDaoImpl.getInstance().insert(vaga);
     }
 
     @Override
-    public boolean update(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException {
-        if(Vaga == null)
-            throw new BusinessException("VAga não pode ser nulo");
-        return VagaDao.update(Vaga);
-            
+    public void update(Vaga vaga) throws BusinessException, PersistenceException, RemoteException {
+        if(vaga == null)
+            throw new BusinessException("A vaga não pode ser nula!");
+        if(vaga.getDataPublicacao() == null)
+            throw new BusinessException("A data de publicação não pode ser nula!");
+        VagaDaoImpl.getInstance().update(vaga);
     }
 
     @Override
-    public boolean delete(Vaga Vaga) throws PersistenceException, RemoteException {
-        if(Vaga == null)
-            throw new BusinessException("VAga não pode ser nulo");
-        return VagaDao.delete(Vaga);
-            
+    public void delete(Vaga vaga) throws PersistenceException, RemoteException {
+        if(vaga == null)
+            throw new BusinessException("A vaga não pode ser nula!");
+        VagaDaoImpl.getInstance().delete(vaga);
     }
 
     @Override
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException, RemoteException {
-        return VagaDao.pesquisar(Seq_Vaga);
-            
+    public Vaga pesquisar(int seqVaga) throws PersistenceException, RemoteException {
+        return VagaDaoImpl.getInstance().pesquisar(seqVaga);
     }
     
     @Override
-    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException, RemoteException {
-        return VagaDao.listarVagaEmpresa(CNPJ);
-           
+    public ArrayList<Vaga> listarVagaEmpresa(long cnpj) throws PersistenceException, RemoteException {
+        return VagaDaoImpl.getInstance().listarVagaEmpresa(cnpj);
     }
 
     @Override
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException, RemoteException{
-        return VagaDao.listarVagaCandidato(CPF);
+    public ArrayList<Vaga> listarVagaCandidato(long cpf) throws PersistenceException, RemoteException {
+        return VagaDaoImpl.getInstance().listarVagaCandidato(cpf);
     }
 }
-

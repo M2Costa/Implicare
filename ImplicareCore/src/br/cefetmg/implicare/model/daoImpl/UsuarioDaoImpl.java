@@ -8,46 +8,51 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsuarioDaoImpl implements UsuarioDao {
+    
+    private static UsuarioDao UsuarioDao;
 
+    private UsuarioDaoImpl() {}
+    
+    public static UsuarioDao getInstance() {
+        if (UsuarioDao == null) {
+            UsuarioDao = new UsuarioDaoImpl();
+        }
+        return UsuarioDao;
+    }
+    
     @Override
-    public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
+    public Usuario login(long cpfCnpj, String senha) throws PersistenceException {
+        
+        try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+            
             String sql = "SELECT * FROM Usuario WHERE CPF_CNPJ = ? AND Senha = ?";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ps.setLong(1, CPF_CNPJ);
-            ps.setString(2, Senha);
-
-            ResultSet rs = ps.executeQuery();
-
-            Usuario User = null;
-
-            if (rs.next()) {
-                User = new Usuario();
-                User.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
-                User.setEmail(rs.getString("Email"));
-                User.setSenha(rs.getString("Senha"));
-                User.setFoto(rs.getString("Foto"));
-                User.setCod_CEP(rs.getLong("Cod_CEP"));
-                User.setEndereco(rs.getString("Endereco"));
-                User.setDesc_Usuario(rs.getString("Desc_Usuario"));
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                
+                ps.setLong(1, cpfCnpj);
+                ps.setString(2, senha);
+                try (ResultSet rs = ps.executeQuery()) {
+                    
+                    if(rs.first())
+                        return new Usuario(
+                            rs.getLong("CPF_CNPJ"),
+                            rs.getString("Email"),
+                            rs.getString("Senha"),
+                            rs.getString("Foto"),
+                            rs.getLong("Cod_CEP"),
+                            rs.getString("Endereco"),
+                            rs.getString("Desc_Usuario")
+                        );
+                    else
+                        throw new PersistenceException("Não foi possível de encontrar o usuário com o cadastro: " + cpfCnpj);
+                }
             }
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return User;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+        }catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(TelefoneDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException("Não foi possível de encontrar o usuário com o cadastro: " + cpfCnpj);
         }
     }
-
 }

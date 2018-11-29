@@ -1,25 +1,26 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
 import br.cefetmg.implicare.dao.UsuarioDao;
-import br.cefetmg.implicare.model.daoImpl.UsuarioDaoImpl;
+import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.UsuarioManagement;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UsuarioManagementImpl implements UsuarioManagement {
+    
+    private final UsuarioDao dao;
 
-    private final UsuarioDao UsuarioDao;
-
-    public UsuarioManagementImpl() throws RemoteException {
-        UsuarioDao = new UsuarioDaoImpl();
+    public UsuarioManagementImpl(UsuarioDao dao) throws RemoteException {
+        this.dao = dao;
     }
-
+    
     @Override
-    public Usuario login(long CPF_CNPJ, String Senha) throws PersistenceException, RemoteException {
-        return UsuarioDao.login(CPF_CNPJ, Senha);
-            
+    public Usuario login(long cpfCnpj, String senha) throws BusinessException, PersistenceException, RemoteException {
+        if(senha == null)
+            throw new BusinessException("A senha não pode ser nula!");
+        if(senha.isEmpty())
+            throw new BusinessException("A senha não pode estar vazia!");
+        return dao.login(cpfCnpj, senha);
     }
 }

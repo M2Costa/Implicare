@@ -8,11 +8,11 @@ import java.rmi.RemoteException;
 
 public interface EmpresaManagement extends Remote{
 
-    public boolean insert(Empresa Empresa) throws BusinessException, PersistenceException, RemoteException;
+	public void insert(Empresa empresa) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(Empresa Empresa) throws BusinessException, PersistenceException, RemoteException;
+    public void update(Empresa empresa) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(Empresa Empresa) throws BusinessException, PersistenceException, RemoteException;
+    public void delete(Empresa empresa) throws BusinessException, PersistenceException, RemoteException;
 
-    public Empresa pesquisar(long CNPJ) throws PersistenceException, RemoteException;
+    public Empresa pesquisar(long cnpj) throws PersistenceException, RemoteException;
 }

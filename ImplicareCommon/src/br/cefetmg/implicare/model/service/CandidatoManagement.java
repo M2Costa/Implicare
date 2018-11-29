@@ -7,12 +7,12 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface CandidatoManagement extends Remote {
+	
+    public void insert(Candidato candidato) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean insert(Candidato Candidato) throws BusinessException, PersistenceException, RemoteException;
+    public void update(Candidato candidato) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(Candidato Candidato) throws BusinessException, PersistenceException, RemoteException;
+    public void delete(Candidato candidato) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(Candidato Candidato) throws BusinessException, PersistenceException, RemoteException;
-
-    public Candidato pesquisar(long CPF) throws PersistenceException, RemoteException;
+    public Candidato pesquisar(long cpf) throws PersistenceException, RemoteException;
 }

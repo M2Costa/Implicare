@@ -9,16 +9,15 @@ import java.util.ArrayList;
 
 public interface VagaManagement extends Remote{
 
+    public void insert(Vaga vaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean insert(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
+    public void update(Vaga vaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(Vaga Vaga) throws BusinessException, PersistenceException, RemoteException;
+    public void delete(Vaga vaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(Vaga Vaga) throws PersistenceException, RemoteException;
+    public Vaga pesquisar(int seqVaga) throws PersistenceException, RemoteException;
 
-    public Vaga pesquisar(int Seq_Vaga) throws PersistenceException, RemoteException;
+    public ArrayList<Vaga> listarVagaEmpresa(long cnpj) throws PersistenceException, RemoteException;
 
-    public ArrayList<Vaga> listarVagaEmpresa(long CNPJ) throws PersistenceException, RemoteException;
-
-    public ArrayList<Vaga> listarVagaCandidato(long CPF) throws PersistenceException, RemoteException;
+    public ArrayList<Vaga> listarVagaCandidato(long cpf) throws PersistenceException, RemoteException;
 }

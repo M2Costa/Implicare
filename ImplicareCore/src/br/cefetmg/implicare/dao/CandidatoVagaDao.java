@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public interface CandidatoVagaDao {
 
-    public boolean insert(CandidatoVaga CandidatoVaga) throws PersistenceException;
+    public void insert(CandidatoVaga sanidatoVaga) throws PersistenceException;
 
-    public boolean update(CandidatoVaga CandidatoVaga) throws PersistenceException;
+    public void update(CandidatoVaga sanidatoVaga) throws PersistenceException;
 
-    public ArrayList<CandidatoVaga> listarAceitos(int Seq_Vaga) throws PersistenceException;
+    public ArrayList<CandidatoVaga> listarAceitos(int seqVaga) throws PersistenceException;
 
-    public ArrayList<CandidatoVaga> listar(int Seq_Vaga) throws PersistenceException;
+    public ArrayList<CandidatoVaga> listar(int seqVaga) throws PersistenceException;
 }

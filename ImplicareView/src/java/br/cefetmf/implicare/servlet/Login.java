@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmf.implicare.servlet;
 
+import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.domain.Candidato;
 import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.model.service.CandidatoManagement;
@@ -12,19 +8,11 @@ import br.cefetmg.implicare.model.service.UsuarioManagement;
 import br.cefetmg.implicare.model.serviceImpl.CandidatoManagementImpl;
 import br.cefetmg.implicare.model.serviceImpl.UsuarioManagementImpl;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Gabriel
- * 
- */
-
-class Login {
+public class Login {
 
     static String execute(HttpServletRequest request) {
         String jsp = "";
@@ -33,8 +21,7 @@ class Login {
             String Senha = request.getParameter("Senha");
 
             UsuarioManagement UsuarioManagement = new UsuarioManagementImpl();
-            Usuario user = new Usuario();
-            user = UsuarioManagement.login(CPF_CNPJ, Senha);
+            Usuario user = UsuarioManagement.login(CPF_CNPJ, Senha);
             
             if(user == null) {
                 return "/login.jsp";
@@ -46,10 +33,8 @@ class Login {
             } 
             else {
                 
-                HttpSession session = request.getSession();
                 CandidatoManagement CandidatoManagement = new CandidatoManagementImpl();
-                Candidato Cand = new Candidato();
-                Cand = CandidatoManagement.pesquisar(CPF_CNPJ);
+                Candidato Cand = CandidatoManagement.pesquisar(CPF_CNPJ);
                 if(Cand == null) {
                     request.getSession().setAttribute("Tipo","E");
                     jsp = "ImplicareServlet?acao=ListarVagaEmpresa";
@@ -66,22 +51,16 @@ class Login {
                 
                 
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (PersistenceException | NumberFormatException e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return jsp;
     }
     
-    public static void validarSessao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        Long CPF_CNPJ = (Long) request.getSession().getAttribute("CPF_CNPJ");
-        System.out.println(request.getSession().getAttribute("CPF_CNPJ"));
-        String jsp = "";
-        if (CPF_CNPJ == null) {
-            jsp = "/index.jsp";
-            RequestDispatcher rd = request.getRequestDispatcher(jsp);
-            rd.forward(request, response);
+    public static void validarSessao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {        
+        if (request.getSession().getAttribute("CPF_CNPJ") == null) {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
    

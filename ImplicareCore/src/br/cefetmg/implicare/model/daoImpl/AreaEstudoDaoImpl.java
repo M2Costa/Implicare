@@ -47,24 +47,20 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
     @Override
     public AreaEstudo pesquisar(int Cod_Area_Estudo) throws PersistenceException {
         try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String sql = "SELECT * FROM Area_Estudo WHERE Cod_Area_Estudo = ?";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Cod_Area_Estudo);
-            ResultSet rs = ps.executeQuery();
-
-            AreaEstudo Area = new AreaEstudo();
-
-            if (rs.next()) {
-                Area.setCod_Area_Estudo(rs.getInt("Cod_Area_Estudo"));
-                Area.setNom_Area_Estudo(rs.getString("Nom_Area_Estudo"));
+            AreaEstudo Area;
+            try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
+                String sql = "SELECT * FROM Area_Estudo WHERE Cod_Area_Estudo = ?";
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                    ps.setInt(1, Cod_Area_Estudo);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        Area = new AreaEstudo();
+                        if (rs.next()) {
+                            Area.setCod_Area_Estudo(rs.getInt("Cod_Area_Estudo"));
+                            Area.setNom_Area_Estudo(rs.getString("Nom_Area_Estudo"));
+                        }
+                    }
+                }
             }
-
-            rs.close();
-            ps.close();
-            connection.close();
 
             return Area;
 

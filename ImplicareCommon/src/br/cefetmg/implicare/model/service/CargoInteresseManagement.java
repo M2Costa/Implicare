@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public interface CargoInteresseManagement extends Remote{
 
-    public boolean insert(CargoInteresse CargoInteresse) throws BusinessException, PersistenceException, RemoteException;
+    public void insert(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException, RemoteException;
+    public void delete(CargoInteresse cargoInteresse) throws BusinessException, PersistenceException, RemoteException;
 
-    public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException, RemoteException;
+    public ArrayList<CargoInteresse> listar(long cpf) throws PersistenceException, RemoteException;
 }

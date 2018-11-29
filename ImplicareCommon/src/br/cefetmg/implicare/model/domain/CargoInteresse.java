@@ -2,31 +2,27 @@ package br.cefetmg.implicare.model.domain;
 
 public class CargoInteresse {
 
-    private long CPF;
-    private int Cod_Cargo;
-
-    public CargoInteresse() {
-    }
+    private long cpf;
+    private int codCargo;
 
     public CargoInteresse(long CPF, int Cod_Cargo) {
-        this.CPF = CPF;
-        this.Cod_Cargo = Cod_Cargo;
+        this.cpf = CPF;
+        this.codCargo = Cod_Cargo;
     }
 
-    public long getCPF() {
-        return CPF;
+    public long getCpf() {
+        return cpf;
     }
 
-    public void setCPF(long CPF) {
-        this.CPF = CPF;
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
-    public int getCod_Cargo() {
-        return Cod_Cargo;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public void setCod_Cargo(int Cod_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
-
 }

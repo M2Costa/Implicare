@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public interface CargoManagement extends Remote{
 
     public ArrayList<Cargo> listar() throws PersistenceException, RemoteException;
+    
+    public ArrayList<Cargo> listarCargoAreaEstudo(long cpf) throws PersistenceException, RemoteException;
 
-    public ArrayList<Cargo> listarCargoAreaEstudo(long CPF) throws PersistenceException, RemoteException;
-
-    public Cargo pesquisar(int Cod_Cargo) throws PersistenceException, RemoteException;
+    public Cargo pesquisar(int codCargo) throws PersistenceException, RemoteException;
 }

@@ -8,10 +8,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface CandidatoVagaManagement extends Remote{
+	
+    public void insert(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean insert(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException;
+    public void update(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(CandidatoVaga CandidatoVaga) throws BusinessException, PersistenceException, RemoteException;
-
-    public ArrayList<CandidatoVaga> listar(int Seq_Vaga) throws PersistenceException, RemoteException;
+    public ArrayList<CandidatoVaga> listar(int seqVaga) throws PersistenceException, RemoteException;
 }

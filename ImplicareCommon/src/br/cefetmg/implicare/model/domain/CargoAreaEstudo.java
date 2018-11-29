@@ -2,31 +2,28 @@ package br.cefetmg.implicare.model.domain;
 
 public class CargoAreaEstudo {
 
-    private int Cod_Area_Estudo;
-    private int Cod_Cargo;
+    private int codAreaEstudo;
+    private int codCargo;
 
-    public CargoAreaEstudo() {
+    public CargoAreaEstudo(int codAreaEstudo, int codCargo) {
+        this.codAreaEstudo = codAreaEstudo;
+        this.codCargo = codCargo;
     }
 
-    public CargoAreaEstudo(int Cod_Area_Estudo, int Cod_Cargo) {
-        this.Cod_Area_Estudo = Cod_Area_Estudo;
-        this.Cod_Cargo = Cod_Cargo;
+    public int getCodAreaEstudo() {
+        return codAreaEstudo;
     }
 
-    public int getCod_Area_Estudo() {
-        return Cod_Area_Estudo;
+    public void setCodAreaEstudo(int codAreaEstudo) {
+        this.codAreaEstudo = codAreaEstudo;
     }
 
-    public void setCod_Area_Estudo(int Cod_Area_Estudo) {
-        this.Cod_Area_Estudo = Cod_Area_Estudo;
+    public int getCodCargo() {
+        return codCargo;
     }
 
-    public int getCod_Cargo() {
-        return Cod_Cargo;
-    }
-
-    public void setCod_Cargo(int Cod_Cargo) {
-        this.Cod_Cargo = Cod_Cargo;
+    public void setCodCargo(int codCargo) {
+        this.codCargo = codCargo;
     }
 
 }

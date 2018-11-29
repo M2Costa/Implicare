@@ -8,14 +8,14 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface TelefoneManagement extends Remote{
+    
+    public void insert(Telefone telefone) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean insert(Telefone Telefone) throws BusinessException, PersistenceException, RemoteException;
+    public void update(Telefone telefone) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(Telefone Telefone) throws BusinessException, PersistenceException, RemoteException;
+    public void delete(Telefone telefone) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(Telefone Telefone) throws PersistenceException, RemoteException;
+    public Telefone pesquisar(int seqTelefone) throws PersistenceException, RemoteException;
 
-    public Telefone pesquisar(int Seq_Telefone) throws PersistenceException, RemoteException;
-
-    public ArrayList<Telefone> listar(long CPF_CNPJ) throws PersistenceException, RemoteException;
+    public ArrayList<Telefone> listar(long cpjCnpj) throws PersistenceException, RemoteException;
 }

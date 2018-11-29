@@ -9,5 +9,4 @@ public class BusinessException extends RuntimeException {
     public BusinessException(BusinessException ex) {
         super(ex);
     }
-
 }

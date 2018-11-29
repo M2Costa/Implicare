@@ -107,7 +107,7 @@ CREATE TABLE Telefone(
  Seq_Telefone Serial NOT NULL,
  Num_Telefone Character(9) NOT NULL,
  Tipo_Telefone Character(1) NOT NULL,
- DDD Bit(2) NOT NULL,
+ DDD integer NOT NULL,
  Ramal Integer
 );
 

@@ -5,11 +5,11 @@ import br.cefetmg.implicare.exception.PersistenceException;
 
 public interface CandidatoDao {
 
-    public boolean insert(Candidato Candidato) throws PersistenceException;
+    public void insert(Candidato candidato) throws PersistenceException;
+    
+    public void update(Candidato candidato) throws PersistenceException;
 
-    public boolean update(Candidato Candidato) throws PersistenceException;
+    public void delete(Candidato candidato) throws PersistenceException;
 
-    public boolean delete(Candidato Candidato) throws PersistenceException;
-
-    public Candidato pesquisar(long CPF_CNPJ) throws PersistenceException;
+    public Candidato pesquisar(long cpfCnpj) throws PersistenceException;
 }

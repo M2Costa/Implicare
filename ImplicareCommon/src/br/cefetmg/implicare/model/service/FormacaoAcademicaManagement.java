@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public interface FormacaoAcademicaManagement extends Remote{
 
-    public boolean insert(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
+    public void insert(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(FormacaoAcademica FormacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
+    public void update(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(FormacaoAcademica FormacaoAcademica) throws PersistenceException, RemoteException;
+    public void delete(FormacaoAcademica formacaoAcademica) throws BusinessException, PersistenceException, RemoteException;
 
-    public FormacaoAcademica pesquisar(int Seq_Formacao) throws PersistenceException, RemoteException;
+    public FormacaoAcademica pesquisar(int seqFormacao) throws PersistenceException, RemoteException;
 
-    public ArrayList<FormacaoAcademica> listar(long CPF) throws PersistenceException, RemoteException;
+    public ArrayList<FormacaoAcademica> listar(long cpf) throws PersistenceException, RemoteException;
 }

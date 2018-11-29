@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public interface ExperienciaProfissionalManagement extends Remote{
 
-    public boolean insert(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException;
+    public void insert(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean update(ExperienciaProfissional ExperienciaProfissional) throws BusinessException, PersistenceException, RemoteException;
+    public void update(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException, RemoteException;
 
-    public boolean delete(ExperienciaProfissional ExperienciaProfissional) throws PersistenceException, RemoteException;
-  
-    public ExperienciaProfissional pesquisar(int Seq_Experiencia) throws PersistenceException, RemoteException;
+    public void delete(ExperienciaProfissional experienciaProfissional) throws BusinessException, PersistenceException, RemoteException;
 
-    public ArrayList<ExperienciaProfissional> listar(long CPF) throws PersistenceException, RemoteException;
+    public ExperienciaProfissional pesquisar(int seqExperiencia) throws PersistenceException, RemoteException;
+
+    public ArrayList<ExperienciaProfissional> listar(long cpf) throws PersistenceException, RemoteException;
 }

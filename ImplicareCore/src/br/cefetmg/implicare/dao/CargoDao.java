@@ -8,7 +8,7 @@ public interface CargoDao {
 
     public ArrayList<Cargo> listar() throws PersistenceException;
 
-    public ArrayList<Cargo> listarCargoAreaEstudo(long CPF) throws PersistenceException;
+    public ArrayList<Cargo> listarCargoAreaEstudo(long cpf) throws PersistenceException;
 
-    public Cargo pesquisar(int Cod_Cargo) throws PersistenceException;
+    public Cargo pesquisar(int codCargo) throws PersistenceException;
 }

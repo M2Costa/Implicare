@@ -2,68 +2,68 @@ package br.cefetmg.implicare.model.domain;
 
 public class Telefone {
 
-    private long CPF_CNPJ;
-    private int Seq_Telefone;
-    private String Num_Telefone;
-    private String Tipo_Telefone;
-    private int DDD;
-    private int Ramal;
+    private long CpfCnpj;
+    private int seqTelefone;
+    private String numTelefone;
+    private char tipoTelefone;
+    private int ddd;
+    private int ramal;
 
-    public Telefone(long CPF_CNPJ, int Seq_Telefone, String Num_Telefone, String Tipo_Telefone, int DDD, int Ramal) {
-        this.CPF_CNPJ = CPF_CNPJ;
-        this.Seq_Telefone = Seq_Telefone;
-        this.Num_Telefone = Num_Telefone;
-        this.Tipo_Telefone = Tipo_Telefone;
-        this.DDD = DDD;
-        this.Ramal = Ramal;
+    public Telefone(long CpfCnpj, int seqTelefone, String numTelefone, char tipoTelefone, int ddd, int ramal) {
+        this.CpfCnpj = CpfCnpj;
+        this.seqTelefone = seqTelefone;
+        this.numTelefone = numTelefone;
+        this.tipoTelefone = tipoTelefone;
+        this.ddd = ddd;
+        this.ramal = ramal;
     }
 
-    public long getCPF_CNPJ() {
-        return CPF_CNPJ;
+    public long getCpfCnpj() {
+        return CpfCnpj;
     }
 
-    public void setCPF_CNPJ(long CPF_CNPJ) {
-        this.CPF_CNPJ = CPF_CNPJ;
+    public void setCpfCnpj(long CpfCnpj) {
+        this.CpfCnpj = CpfCnpj;
     }
 
-    public int getSeq_Telefone() {
-        return Seq_Telefone;
+    public int getSeqTelefone() {
+        return seqTelefone;
     }
 
-    public void setSeq_Telefone(int Seq_Telefone) {
-        this.Seq_Telefone = Seq_Telefone;
+    public void setSeqTelefone(int seqTelefone) {
+        this.seqTelefone = seqTelefone;
     }
 
-    public String getNum_Telefone() {
-        return Num_Telefone;
+    public String getNumTelefone() {
+        return numTelefone;
     }
 
-    public void setNum_Telefone(String Num_Telefone) {
-        this.Num_Telefone = Num_Telefone;
+    public void setNumTelefone(String numTelefone) {
+        this.numTelefone = numTelefone;
     }
 
-    public String getTipo_Telefone() {
-        return Tipo_Telefone;
+    public char getTipoTelefone() {
+        return tipoTelefone;
     }
 
-    public void setTipo_Telefone(String Tipo_Telefone) {
-        this.Tipo_Telefone = Tipo_Telefone;
+    public void setTipoTelefone(char tipoTelefone) {
+        this.tipoTelefone = tipoTelefone;
     }
 
-    public int getDDD() {
-        return DDD;
+    public int getDdd() {
+        return ddd;
     }
 
-    public void setDDD(int DDD) {
-        this.DDD = DDD;
+    public void setDdd(int ddd) {
+        this.ddd = ddd;
     }
 
     public int getRamal() {
-        return Ramal;
+        return ramal;
     }
 
     public void setRamal(int Ramal) {
-        this.Ramal = Ramal;
+        this.ramal = Ramal;
     }
 
 }

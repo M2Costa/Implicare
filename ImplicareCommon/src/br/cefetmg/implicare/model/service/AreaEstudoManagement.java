@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface AreaEstudoManagement extends Remote{
 
-    public ArrayList<AreaEstudo> listar() throws PersistenceException, RemoteException;
+    public ArrayList<AreaEstudo> listar() throws PersistenceException, RemoteException, RemoteException;
 
-    public AreaEstudo pesquisar(int Cod_Area_Estudo) throws PersistenceException, RemoteException;
+    public AreaEstudo pesquisar(int codAreaEstudo) throws PersistenceException, RemoteException;
 }
