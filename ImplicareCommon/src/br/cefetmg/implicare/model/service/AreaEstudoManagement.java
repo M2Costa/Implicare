@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.model.service;
 
-import br.cefetmg.implicare.model.domain.AreaEstudo;
+
+import br.cefetmg.implicare.model.domain.jpa.AreaEstudo;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

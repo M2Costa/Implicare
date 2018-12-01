@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.Vaga" optimistic-lock="version" schema="public" table="vaga">
+    <composite-id class="br.cefetmg.implicare.model.domain.jpa.relacionamentos.VagaId" name="id">
+      <key-property name="codCargo" type="int">
+        <column name="cod_cargo"/>
+      </key-property>
+      <key-property name="seqVaga" type="int">
+        <column name="seq_vaga"/>
+      </key-property>
+      <key-property name="cnpj" type="long">
+        <column name="cnpj"/>
+      </key-property>
+      <key-property name="datPublicacao" type="long">
+        <column name="dat_publicacao"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Cargo" fetch="select" insert="false" name="cargo" update="false">
+      <column name="cod_cargo" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Empresa" fetch="select" insert="false" name="empresa" update="false">
+      <column name="cnpj" not-null="true"/>
+    </many-to-one>
+    <property name="numVagas" type="java.lang.Integer">
+      <column name="num_vagas"/>
+    </property>
+    <property name="cargaHoraria" type="long">
+      <column name="carga_horaria" not-null="true"/>
+    </property>
+    <property name="remuneracao" type="java.lang.Double">
+      <column name="remuneracao" scale="0"/>
+    </property>
+    <property name="descVaga" type="string">
+      <column name="desc_vaga"/>
+    </property>
+    <property name="statusVaga" type="boolean">
+      <column name="status_vaga" not-null="true">
+        <comment>0 - Aberta; 1 - Fechada;</comment>
+      </column>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="candidatoVagas" table="candidato_vaga">
+      <key>
+        <column name="cod_cargo" not-null="true"/>
+        <column name="seq_vaga" not-null="true"/>
+        <column name="cnpj" not-null="true"/>
+        <column name="dat_publicacao" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.CandidatoVaga"/>
+    </set>
+  </class>
+</hibernate-mapping>

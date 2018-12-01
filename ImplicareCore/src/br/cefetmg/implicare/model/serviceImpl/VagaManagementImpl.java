@@ -1,8 +1,9 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.Vaga;
 import br.cefetmg.implicare.dao.VagaDao;
 import br.cefetmg.implicare.model.daoImpl.VagaDaoImpl;
-import br.cefetmg.implicare.model.domain.Vaga;
+
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
@@ -21,8 +22,6 @@ public class VagaManagementImpl implements VagaManagement {
     public void insert(Vaga vaga) throws BusinessException, PersistenceException, RemoteException {
         if(vaga == null)
             throw new BusinessException("A vaga não pode ser nula!");
-        if(vaga.getDataPublicacao() == null)
-            throw new BusinessException("A data de publicação não pode ser nula!");
         VagaDaoImpl.getInstance().insert(vaga);
     }
 
@@ -30,8 +29,6 @@ public class VagaManagementImpl implements VagaManagement {
     public void update(Vaga vaga) throws BusinessException, PersistenceException, RemoteException {
         if(vaga == null)
             throw new BusinessException("A vaga não pode ser nula!");
-        if(vaga.getDataPublicacao() == null)
-            throw new BusinessException("A data de publicação não pode ser nula!");
         VagaDaoImpl.getInstance().update(vaga);
     }
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.Empresa" optimistic-lock="version" schema="public" table="empresa">
+    <id name="cnpj" type="long">
+      <column name="cnpj"/>
+      <generator class="foreign">
+        <param name="property">usuario</param>
+      </generator>
+    </id>
+    <one-to-one class="br.cefetmg.implicare.model.domain.jpa.Usuario" constrained="true" name="usuario"/>
+    <property name="nomRazaoSocial" type="string">
+      <column name="nom_razao_social" not-null="true"/>
+    </property>
+    <property name="nomeFantasia" type="string">
+      <column name="nome_fantasia" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="vagas" table="vaga">
+      <key>
+        <column name="cnpj" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.Vaga"/>
+    </set>
+  </class>
+</hibernate-mapping>

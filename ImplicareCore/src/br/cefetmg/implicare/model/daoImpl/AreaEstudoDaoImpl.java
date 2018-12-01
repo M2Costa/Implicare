@@ -1,72 +1,57 @@
 package br.cefetmg.implicare.model.daoImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.AreaEstudo;
 import br.cefetmg.implicare.dao.AreaEstudoDao;
-import br.cefetmg.implicare.model.domain.AreaEstudo;
 import br.cefetmg.implicare.exception.PersistenceException;
-import br.cefetmg.inf.util.db.JDBCConnectionManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class AreaEstudoDaoImpl implements AreaEstudoDao {
+    
+    private static AreaEstudoDaoImpl areaEstudoDao;
+    
+    private AreaEstudoDaoImpl(){}
+    
+    public static AreaEstudoDaoImpl getInstance() {
+        if (areaEstudoDao == null) {
+            areaEstudoDao = new AreaEstudoDaoImpl();
+        }
+        return areaEstudoDao;
+    }
 
     @Override
     public ArrayList<AreaEstudo> listar() throws PersistenceException {
         try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Implicare");
+            EntityManager manager = factory.createEntityManager();
+            Query query = manager.createNativeQuery("SELECT * FROM cidade");
 
-            String sql = "SELECT * FROM Area_Estudo ORDER BY Nom_Area_Estudo;";
+            ArrayList<AreaEstudo> listAll = (ArrayList<AreaEstudo>) query.getResultList();
 
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            return listAll;
 
-            ArrayList<AreaEstudo> lista = new ArrayList<>();
-
-            if (rs.next()) {
-                do {
-                    AreaEstudo Area = new AreaEstudo();
-                    Area.setCod_Area_Estudo(rs.getInt("Cod_Area_Estudo"));
-                    Area.setNom_Area_Estudo(rs.getString("Nom_Area_Estudo"));
-                    lista.add(Area);
-                } while (rs.next());
-            }
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return lista;
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(e);
         }
     }
 
     @Override
-    public AreaEstudo pesquisar(int Cod_Area_Estudo) throws PersistenceException {
+    public AreaEstudo pesquisar(int codAreaEstudo) throws PersistenceException {
         try {
-            AreaEstudo Area;
-            try (Connection connection = JDBCConnectionManager.getInstance().getConnection()) {
-                String sql = "SELECT * FROM Area_Estudo WHERE Cod_Area_Estudo = ?";
-                try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                    ps.setInt(1, Cod_Area_Estudo);
-                    try (ResultSet rs = ps.executeQuery()) {
-                        Area = new AreaEstudo();
-                        if (rs.next()) {
-                            Area.setCod_Area_Estudo(rs.getInt("Cod_Area_Estudo"));
-                            Area.setNom_Area_Estudo(rs.getString("Nom_Area_Estudo"));
-                        }
-                    }
-                }
-            }
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Implicare");
+            EntityManager manager = factory.createEntityManager();
 
-            return Area;
+            AreaEstudo cidade = manager.find(AreaEstudo.class, codAreaEstudo);
 
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+            return cidade;
+
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(e);
         }
     }
 

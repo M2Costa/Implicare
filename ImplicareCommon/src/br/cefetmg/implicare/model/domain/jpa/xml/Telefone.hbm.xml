@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.Telefone" optimistic-lock="version" schema="public" table="telefone">
+    <composite-id class="br.cefetmg.implicare.model.domain.jpa.relacionamentos.TelefoneId" name="id">
+      <key-property name="cpfCnpj" type="long">
+        <column name="cpf_cnpj"/>
+      </key-property>
+      <key-property name="seqTelefone" type="int">
+        <column name="seq_telefone"/>
+      </key-property>
+      <key-property name="numTelefone" type="string">
+        <column length="9" name="num_telefone"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Usuario" fetch="select" insert="false" name="usuario" update="false">
+      <column name="cpf_cnpj" not-null="true"/>
+    </many-to-one>
+    <property name="tipoTelefone" type="char">
+      <column length="1" name="tipo_telefone" not-null="true"/>
+    </property>
+    <property name="ddd" type="int">
+      <column name="ddd" not-null="true"/>
+    </property>
+    <property name="ramal" type="java.lang.Integer">
+      <column name="ramal"/>
+    </property>
+  </class>
+</hibernate-mapping>

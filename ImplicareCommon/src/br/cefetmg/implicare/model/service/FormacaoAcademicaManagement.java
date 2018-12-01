@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.model.service;
 
-import br.cefetmg.implicare.model.domain.FormacaoAcademica;
+
+import br.cefetmg.implicare.model.domain.jpa.FormacaoAcademica;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.rmi.Remote;

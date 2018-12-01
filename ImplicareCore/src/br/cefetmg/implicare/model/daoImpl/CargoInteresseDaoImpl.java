@@ -1,100 +1,36 @@
 package br.cefetmg.implicare.model.daoImpl;
 
-import br.cefetmg.implicare.dao.CargoInteresseDao;
-import br.cefetmg.implicare.model.domain.CargoInteresse;
 import br.cefetmg.implicare.exception.PersistenceException;
-import br.cefetmg.inf.util.db.JDBCConnectionManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import br.cefetmg.implicare.dao.FormacaoAcademicaIdDao;
+import br.cefetmg.implicare.model.domain.jpa.relacionamentos.FormacaoAcademicaId;
 
-public class CargoInteresseDaoImpl implements CargoInteresseDao {
-
-    @Override
-    public boolean insert(CargoInteresse CargoInteresse) throws PersistenceException {
-        try {
-
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String sql = "INSERT INTO Cargo_Interesse (CPF, Cod_Cargo) VALUES(?,?)";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-
-            ps.setLong(1, CargoInteresse.getCPF());
-            ps.setInt(2, CargoInteresse.getCod_Cargo());
-
-            ResultSet rs = ps.executeQuery();
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return true;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
+public class CargoInteresseDaoImpl implements FormacaoAcademicaIdDao {
+    
+    private static CargoInteresseDaoImpl cargoInteresseDao = null;
+    
+    private CargoInteresseDaoImpl(){}
+    
+    public static CargoInteresseDaoImpl getInstance() {
+        if (cargoInteresseDao == null) {
+            cargoInteresseDao = new CargoInteresseDaoImpl();
         }
+        return cargoInteresseDao;
     }
 
     @Override
-    public boolean delete(CargoInteresse CargoInteresse) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
-
-            String SQL = "DELETE FROM Cargo_Interesse"
-                    + "WHERE CPF = ?, Cod_Cargo = ?";
-
-            PreparedStatement ps = connection.prepareStatement(SQL);
-
-            ps.setLong(1, CargoInteresse.getCPF());
-            ps.setInt(2, CargoInteresse.getCod_Cargo());
-
-            ps.executeQuery(SQL);
-            ps.close();
-            connection.close();
-            return true;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
-        }
+    public void insert(FormacaoAcademicaId formacaoAcademicaId) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<CargoInteresse> listar(long CPF) throws PersistenceException {
-        try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+    public void delete(FormacaoAcademicaId formacaoAcademicaId) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-            String sql = "SELECT * FROM Cargo_Interesse WHERE CPF = ? ORDER BY Cod_Cargo";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, CPF);
-            ResultSet rs = ps.executeQuery();
-
-            ArrayList<CargoInteresse> lista = new ArrayList<>();
-
-            if (rs.next()) {
-                do {
-                    CargoInteresse Car = new CargoInteresse();
-                    Car.setCPF(rs.getLong("CPF"));
-                    Car.setCod_Cargo(rs.getInt("Cod_Cargo"));
-                    lista.add(Car);
-                } while (rs.next());
-            }
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return lista;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
-        }
+    @Override
+    public ArrayList<FormacaoAcademicaId> listar(long cpf) throws PersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

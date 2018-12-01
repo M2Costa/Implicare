@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.Cargo" optimistic-lock="version" schema="public" table="cargo">
+    <id name="codCargo" type="int">
+      <column name="cod_cargo"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nomCargo" type="string">
+      <column name="nom_cargo" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="vagas" table="vaga">
+      <key>
+        <column name="cod_cargo" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.Vaga"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="areaEstudos" table="cargo_areaestudo">
+      <key>
+        <column name="cod_cargo" not-null="true"/>
+      </key>
+      <many-to-many entity-name="br.cefemg.implicare.domain.jpa.AreaEstudo">
+        <column name="cod_area_estudo" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="candidatos" table="cargo_interesse">
+      <key>
+        <column name="cod_cargo" not-null="true"/>
+      </key>
+      <many-to-many entity-name="br.cefemg.implicare.domain.jpa.Candidato">
+        <column name="cpf" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="experienciaProfissionals" table="experiencia_profissional">
+      <key>
+        <column name="cod_cargo" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.ExperienciaProfissional"/>
+    </set>
+  </class>
+</hibernate-mapping>

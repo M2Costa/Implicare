@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.dao;
 
-import br.cefetmg.implicare.model.domain.Vaga;
+
+import br.cefetmg.implicare.model.domain.jpa.Vaga;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 

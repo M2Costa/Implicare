@@ -1,7 +1,7 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.Telefone;
 import br.cefetmg.implicare.dao.TelefoneDao;
-import br.cefetmg.implicare.model.domain.Telefone;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
@@ -20,10 +20,6 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     public void insert(Telefone telefone) throws BusinessException, PersistenceException, RemoteException {
         if(telefone == null)
             throw new BusinessException("O telefone dado não pode ser nulo!");
-        if(telefone.getNumTelefone() == null)
-            throw new BusinessException("O número do telefone dado não pode ser nulo!");
-        if(telefone.getNumTelefone().isEmpty())
-            throw new BusinessException("O número do telefone dado não pode estar vazio!");
         dao.insert(telefone);
     }
 
@@ -31,10 +27,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     public void update(Telefone telefone) throws BusinessException, PersistenceException, RemoteException {
         if(telefone == null)
             throw new BusinessException("O telefone dado não pode ser nulo!");
-        if(telefone.getNumTelefone() == null)
-            throw new BusinessException("O número do telefone dado não pode ser nulo!");
-        if(telefone.getNumTelefone().isEmpty())
-            throw new BusinessException("O número do telefone dado não pode estar vazio!");
+        
         dao.update(telefone);
     }
 
@@ -42,10 +35,7 @@ public class TelefoneManagementImpl implements TelefoneManagement {
     public void delete(Telefone telefone) throws BusinessException, PersistenceException, RemoteException {
         if(telefone == null)
             throw new BusinessException("O telefone dado não pode ser nulo!");
-        if(telefone.getNumTelefone() == null)
-            throw new BusinessException("O número do telefone dado não pode ser nulo!");
-        if(telefone.getNumTelefone().isEmpty())
-            throw new BusinessException("O número do telefone dado não pode estar vazio!");
+        
         dao.delete(telefone);
     }
 

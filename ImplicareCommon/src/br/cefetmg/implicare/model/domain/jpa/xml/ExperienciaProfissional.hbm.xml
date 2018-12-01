@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.ExperienciaProfissional" optimistic-lock="version" schema="public" table="experiencia_profissional">
+    <composite-id class="br.cefetmg.implicare.model.domain.jpa.relacionamentos.ExperienciaProfissionalId" name="id">
+      <key-property name="cpf" type="long">
+        <column name="cpf"/>
+      </key-property>
+      <key-property name="seqExperienciaProfissional" type="int">
+        <column name="seq_experiencia_profissional"/>
+      </key-property>
+      <key-property name="codCargo" type="int">
+        <column name="cod_cargo"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Candidato" fetch="select" insert="false" name="candidato" update="false">
+      <column name="cpf" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Cargo" fetch="select" insert="false" name="cargo" update="false">
+      <column name="cod_cargo" not-null="true"/>
+    </many-to-one>
+    <property name="nomEmpresa" type="string">
+      <column name="nom_empresa" not-null="true"/>
+    </property>
+    <property name="dataInicio" type="date">
+      <column length="13" name="data_inicio" not-null="true"/>
+    </property>
+    <property name="dataTermino" type="date">
+      <column length="13" name="data_termino"/>
+    </property>
+    <property name="descExperienciaProfissional" type="string">
+      <column name="desc_experiencia_profissional"/>
+    </property>
+  </class>
+</hibernate-mapping>

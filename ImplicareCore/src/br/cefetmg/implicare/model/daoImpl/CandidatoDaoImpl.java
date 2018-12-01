@@ -1,139 +1,105 @@
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.dao.CandidatoDao;
-import br.cefetmg.implicare.model.domain.Candidato;
 import br.cefetmg.implicare.exception.PersistenceException;
-import br.cefetmg.inf.util.db.JDBCConnectionManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import br.cefetmg.implicare.model.domain.jpa.Candidato;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class CandidatoDaoImpl implements CandidatoDao {
+    
+    private static CandidatoDaoImpl candidatoDao = null;
+    
+    private CandidatoDaoImpl(){}
+    
+    public static CandidatoDaoImpl getInstance() {
+        if (candidatoDao == null) {
+            candidatoDao = new CandidatoDaoImpl();
+        }
+        return candidatoDao;
+    }
 
     @Override
-    public boolean insert(Candidato Candidato) throws PersistenceException {
+    public void insert(Candidato candidato) throws PersistenceException {
+       if (candidato == null) {
+            throw new PersistenceException("Domínio não pode ser nulo.");
+        }
+
+
         try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Implicare");
+            EntityManager manager = factory.createEntityManager();
 
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+            manager.getTransaction().begin();
+            manager.persist(candidato);
+            manager.getTransaction().commit();
 
-            String sql = "INSERT INTO Candidato (CPF, Nome, Data_Nascimento, Email, Senha, Foto,"
-                    + "Cod_Cep, Endereco, Desc_Usuario) VALUES(?,?,?,?,?,?,?,?,?) ";
 
-            PreparedStatement ps = connection.prepareStatement(sql);
+            manager.close();
+            factory.close();
 
-            ps.setLong(1, Candidato.getCPF_CNPJ());
-            ps.setString(2, Candidato.getNome());
-            ps.setDate(3, Candidato.getData_Nascimento());
-            ps.setString(4, Candidato.getEmail());
-            ps.setString(5, Candidato.getSenha());
-            ps.setString(6, Candidato.getFoto());
-            ps.setLong(7, Candidato.getCod_CEP());
-            ps.setString(8, Candidato.getEndereco());
-            ps.setString(9, Candidato.getDesc_Usuario());
 
-            ResultSet rs = ps.executeQuery();
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return true;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return false;
+        } catch (PersistenceException ex) {
+            Logger.getLogger(CandidatoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenceException(ex);
         }
     }
 
     @Override
-    public boolean update(Candidato Candidato) throws PersistenceException {
+    public void update(Candidato candidato) throws PersistenceException {
         try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("FarmazPU");
+            EntityManager manager = factory.createEntityManager();
 
-            String SQL = "UPDATE Candidato SET Email = ?, Nome = ?, Data_Nascimento = ?,"
-                    + "Senha = ?, Foto = ?, Cod_CEP, Endereco = ?, Desc_Usuario = ? "
-                    + "WHERE CPF = ?";
+            manager.getTransaction().begin();
+            manager.refresh(candidato);
+            manager.getTransaction().commit();
 
-            PreparedStatement ps = connection.prepareStatement(SQL);
+            manager.close();
+            factory.close();
 
-            ps.setString(1, Candidato.getNome());
-            ps.setDate(2, Candidato.getData_Nascimento());
-            ps.setString(3, Candidato.getEmail());
-            ps.setString(4, Candidato.getSenha());
-            ps.setString(5, Candidato.getFoto());
-            ps.setLong(6, Candidato.getCod_CEP());
-            ps.setString(7, Candidato.getEndereco());
-            ps.setString(8, Candidato.getDesc_Usuario());
-            ps.setLong(9, Candidato.getCPF_CNPJ());
 
-            ps.executeQuery(SQL);
-            ps.close();
-            connection.close();
-            return true;
-
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-            return false;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(e);
         }
     }
 
     @Override
-    public boolean delete(Candidato Candidato) throws PersistenceException {
+    public void delete(Candidato candidato) throws PersistenceException {
         try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("FarmazPU");
+            EntityManager manager = factory.createEntityManager();
 
-            String SQL = "DELETE FROM Candidato WHERE CPF = ?";
+            manager.getTransaction().begin();
+            manager.remove(candidato);
+            manager.getTransaction().commit();
 
-            PreparedStatement ps = connection.prepareStatement(SQL);
 
-            ps.setLong(1, Candidato.getCPF_CNPJ());
-
-            ps.executeQuery(SQL);
-            ps.close();
-            connection.close();
-
-            return true;
-
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-            return false;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(e);
         }
     }
 
     @Override
-    public Candidato pesquisar(long CPF) throws PersistenceException {
+    public Candidato pesquisar(long cpfCnpj) throws PersistenceException {
         try {
-            Connection connection = JDBCConnectionManager.getInstance().getConnection();
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("FarmazPU");
+            EntityManager manager = factory.createEntityManager();
 
-            String sql = "SELECT * FROM Candidato WHERE CPF = ?";
+            Candidato candidato = manager.find(Candidato.class, cpfCnpj);
 
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, CPF);
-            ResultSet rs = ps.executeQuery();
+            return candidato;
 
-            Candidato Cand = new Candidato();
-
-            if (rs.next()) {
-                Cand.setCPF_CNPJ(rs.getLong("CPF_CNPJ"));
-                Cand.setNome(rs.getString("Nome"));
-                Cand.setData_Nascimento(rs.getDate("Data_Nascimento"));
-                Cand.setEmail(rs.getString("Email"));
-                Cand.setFoto(rs.getString("Foto"));
-                Cand.setEndereco(rs.getString("Endereco"));
-                Cand.setDesc_Usuario(rs.getString("Desc_Usuario"));
-            }
-
-            rs.close();
-            ps.close();
-            connection.close();
-
-            return Cand;
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-            return null;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException(e);
         }
     }
+
 
 }

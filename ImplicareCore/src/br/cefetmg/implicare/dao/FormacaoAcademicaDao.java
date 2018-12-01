@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.dao;
 
-import br.cefetmg.implicare.model.domain.FormacaoAcademica;
+
+import br.cefetmg.implicare.model.domain.jpa.FormacaoAcademica;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 

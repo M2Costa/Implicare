@@ -1,8 +1,8 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.Usuario;
 import br.cefetmg.implicare.dao.UsuarioDao;
 import br.cefetmg.implicare.exception.BusinessException;
-import br.cefetmg.implicare.model.domain.Usuario;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.UsuarioManagement;
 import java.rmi.RemoteException;

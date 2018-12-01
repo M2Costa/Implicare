@@ -1,7 +1,8 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.FormacaoAcademica;
 import br.cefetmg.implicare.dao.FormacaoAcademicaDao;
-import br.cefetmg.implicare.model.domain.FormacaoAcademica;
+
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaManagement;
