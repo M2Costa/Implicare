@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.CandidatoVaga" optimistic-lock="version" schema="public" table="candidato_vaga">
+    <composite-id class="br.cefetmg.implicare.model.domain.jpa.relacionamentos.CandidatoVagaId" name="id">
+      <key-property name="cpf" type="long">
+        <column name="cpf"/>
+      </key-property>
+      <key-property name="seqVaga" type="int">
+        <column name="seq_vaga"/>
+      </key-property>
+      <key-property name="codCargo" type="int">
+        <column name="cod_cargo"/>
+      </key-property>
+      <key-property name="cnpj" type="long">
+        <column name="cnpj"/>
+      </key-property>
+      <key-property name="datPublicacao" type="long">
+        <column name="dat_publicacao"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Candidato" fetch="select" insert="false" name="candidato" update="false">
+      <column name="cpf" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Vaga" fetch="select" insert="false" name="vaga" update="false">
+      <column name="cod_cargo" not-null="true"/>
+      <column name="seq_vaga" not-null="true"/>
+      <column name="cnpj" not-null="true"/>
+      <column name="dat_publicacao" not-null="true"/>
+    </many-to-one>
+    <property name="statusCandidato" type="char">
+      <column length="1" name="status_candidato" not-null="true">
+        <comment>A - Aceito; H - Habilitado; R - Rejeitado; E - Espera;</comment>
+      </column>
+    </property>
+  </class>
+</hibernate-mapping>

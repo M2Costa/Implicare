@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.Usuario" optimistic-lock="version" schema="public" table="usuario">
+    <id name="cpfCnpj" type="long">
+      <column name="cpf_cnpj"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="email" type="string">
+      <column name="email" not-null="true"/>
+    </property>
+    <property name="senha" type="string">
+      <column length="44" name="senha" not-null="true"/>
+    </property>
+    <property name="foto" type="binary">
+      <column name="foto"/>
+    </property>
+    <property name="codCep" type="java.lang.Long">
+      <column name="cod_cep"/>
+    </property>
+    <property name="endereco" type="string">
+      <column name="endereco" not-null="true"/>
+    </property>
+    <property name="descUsuario" type="string">
+      <column name="desc_usuario"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="telefones" table="telefone">
+      <key>
+        <column name="cpf_cnpj" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.Telefone"/>
+    </set>
+    <one-to-one class="br.cefetmg.implicare.model.domain.jpa.Empresa" name="empresa"/>
+    <one-to-one class="br.cefetmg.implicare.model.domain.jpa.Candidato" name="candidato"/>
+  </class>
+</hibernate-mapping>

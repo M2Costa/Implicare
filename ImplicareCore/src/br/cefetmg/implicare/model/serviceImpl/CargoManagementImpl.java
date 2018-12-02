@@ -1,7 +1,7 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.Cargo;
 import br.cefetmg.implicare.dao.CargoDao;
-import br.cefetmg.implicare.model.domain.Cargo;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoManagement;
 import java.rmi.RemoteException;

@@ -135,7 +135,7 @@ CREATE TABLE Vaga(
  Dat_Publicacao Bigint NOT NULL,
  Num_Vagas Integer,
  Carga_Horaria Bigint NOT NULL,
- Remuneração Money,
+ Remuneracao Money,
  Desc_Vaga Character varying,
  Status_Vaga Bit(1) NOT NULL
  CONSTRAINT Check_Status CHECK (Status_Vaga = '0'::Bit(1) OR Status_Vaga = '1'::Bit(1))

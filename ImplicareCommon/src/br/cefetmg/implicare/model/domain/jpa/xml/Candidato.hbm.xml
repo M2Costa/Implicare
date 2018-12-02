@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.Candidato" optimistic-lock="version" schema="public" table="candidato">
+    <id name="cpf" type="long">
+      <column name="cpf"/>
+      <generator class="foreign">
+        <param name="property">usuario</param>
+      </generator>
+    </id>
+    <one-to-one class="br.cefetmg.implicare.model.domain.jpa.Usuario" constrained="true" name="usuario"/>
+    <property name="nome" type="string">
+      <column name="nome" not-null="true"/>
+    </property>
+    <property name="dataNascimento" type="date">
+      <column length="13" name="data_nascimento" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="false" lazy="true" name="cargos" table="cargo_interesse">
+      <key>
+        <column name="cpf" not-null="true"/>
+      </key>
+      <many-to-many entity-name="br.cefemg.implicare.domain.jpa.Cargo">
+        <column name="cod_cargo" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="experienciaProfissionals" table="experiencia_profissional">
+      <key>
+        <column name="cpf" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.ExperienciaProfissional"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="candidatoVagas" table="candidato_vaga">
+      <key>
+        <column name="cpf" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.CandidatoVaga"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="formacaoAcademicas" table="formacao_academica">
+      <key>
+        <column name="cpf" not-null="true"/>
+      </key>
+      <one-to-many class="br.cefetmg.implicare.model.domain.jpa.FormacaoAcademica"/>
+    </set>
+  </class>
+</hibernate-mapping>

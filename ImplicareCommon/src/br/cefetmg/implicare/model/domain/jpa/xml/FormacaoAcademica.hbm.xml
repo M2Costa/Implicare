@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2018 03:11:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="br.cefetmg.implicare.model.domain.jpa.FormacaoAcademica" optimistic-lock="version" schema="public" table="formacao_academica">
+    <composite-id class="br.cefetmg.implicare.model.domain.jpa.relacionamentos.FormacaoAcademicaId" name="id">
+      <key-property name="cpf" type="long">
+        <column name="cpf"/>
+      </key-property>
+      <key-property name="seqFormacao" type="int">
+        <column name="seq_formacao"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.AreaEstudo" fetch="select" name="areaEstudo">
+      <column name="cod_area_estudo"/>
+    </many-to-one>
+    <many-to-one class="br.cefetmg.implicare.model.domain.jpa.Candidato" fetch="select" insert="false" name="candidato" update="false">
+      <column name="cpf" not-null="true"/>
+    </many-to-one>
+    <property name="instituicaoEnsino" type="string">
+      <column name="instituicao_ensino" not-null="true"/>
+    </property>
+    <property name="atividadesDesenvolvidas" type="string">
+      <column name="atividades_desenvolvidas"/>
+    </property>
+    <property name="dataInicio" type="date">
+      <column length="13" name="data_inicio" not-null="true"/>
+    </property>
+    <property name="dataTermino" type="date">
+      <column length="13" name="data_termino" not-null="true"/>
+    </property>
+    <property name="descFormacaoAcademica" type="string">
+      <column name="desc_formacao_academica"/>
+    </property>
+  </class>
+</hibernate-mapping>

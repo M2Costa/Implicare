@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>ImplicareServlet</servlet-name>
-        <servlet-class>br.cefetmf.implicare.servlet.ImplicareServlet</servlet-class>
+        <servlet-class>br.cefetmg.implicare.servlet.ImplicareServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

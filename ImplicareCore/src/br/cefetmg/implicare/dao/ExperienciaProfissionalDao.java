@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.dao;
 
-import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
+
+import br.cefetmg.implicare.model.domain.jpa.ExperienciaProfissional;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 

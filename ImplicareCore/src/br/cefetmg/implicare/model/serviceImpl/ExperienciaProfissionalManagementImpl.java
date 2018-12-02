@@ -1,7 +1,7 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.ExperienciaProfissional;
 import br.cefetmg.implicare.dao.ExperienciaProfissionalDao;
-import br.cefetmg.implicare.model.domain.ExperienciaProfissional;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;

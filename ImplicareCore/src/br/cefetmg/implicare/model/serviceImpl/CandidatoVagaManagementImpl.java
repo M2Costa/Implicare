@@ -1,7 +1,7 @@
 package br.cefetmg.implicare.model.serviceImpl;
 
+import br.cefetmg.implicare.model.domain.jpa.CandidatoVaga;
 import br.cefetmg.implicare.dao.CandidatoVagaDao;
-import br.cefetmg.implicare.model.domain.CandidatoVaga;
 import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaManagement;
@@ -20,8 +20,6 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
     public void insert(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         if(candidatoVaga == null)
             throw new BusinessException("A vaga do candidato não podem ser nula!");
-        if(candidatoVaga.getDatPublicacao() == null)
-            throw new BusinessException("A vaga do candidato tem que ter uma data definida!");
         dao.insert(candidatoVaga);
     }
 
@@ -29,8 +27,6 @@ public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
     public void update(CandidatoVaga candidatoVaga) throws BusinessException, PersistenceException, RemoteException {
         if(candidatoVaga == null)
             throw new BusinessException("A vaga do candidato não podem ser nula!");
-        if(candidatoVaga.getDatPublicacao() == null)
-            throw new BusinessException("A vaga do candidato tem que ter uma data definida!");
         dao.update(candidatoVaga);
     }
 

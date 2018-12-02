@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.dao;
 
-import br.cefetmg.implicare.model.domain.Telefone;
+
+import br.cefetmg.implicare.model.domain.jpa.Telefone;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 

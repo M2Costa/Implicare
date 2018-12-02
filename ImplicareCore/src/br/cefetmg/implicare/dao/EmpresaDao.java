@@ -1,6 +1,7 @@
 package br.cefetmg.implicare.dao;
 
-import br.cefetmg.implicare.model.domain.Empresa;
+
+import br.cefetmg.implicare.model.domain.jpa.Empresa;
 import br.cefetmg.implicare.exception.PersistenceException;
 
 public interface EmpresaDao {
