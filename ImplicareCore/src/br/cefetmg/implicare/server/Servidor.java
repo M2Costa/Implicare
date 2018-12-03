@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.cefetmg.implicare.server;
 
 import br.cefetmg.implicare.model.daoImpl.AreaEstudoDaoImpl;
 import br.cefetmg.implicare.model.daoImpl.CandidatoDaoImpl;
 import br.cefetmg.implicare.model.daoImpl.CandidatoVagaDaoImpl;
 import br.cefetmg.implicare.model.daoImpl.CargoDaoImpl;
-import br.cefetmg.implicare.model.daoImpl.CargoInteresseDaoImpl;
+import br.cefetmg.implicare.model.daoImpl.FormacaoAcademicaIdDaoImpl;
 import br.cefetmg.implicare.model.daoImpl.EmpresaDaoImpl;
 import br.cefetmg.implicare.model.daoImpl.ExperienciaProfissionalDaoImpl;
 import br.cefetmg.implicare.model.daoImpl.FormacaoAcademicaDaoImpl;
@@ -43,10 +38,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaIdManagement;
 
-/**
- *
- * @author Morato
- */
 public class Servidor {
     public static void main(String[] args) throws RemoteException, AlreadyBoundException {
         
@@ -66,7 +57,7 @@ public class Servidor {
         CandidatoVagaManagement candidatoVaga = new CandidatoVagaManagementImpl(CandidatoVagaDaoImpl.getInstance());
         registry.rebind("CandidatoVagaManagement", candidatoVaga); // registra este objeto
         
-        FormacaoAcademicaIdManagement cargoInteresse = new FormacaoAcademicaIdImpl(CargoInteresseDaoImpl.getInstance());
+        FormacaoAcademicaIdManagement cargoInteresse = new FormacaoAcademicaIdImpl(FormacaoAcademicaIdDaoImpl.getInstance());
         registry.rebind("CargoInteresseManagement", cargoInteresse); // registra este objeto
         
         CargoManagement cargo = new CargoManagementImpl(CargoDaoImpl.getInstance());

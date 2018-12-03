@@ -4,9 +4,8 @@ import br.cefetmg.implicare.model.domain.jpa.AreaEstudo;
 import br.cefetmg.implicare.dao.AreaEstudoDao;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
-import javax.persistence.Query;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Persistence;
 
 public class AreaEstudoDaoImpl implements AreaEstudoDao {
@@ -25,16 +24,14 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
     @Override
     public ArrayList<AreaEstudo> listar() throws PersistenceException {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Implicare");
-            EntityManager manager = factory.createEntityManager();
-            Query query = manager.createNativeQuery("SELECT * FROM cidade");
-
-            ArrayList<AreaEstudo> listAll = (ArrayList<AreaEstudo>) query.getResultList();
-
-            return listAll;
-
+            return (ArrayList<AreaEstudo>)
+                    Persistence
+                        .createEntityManagerFactory("Implicare")
+                        .createEntityManager()
+                        .createNativeQuery("SELECT * FROM area_estudo")
+                        .getResultList();
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Logger.getLogger(AreaEstudoDaoImpl.class.getName()).log(Level.SEVERE, null, e);
             throw new PersistenceException(e);
         }
     }
@@ -42,15 +39,12 @@ public class AreaEstudoDaoImpl implements AreaEstudoDao {
     @Override
     public AreaEstudo pesquisar(int codAreaEstudo) throws PersistenceException {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Implicare");
-            EntityManager manager = factory.createEntityManager();
-
-            AreaEstudo cidade = manager.find(AreaEstudo.class, codAreaEstudo);
-
-            return cidade;
-
+            return Persistence
+                        .createEntityManagerFactory("Implicare")
+                        .createEntityManager()
+                        .find(AreaEstudo.class, codAreaEstudo);
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Logger.getLogger(AreaEstudoDaoImpl.class.getName()).log(Level.SEVERE, null, e);
             throw new PersistenceException(e);
         }
     }

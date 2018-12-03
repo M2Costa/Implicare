@@ -1,13 +1,13 @@
 package br.cefetmg.implicare.model.daoImpl;
 
 import br.cefetmg.implicare.dao.EmpresaDao;
+import static br.cefetmg.implicare.dao.GenericDao.UP;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.domain.jpa.Empresa;
-import br.cefetmg.inf.util.db.JDBCConnectionManager;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 
 public class EmpresaDaoImpl implements EmpresaDao {
     
@@ -24,23 +24,71 @@ public class EmpresaDaoImpl implements EmpresaDao {
 
     @Override
     public void insert(Empresa empresa) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (empresa == null)
+            throw new PersistenceException("Domínio não pode ser nulo.");
+        
+        try {
+            EntityManager manager = Persistence.createEntityManagerFactory(UP).createEntityManager();
+
+            manager.getTransaction().begin();
+            manager.persist(empresa);
+            manager.getTransaction().commit();
+            
+            manager.close();
+        } catch (PersistenceException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public void update(Empresa empresa) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (empresa == null)
+            throw new PersistenceException("Domínio não pode ser nulo.");
+        
+        try {
+            EntityManager manager = Persistence.createEntityManagerFactory(UP).createEntityManager();
+
+            manager.getTransaction().begin();
+            manager.refresh(empresa);
+            manager.getTransaction().commit();
+            
+            manager.close();
+        } catch (PersistenceException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public void delete(Empresa empresa) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (empresa == null)
+            throw new PersistenceException("Domínio não pode ser nulo.");
+        
+        try {
+            EntityManager manager = Persistence.createEntityManagerFactory(UP).createEntityManager();
+
+            manager.getTransaction().begin();
+            manager.remove(empresa);
+            manager.getTransaction().commit();
+            
+            manager.close();
+        } catch (PersistenceException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public Empresa pesquisar(long cnpj) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return Persistence
+                    .createEntityManagerFactory(UP)
+                    .createEntityManager()
+                    .find(Empresa.class, cnpj);
+        } catch(PersistenceException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            throw new PersistenceException(e);
+        }
     }
-
-
 }

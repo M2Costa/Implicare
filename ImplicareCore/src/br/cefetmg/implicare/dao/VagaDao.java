@@ -5,7 +5,7 @@ import br.cefetmg.implicare.model.domain.jpa.Vaga;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 
-public interface VagaDao {
+public interface VagaDao extends GenericDao{
 
     public void insert(Vaga vaga) throws PersistenceException;
 
