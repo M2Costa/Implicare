@@ -6,8 +6,9 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.UsuarioManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class UsuarioManagementImpl implements UsuarioManagement {
+public class UsuarioManagementImpl extends UnicastRemoteObject implements UsuarioManagement {
     
     private final UsuarioDao dao;
 

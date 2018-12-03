@@ -8,9 +8,10 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.VagaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class VagaManagementImpl implements VagaManagement {
+public class VagaManagementImpl extends UnicastRemoteObject implements VagaManagement {
     
     private final VagaDao dao;
 

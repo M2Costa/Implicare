@@ -6,8 +6,9 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class CandidatoManagementImpl implements CandidatoManagement {
+public class CandidatoManagementImpl extends UnicastRemoteObject implements CandidatoManagement {
 
     private final CandidatoDao dao;
 

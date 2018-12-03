@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaIdManagement;
 import br.cefetmg.implicare.dao.FormacaoAcademicaIdDao;
 import br.cefetmg.implicare.model.domain.jpa.relacionamentos.FormacaoAcademicaId;
+import java.rmi.server.UnicastRemoteObject;
 
-public class FormacaoAcademicaIdImpl implements FormacaoAcademicaIdManagement {
+public class FormacaoAcademicaIdImpl extends UnicastRemoteObject implements FormacaoAcademicaIdManagement {
 
     private final FormacaoAcademicaIdDao dao;
 

@@ -6,9 +6,10 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CandidatoVagaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class CandidatoVagaManagementImpl implements CandidatoVagaManagement {
+public class CandidatoVagaManagementImpl extends UnicastRemoteObject implements CandidatoVagaManagement {
 
     private final CandidatoVagaDao dao;
     

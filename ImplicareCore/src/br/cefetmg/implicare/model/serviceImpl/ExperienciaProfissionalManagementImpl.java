@@ -6,9 +6,10 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.ExperienciaProfissionalManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class ExperienciaProfissionalManagementImpl implements ExperienciaProfissionalManagement {
+public class ExperienciaProfissionalManagementImpl extends UnicastRemoteObject implements ExperienciaProfissionalManagement {
     private final ExperienciaProfissionalDao dao;
 
     public ExperienciaProfissionalManagementImpl(ExperienciaProfissionalDao dao)

@@ -6,9 +6,10 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.TelefoneManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class TelefoneManagementImpl implements TelefoneManagement {
+public class TelefoneManagementImpl extends UnicastRemoteObject implements TelefoneManagement {
     
     private final TelefoneDao dao;
 

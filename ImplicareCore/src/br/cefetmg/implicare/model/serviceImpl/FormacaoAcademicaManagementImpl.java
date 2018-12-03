@@ -7,9 +7,10 @@ import br.cefetmg.implicare.exception.BusinessException;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.FormacaoAcademicaManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class FormacaoAcademicaManagementImpl implements FormacaoAcademicaManagement {
+public class FormacaoAcademicaManagementImpl extends UnicastRemoteObject implements FormacaoAcademicaManagement {
 
     private final FormacaoAcademicaDao dao;
 

@@ -5,9 +5,10 @@ import br.cefetmg.implicare.dao.CargoDao;
 import br.cefetmg.implicare.exception.PersistenceException;
 import br.cefetmg.implicare.model.service.CargoManagement;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class CargoManagementImpl implements CargoManagement {
+public class CargoManagementImpl extends UnicastRemoteObject implements CargoManagement {
     
     private final CargoDao dao;
 
