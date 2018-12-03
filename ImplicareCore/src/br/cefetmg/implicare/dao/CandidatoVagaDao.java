@@ -5,11 +5,11 @@ import br.cefetmg.implicare.model.domain.jpa.CandidatoVaga;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 
-public interface CandidatoVagaDao {
+public interface CandidatoVagaDao extends GenericDao {
 
-    public void insert(CandidatoVaga sanidatoVaga) throws PersistenceException;
+    public void insert(CandidatoVaga candidatoVaga) throws PersistenceException;
 
-    public void update(CandidatoVaga sanidatoVaga) throws PersistenceException;
+    public void update(CandidatoVaga candidatoVaga) throws PersistenceException;
 
     public ArrayList<CandidatoVaga> listarAceitos(int seqVaga) throws PersistenceException;
 

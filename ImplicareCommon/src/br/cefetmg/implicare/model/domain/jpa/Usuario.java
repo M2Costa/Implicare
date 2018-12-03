@@ -29,7 +29,7 @@ public class Usuario  implements java.io.Serializable {
      private Long codCep;
      private String endereco;
      private String descUsuario;
-     private Set<Telefone> telefones = new HashSet<Telefone>(0);
+     private Set<Telefone> telefones = new HashSet<>(0);
      private Empresa empresa;
      private Candidato candidato;
 

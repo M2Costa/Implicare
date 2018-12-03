@@ -5,7 +5,7 @@ import br.cefetmg.implicare.model.domain.jpa.FormacaoAcademica;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 
-public interface FormacaoAcademicaDao {
+public interface FormacaoAcademicaDao extends GenericDao {
 
     public void insert(FormacaoAcademica formacaoAcademica) throws PersistenceException;
 

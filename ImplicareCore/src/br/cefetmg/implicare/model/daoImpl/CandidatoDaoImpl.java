@@ -6,7 +6,6 @@ import br.cefetmg.implicare.model.domain.jpa.Candidato;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class CandidatoDaoImpl implements CandidatoDao {
@@ -24,63 +23,67 @@ public class CandidatoDaoImpl implements CandidatoDao {
 
     @Override
     public void insert(Candidato candidato) throws PersistenceException {
-       if (candidato == null) {
+       if (candidato == null)
             throw new PersistenceException("Domínio não pode ser nulo.");
-        }
 
 
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("Implicare");
-            EntityManager manager = factory.createEntityManager();
+            EntityManager manager =
+                        Persistence
+                            .createEntityManagerFactory(UP)
+                            .createEntityManager();
 
             manager.getTransaction().begin();
             manager.persist(candidato);
             manager.getTransaction().commit();
-
-
+            
             manager.close();
-            factory.close();
-
-
-        } catch (PersistenceException ex) {
-            Logger.getLogger(CandidatoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenceException(ex);
+        } catch (PersistenceException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            throw new PersistenceException(e);
         }
     }
 
     @Override
     public void update(Candidato candidato) throws PersistenceException {
+        if (candidato == null)
+            throw new PersistenceException("Domínio não pode ser nulo.");
+        
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("FarmazPU");
-            EntityManager manager = factory.createEntityManager();
+            EntityManager manager =
+                        Persistence
+                            .createEntityManagerFactory(UP)
+                            .createEntityManager();
 
             manager.getTransaction().begin();
             manager.refresh(candidato);
             manager.getTransaction().commit();
 
             manager.close();
-            factory.close();
-
-
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             throw new PersistenceException(e);
         }
     }
 
     @Override
     public void delete(Candidato candidato) throws PersistenceException {
+        if (candidato == null)
+            throw new PersistenceException("Domínio não pode ser nulo.");
+        
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("FarmazPU");
-            EntityManager manager = factory.createEntityManager();
+            EntityManager manager = 
+                        Persistence
+                            .createEntityManagerFactory(UP)
+                            .createEntityManager();
 
             manager.getTransaction().begin();
             manager.remove(candidato);
             manager.getTransaction().commit();
-
-
+            
+            manager.close();
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             throw new PersistenceException(e);
         }
     }
@@ -88,18 +91,13 @@ public class CandidatoDaoImpl implements CandidatoDao {
     @Override
     public Candidato pesquisar(long cpfCnpj) throws PersistenceException {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("FarmazPU");
-            EntityManager manager = factory.createEntityManager();
-
-            Candidato candidato = manager.find(Candidato.class, cpfCnpj);
-
-            return candidato;
-
+            return Persistence
+                        .createEntityManagerFactory(UP)
+                        .createEntityManager()
+                        .find(Candidato.class, cpfCnpj);
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
             throw new PersistenceException(e);
         }
     }
-
-
 }

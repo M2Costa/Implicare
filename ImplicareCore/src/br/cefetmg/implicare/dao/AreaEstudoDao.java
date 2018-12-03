@@ -5,7 +5,7 @@ import br.cefetmg.implicare.model.domain.jpa.AreaEstudo;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 
-public interface AreaEstudoDao {
+public interface AreaEstudoDao extends GenericDao {
 
     public ArrayList<AreaEstudo> listar() throws PersistenceException;
 

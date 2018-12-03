@@ -4,7 +4,7 @@ package br.cefetmg.implicare.dao;
 import br.cefetmg.implicare.model.domain.jpa.Empresa;
 import br.cefetmg.implicare.exception.PersistenceException;
 
-public interface EmpresaDao {
+public interface EmpresaDao extends GenericDao {
 
     public void insert(Empresa empresa) throws PersistenceException;
 

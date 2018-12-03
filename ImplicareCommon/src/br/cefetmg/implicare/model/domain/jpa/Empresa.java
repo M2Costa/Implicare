@@ -30,7 +30,7 @@ public class Empresa  implements java.io.Serializable {
      private Usuario usuario;
      private String nomRazaoSocial;
      private String nomeFantasia;
-     private Set<Vaga> vagas = new HashSet<Vaga>(0);
+     private Set<Vaga> vagas = new HashSet<>(0);
 
     public Empresa() {
     }

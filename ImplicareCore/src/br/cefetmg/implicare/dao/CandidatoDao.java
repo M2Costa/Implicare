@@ -4,7 +4,7 @@ package br.cefetmg.implicare.dao;
 import br.cefetmg.implicare.model.domain.jpa.Candidato;
 import br.cefetmg.implicare.exception.PersistenceException;
 
-public interface CandidatoDao {
+public interface CandidatoDao extends GenericDao {
 
     public void insert(Candidato candidato) throws PersistenceException;
     

@@ -5,11 +5,11 @@ import br.cefetmg.implicare.model.domain.jpa.ExperienciaProfissional;
 import br.cefetmg.implicare.exception.PersistenceException;
 import java.util.ArrayList;
 
-public interface ExperienciaProfissionalDao {
+public interface ExperienciaProfissionalDao extends GenericDao {
 
     public void insert(ExperienciaProfissional experienciaProfissional) throws PersistenceException;
 
-    public void update(ExperienciaProfissional experienciaProfssional) throws PersistenceException;
+    public void update(ExperienciaProfissional experienciaProfissional) throws PersistenceException;
 
     public void delete(ExperienciaProfissional experienciaProfissional) throws PersistenceException;
 

@@ -21,7 +21,7 @@ public class CargoManagementImpl implements CargoManagement {
     }
 
     @Override
-    public ArrayList<Cargo> listarCargoAreaEstudo(long cpf) throws PersistenceException, RemoteException {
+    public ArrayList<Cargo> listarCargoAreaEstudo(int cpf) throws PersistenceException, RemoteException {
         return dao.listarCargoAreaEstudo(cpf);
     }
 
